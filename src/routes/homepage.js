@@ -11,8 +11,9 @@ router.route("/")
     res.render("pages/index", { msg: msg, title: title });
   })
 
-  .post(function (req, res) {
-    res.send({response: commerceAPI.getProductById(req.body.msg)});
+  .post(pedrocorreia, async (req, res, next) => {
+    const PRODUCT = await commerceAPI.getProductById(req.body.msg);
+    res.json({response: PRODUCT});
   });
 
 module.exports = router;

@@ -9,8 +9,8 @@ $(document).ready(function(){
         $.ajax({
             url:"/",
             method: 'POST',
-            contentType: "application/json",
-            data: JSON.stringify({msg: value}),
+            contentType: "json",
+            data: {msg: value},
             success: function(res){
                     $('h2').html(res);
                     
