@@ -12,7 +12,7 @@ router.route("/")
   })
 
   .post(function (req, res) {
-    res.send(commerceAPI.getProductById(req.body.msg));
+    res.send({response: commerceAPI.getProductById(req.body.msg)});
   });
 
 module.exports = router;

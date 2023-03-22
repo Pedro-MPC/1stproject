@@ -9,15 +9,15 @@ const products = database.collection('products');
 
 
 const getProductById = async (id) => {
-    const idd = toInteger(id)
+    const idint = toInteger(id)
     try {
-        const query = { _id: idd };
-        const product = await products.findOne({ _id: idd });
-        console.log(product);
-        
+        const query = { _id: idint };
+        const product = await products.findOne({ _id: 1 });
+
+        console.log("API: "+product.name);
+        return product.name;
+
       } finally {
-        // Ensures that the client will close when you finish/error
-        //await client.close();
       }
   }
 
