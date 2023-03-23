@@ -1,22 +1,31 @@
-
-$(document).ready(function(){
-    $('#form-insert').on('submit', function(event){
-        
+$(document).ready(function () {
+    $('#form-insert').on('submit', function (event) {
         event.preventDefault();
         let value = $('#inputText').val();
-        if(value != ""){
-            console.log(value);
-        $.ajax({
-            url:"/",
-            method: 'POST',
-            contentType: "json",
-            data: {msg: value},
-            success: function(res){
-                    $('h2').html(res);
-                    
-                    console.log("Response: "+res.response);
-            }
+        if (value != '') {
+            $.ajax({
+                url: '/',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ msg: value }),
+                success: function (res) {
+                    if (res.response == 'notFound') {
+                        $('#searchProduct').html('Product not found');
+                    } else {
+                        console.log;
+                        $('#searchProduct').html(
+                            'Searched : ' +
+                                value +
+                                '<br>ID: ' +
+                                res.response[0]._id +
+                                '<br>Name: ' +
+                                res.response[0].name
+                        );
+                        console.log(res.response[0]);
+                        //alert("Searched ID: "+value+"\nProduct ID: "+res.response._id+"\nProduct Name: "+res.response.name)
+                    }
+                }
+            });
         }
-        )
-    }})
-})
+    });
+});

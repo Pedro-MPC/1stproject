@@ -1,31 +1,34 @@
 {
-  "name": "1stproject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack"
-  },
-  "author": "pedro correia",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "bootstrap": "^5.2.3",
-    "cputemp": "^0.0.1",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "gulp": "^4.0.2",
-    "lodash": "^4.17.21",
-    "mongodb": "5.1",
-    "nodemon": "^2.0.21"
-  },
-  "devDependencies": {
-    "css-loader": "^6.7.3",
-    "gulp-sass": "^5.1.0",
-    "node-sass": "^8.0.0",
-    "sass": "^1.59.3",
-    "style-loader": "^3.3.2",
-    "webpack": "^5.76.2",
-    "webpack-cli": "^5.0.1"
-  }
+    "name": "1stproject",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "author": "pedro correia",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "bootstrap": "^5.2.3",
+        "cputemp": "^0.0.1",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "gulp": "^4.0.2",
+        "lodash": "^4.17.21",
+        "module-alias": "^2.2.2",
+        "mongodb": "5.1",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.21",
+        "prettier": "^2.8.6"
+    },
+    "devDependencies": {
+        "css-loader": "^6.7.3",
+        "gulp-sass": "^5.1.0",
+        "node-sass": "^8.0.0",
+        "sass": "^1.59.3",
+        "style-loader": "^3.3.2",
+        "webpack": "^5.76.2",
+        "webpack-cli": "^5.0.1"
+    }
 }

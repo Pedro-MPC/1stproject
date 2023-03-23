@@ -1,23 +1,23 @@
-// CommerceAPI test build v0.1
-const { toInteger } = require("lodash");
-const { MongoClient } = require("mongodb");
-const uri = "mongodb://0.0.0.0:27017/";
-const client = new MongoClient(uri);
+const { toInteger, toString } = require('lodash');
+const { connection } = require('../database/db-connect');
+var mysql = require('mysql');
 
-const database = client.db('nodeProduct');
-const products = database.collection('products');
+require('../database/db-connect');
 
 const getProductById = async (id) => {
-    const idint = toInteger(id)
-    try {
-        const query = { _id: idint };
-        const product = await products.findOne({ _id: id });
-
-        console.log("API: "+product.name);
-        return product.name;
-
-      } finally {
-      }
-}
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM products WHERE _id='" + id + "'", function (err, results, fields) {
+            if (err) {
+                return reject(err);
+            }
+            if (results && results.length > 0) {
+                return resolve(results);
+            } else {
+                var notFound = 'notFound';
+                return resolve(notFound);
+            }
+        });
+    });
+};
 
 exports.getProductById = getProductById;

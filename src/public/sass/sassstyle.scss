@@ -1,7 +1,30 @@
 $bgColor: rgb(3, 20, 46);
 $textColor: white;
 
-body{
+body {
     background-color: $bgColor;
-    color: $textColor
+    color: $textColor;
+}
+
+.conProductShow {
+    width: 70%;
+    height: fit-content;
+    background-color: rgba(85, 117, 244, 0.2);
+    padding: 5vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.conProductShow img {
+    padding: 20px;
+    width: 450px;
+    height: 450px;
+    object-fit: cover;
 }
