@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../partials/header') %>
+    <title>P_COMMERCE - <%= productName %></title>
     <body>
         <div class="conProductShow">
             <h1 class="display-5"><%= productId %> | <%= productName %></h1>
             <img src="<%= productImg %>" alt="" />
 
-            <p><%= productDesc %></p>
+            <p style="text-align: justify"><%= productDesc %></p>
         </div>
     </body>
     <%- include('../partials/footer') %>

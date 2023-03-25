@@ -14,13 +14,15 @@
         "cputemp": "^0.0.1",
         "ejs": "^3.1.9",
         "express": "^4.18.2",
-        "gulp": "^4.0.2",
+        "express-session": "^1.17.3",
+        "gulp": "^3.9.1",
         "lodash": "^4.17.21",
         "module-alias": "^2.2.2",
         "mongodb": "5.1",
         "mysql": "^2.18.1",
         "nodemon": "^2.0.21",
-        "prettier": "^2.8.6"
+        "prettier": "^2.8.6",
+        "sweetalert2": "^11.4.8"
     },
     "devDependencies": {
         "css-loader": "^6.7.3",

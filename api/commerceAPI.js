@@ -1,7 +1,5 @@
 const { toInteger, toString } = require('lodash');
 const { connection } = require('../database/db-connect');
-var mysql = require('mysql');
-
 require('../database/db-connect');
 
 const getProductById = async (id) => {
@@ -20,4 +18,24 @@ const getProductById = async (id) => {
     });
 };
 
+const getCustomerLogin = async (email, password) => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "SELECT * FROM customer WHERE email='" + email + "'AND password = '" + password + "'",
+            function (err, results, fields) {
+                if (err) {
+                    return reject(err);
+                }
+                if (results && results.length > 0) {
+                    return resolve(results);
+                } else {
+                    var notFound = 'notFound';
+                    return resolve(notFound);
+                }
+            }
+        );
+    });
+};
+
 exports.getProductById = getProductById;
+exports.getCustomerLogin = getCustomerLogin;

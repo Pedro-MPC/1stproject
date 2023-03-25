@@ -4,7 +4,7 @@ $(document).ready(function () {
         let value = $('#inputText').val();
         if (value != '') {
             $.ajax({
-                url: '/',
+                url: '/account',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ msg: value }),

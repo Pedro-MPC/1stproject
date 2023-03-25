@@ -1,21 +1,23 @@
 const path = require('path');
 
 module.exports = {
-    entry: ['./src/public/js/script.js', './src/public/stylesheets/style.css', './src/public/stylesheets/sassstyle.css'],
+    entry: [
+        './src/public/js/account.js',
+        './src/public/js/script.js',
+        './src/public/stylesheets/style.css',
+        './src/public/stylesheets/sassstyle.css'
+    ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './src/public/js/'),
+        path: path.resolve(__dirname, './src/public/js/')
     },
     watch: true,
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ],
-            },
-        ],
-    },
+                use: ['style-loader', 'css-loader']
+            }
+        ]
+    }
 };

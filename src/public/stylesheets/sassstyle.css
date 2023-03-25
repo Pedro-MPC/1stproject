@@ -1,11 +1,11 @@
 body {
-  background-color: #03142e;
+  background-color: #fdfdfd;
   color: white; }
 
 .conProductShow {
   width: 70%;
   height: fit-content;
-  background-color: rgba(85, 117, 244, 0.2);
+  background-color: rgba(32, 43, 84, 0.63);
   padding: 5vh;
   position: absolute;
   top: 0;
