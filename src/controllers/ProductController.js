@@ -17,11 +17,15 @@ exports.getProductByParam = () => {
 
         console.log(PRODUCT[0]);
 
-        res.render('pages/product', {
-            productId: productId,
-            productName: productName,
-            productImg: productImg,
-            productDesc: productDesc
-        });
+        if (PRODUCT == 'notFound') {
+            res.render('pages/404', { title: '404 - Product not Found' });
+        } else {
+            res.render('pages/product', {
+                productId: productId,
+                productName: productName,
+                productImg: productImg,
+                productDesc: productDesc
+            });
+        }
     };
 };

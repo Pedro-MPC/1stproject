@@ -4,14 +4,18 @@ const title = 'Homepage - Projeto';
 const session = require('express-session');
 
 exports.renderHome = () => {
-    return function (req, res) {
+    return async function (req, res) {
         const isLoggedIn = req.session.isLogged;
         const userFullName = req.session.fullname;
+
+        const PRODUCTS = await commerceAPI.getAllProducts();
         res.render('pages/index-commerce', {
             msg: msg,
             title: title,
             isLoggedIn: isLoggedIn,
-            userFullName: userFullName
+            userFullName: userFullName,
+            PRODUCTS: PRODUCTS,
+            pgTitle: 'P_COMMERCE - Home'
         });
     };
 };

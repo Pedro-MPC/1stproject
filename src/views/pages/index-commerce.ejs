@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../partials/header') %>
+    <title><%- pgTitle %></title>
 
-    <body>
-        <%- include('../partials/nav-not-logged') %> <%- include('../partials/modal-login') %>
+    <body class="bodyHome">
+        <%- include('../partials/nav-not-logged') %> <%- include('../partials/modal-login') %> <br /><%-
+        include('../partials/productsCaroussel') %> <%-include('../partials/productsList') %>
     </body>
     <%- include('../partials/footer') %>
 </html>

@@ -18,6 +18,25 @@ const getProductById = async (id) => {
     });
 };
 
+const getAllProducts = async () => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            'SELECT * FROM products, category WHERE products.category = category.id',
+            function (err, results, fields) {
+                if (err) {
+                    return reject(err);
+                }
+                if (results && results.length > 0) {
+                    return resolve(results);
+                } else {
+                    var notFound = 'notFound';
+                    return resolve(notFound);
+                }
+            }
+        );
+    });
+};
+
 const getCustomerLogin = async (email, password) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -39,3 +58,4 @@ const getCustomerLogin = async (email, password) => {
 
 exports.getProductById = getProductById;
 exports.getCustomerLogin = getCustomerLogin;
+exports.getAllProducts = getAllProducts;

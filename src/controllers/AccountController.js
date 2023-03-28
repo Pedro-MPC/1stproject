@@ -4,11 +4,18 @@ const session = require('express-session');
 exports.validateLogin = () => {
     return async (req, res, next) => {
         // Getting customer info - LOGDETAILS
-        const LOGDETAILS = await commerceAPI.getCustomerLogin('mail', 'pw');
-        req.session.isLogged = true;
-        req.session.fullname = LOGDETAILS[0].fname + ' ' + LOGDETAILS[0].lname;
-        res.json({ response: LOGDETAILS, fullname: req.session.fullname });
-        req.session.save();
+        const LOGDETAILS = await commerceAPI.getCustomerLogin(req.body.email, req.body.password);
+        console.log(LOGDETAILS);
+        var findFlag = false;
+        if (LOGDETAILS == 'NotFound') {
+            findFlag = false;
+        } else {
+            req.session.isLogged = true;
+            req.session.fullname = LOGDETAILS[0].fname + ' ' + LOGDETAILS[0].lname;
+            res.json({ response: LOGDETAILS, fullname: req.session.fullname });
+            req.session.save();
+            findFlag = true;
+        }
     };
 };
 

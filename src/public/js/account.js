@@ -12,8 +12,12 @@ const Toast = Swal.mixin({
     }
 });
 
+const NormalSwal = Swal.mixin({
+    icon: 'error',
+    title: 'Oops...'
+});
+
 $(function () {
-    console.log('ready!');
     $('#btnLoginModal').on('click', function (event) {
         $('#modalLogin').modal('show');
     });
@@ -24,7 +28,9 @@ $(function () {
         let email = $('#loginEmail').val();
         let password = $('#loginPassword').val();
         if (email == '' || password == '') {
-            alert('Check your credentials');
+            NormalSwal.fire({
+                text: 'Check your credentials'
+            });
         } else {
             $.ajax({
                 url: '/validateLogin',
@@ -33,7 +39,9 @@ $(function () {
                 data: JSON.stringify({ email: email, password: password }),
                 success: function (res) {
                     if (res.response == 'notFound') {
-                        $('#searchProduct').html('Not logged in');
+                        NormalSwal.fire({
+                            text: 'Check your credentials'
+                        });
                     } else {
                         Toast.fire({
                             icon: 'success',
@@ -42,7 +50,7 @@ $(function () {
 
                         setTimeout(() => {
                             location.reload();
-                        }, '1000');
+                        }, '1500');
                     }
                 }
             });
@@ -58,11 +66,13 @@ $(function () {
 
             success: function (res) {
                 Toast.fire({
-                    icon: 'success',
+                    icon: 'error',
                     title: 'A terminar sessão...'
                 });
 
-                location.reload();
+                setTimeout(() => {
+                    location.reload();
+                }, '1500');
             }
         });
     });
