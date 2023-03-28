@@ -3,15 +3,29 @@ import '../js/account';
 import 'boxicons';
 
 $(function () {
-    $('.owl-carousel').owlCarousel({
+    function changeActive(e) {
+        // Remove o seletor classe de todos item
+        $('.owl-stage .owl-item').removeClass('ativo');
+        setTimeout(function () {
+            // Adiciona o seletor classe nos item da pagina ativa
+            $('.owl-stage .active:first').addClass('ativo');
+            $('.owl-stage .active:last').addClass('ativo');
+        }, 0);
+    }
+    var owl = $('.owl-carousel');
+    owl.on('initialized.owl.carousel', changeActive);
+    owl.owlCarousel({
         nav: true,
-        margin: 0,
+        margin: 20,
         loop: true,
         autoplay: true,
-        autoplayTimeout: 1520,
-        smartSpeed: 1500,
-        animateIn: 'linear',
-        animateOut: 'linear',
+        autoplayTimeout: 4000,
+        smartSpeed: 1000,
+        lazyLoad: true,
+        animateIn: 'fadeOut',
+        animateOut: 'fadeOut',
+        onChanged: changeActive,
+        onTranslate: changeActive,
         navText: ["<i class='bx bx-left-arrow-alt'></i>", "<i class='bx bx-right-arrow-alt' ></i>"],
         responsive: {
             0: {

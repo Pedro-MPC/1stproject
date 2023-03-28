@@ -29,3 +29,28 @@ exports.getProductByParam = () => {
         }
     };
 };
+
+exports.getAllProducts = () => {
+    return async (req, res, next) => {
+        const PRODUCTS = await commerceAPI.getAllProducts();
+        res.locals.produtos = PRODUCTS;
+        next();
+    };
+};
+
+exports.getFeaturedProducts = () => {
+    return async (req, res, next) => {
+        const PRODUCTS = await commerceAPI.getFeaturedProducts();
+        res.locals.featuredProdutos = PRODUCTS;
+        next();
+    };
+};
+
+exports.getProductById = () => {
+    return async (req, res, next) => {
+        const PRODUCT = await commerceAPI.getProductById(req.body.msg);
+        console.log('P-ID: ' + PRODUCT[0]._id);
+        console.log('P-NAME: ' + PRODUCT[0].name);
+        res.json({ response: PRODUCT });
+    };
+};

@@ -1,30 +1,20 @@
-const commerceAPI = require('../../api/commerceAPI');
 const msg = 'Produtos';
 const title = 'Homepage - Projeto';
-const session = require('express-session');
 
 exports.renderHome = () => {
-    return async function (req, res) {
+    return async function (req, res, next) {
         const isLoggedIn = req.session.isLogged;
-        const userFullName = req.session.fullname;
+        const customer = req.session.profile;
+        console.log(res.locals.featuredproducts);
 
-        const PRODUCTS = await commerceAPI.getAllProducts();
         res.render('pages/index-commerce', {
             msg: msg,
             title: title,
             isLoggedIn: isLoggedIn,
-            userFullName: userFullName,
-            PRODUCTS: PRODUCTS,
+            customer: customer,
+            PRODUCTS: res.locals.produtos,
+            FEATUREDPRODUCTS: res.locals.featuredProdutos,
             pgTitle: 'P_COMMERCE - Home'
         });
-    };
-};
-
-exports.getProductById = () => {
-    return async (req, res, next) => {
-        const PRODUCT = await commerceAPI.getProductById(req.body.msg);
-        console.log('P-ID: ' + PRODUCT[0]._id);
-        console.log('P-NAME: ' + PRODUCT[0].name);
-        res.json({ response: PRODUCT });
     };
 };

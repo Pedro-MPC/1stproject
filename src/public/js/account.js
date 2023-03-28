@@ -38,14 +38,14 @@ $(function () {
                 contentType: 'application/json',
                 data: JSON.stringify({ email: email, password: password }),
                 success: function (res) {
-                    if (res.response == 'notFound') {
+                    if (res.findFlag == false) {
                         NormalSwal.fire({
                             text: 'Check your credentials'
                         });
                     } else {
                         Toast.fire({
                             icon: 'success',
-                            title: 'Bem-vindo, ' + res.fullname + '!'
+                            title: 'Bem-vindo, ' + res.profile.fname + ' ' + res.profile.lname + '!'
                         });
 
                         setTimeout(() => {

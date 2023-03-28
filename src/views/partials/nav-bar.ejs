@@ -27,7 +27,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <% if (locals.isLoggedIn == true) { %>
                 <div>
-                    <span style="text-align: center" class="btn">Olá, <%= userFullName %>!</span>
+                    <span style="text-align: center" class="btn">Olá, <%= customer.fname %>!</span>
                     <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">Logout</button>
                 </div>
                 <%}else{ %>
