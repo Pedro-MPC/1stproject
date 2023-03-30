@@ -4,13 +4,8 @@ const hpController = require('../controllers/homepageController');
 const productController = require('../controllers/ProductController');
 const customer = require('../controllers/AccountController');
 
-router.get(
-    '/',
-    customer.checkSession(),
-    productController.getAllProducts(),
-    productController.getFeaturedProducts(),
-    hpController.renderHome()
-);
+router.get('*', customer.checkSession());
+router.get('/', productController.getAllProducts(), productController.getFeaturedProducts(), hpController.renderHome());
 //router.post('/', hpController.getProductById());
 
 module.exports = router;

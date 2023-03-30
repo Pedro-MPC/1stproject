@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const commerceapi = require('../api/commerceAPI');
 const session = require('express-session');
-const jquery = require('./views/partials/jquery');
 app.use(express.static('src/public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -16,7 +14,7 @@ app.use(
         cookie: {
             httpOnly: true,
             sameSite: true,
-            maxAge: 600000 // Time is in miliseconds
+            maxAge: 86400000 // Time is in miliseconds
         }
     })
 );
