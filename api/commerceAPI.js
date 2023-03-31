@@ -1,6 +1,8 @@
 const { toInteger, toString } = require('lodash');
 const { connection } = require('../database/db-connect');
-require('../database/db-connect');
+const { Customer } = require('../src/models/customer');
+
+// Products API functions
 
 const getProductById = async (id) => {
     return new Promise((resolve, reject) => {
@@ -55,7 +57,7 @@ const getFeaturedProducts = async () => {
         );
     });
 };
-
+// Customer API functions
 const getCustomerLogin = async (email, password) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -65,7 +67,9 @@ const getCustomerLogin = async (email, password) => {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    return resolve(results);
+                    const customer = new Customer('Login', results);
+                    console.log(customer);
+                    return resolve(customer);
                 } else {
                     var notFound = 'notFound';
                     return resolve(notFound);

@@ -25,11 +25,15 @@ const homeRoute = require('./routes/Homepage');
 const productRoute = require('./routes/productdetails');
 const errorRoute = require('./routes/404');
 const accountRoute = require('./routes/Account');
-
 app.use(homeRoute);
 app.use(productRoute);
 app.use(accountRoute);
 app.use('*', errorRoute);
+
+app.use((req, res, next) => {
+    console.log('req received from client');
+    next(); // this will invoke next middleware function
+});
 
 /** Setting up the server on port 3000 */
 const port = 3000;

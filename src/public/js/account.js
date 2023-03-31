@@ -1,21 +1,4 @@
-const Swal = require('sweetalert2');
-
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-    }
-});
-
-const NormalSwal = Swal.mixin({
-    icon: 'error',
-    title: 'Oops...'
-});
+const swal = require('./swal');
 
 $(function () {
     $('#btnLoginModal').on('click', function (event) {
@@ -28,8 +11,9 @@ $(function () {
         let email = $('#loginEmail').val();
         let password = $('#loginPassword').val();
         if (email == '' || password == '') {
-            NormalSwal.fire({
-                text: 'Check your credentials'
+            swal.NormalSwal.fire({
+                title: 'Wrong Credentials.',
+                text: 'Your email or password is incorrect.'
             });
         } else {
             $.ajax({
@@ -39,13 +23,14 @@ $(function () {
                 data: JSON.stringify({ email: email, password: password }),
                 success: function (res) {
                     if (res.findFlag == false) {
-                        NormalSwal.fire({
-                            text: 'Check your credentials'
+                        swal.NormalSwal.fire({
+                            title: 'Wrong Credentials.',
+                            text: 'Your email or password is incorrect.'
                         });
                     } else {
-                        Toast.fire({
+                        swal.Toast.fire({
                             icon: 'success',
-                            title: 'Bem-vindo, ' + res.profile.fname + ' ' + res.profile.lname + '!'
+                            title: 'Bem-vindo, ' + res.customer.profile[0].fname + '!'
                         });
 
                         setTimeout(() => {

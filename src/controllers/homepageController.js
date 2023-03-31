@@ -4,8 +4,7 @@ const title = 'Homepage - Projeto';
 exports.renderHome = () => {
     return async function (req, res, next) {
         const isLoggedIn = req.session.isLogged;
-        const customer = req.session.profile;
-        console.log(res.locals.featuredproducts);
+        const customer = req.session.customer;
 
         res.render('pages/index-commerce', {
             msg: msg,

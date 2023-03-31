@@ -1,9 +1,7 @@
-function Customer(id, email, dtAdd, fname, lname) {
-    this.id = id;
-    this.email = email;
-    this.dtAdd = dtAdd;
-    this.fname = fname;
-    this.lname = lname;
+function Customer(type, customer) {
+    if (type == 'Login') {
+        this.profile = customer;
+    }
 }
 
 exports.Customer = Customer;

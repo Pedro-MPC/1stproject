@@ -1,27 +1,32 @@
 const commerceAPI = require('../../api/commerceAPI');
-const { Customer } = require('../models/customer');
 
 exports.validateLogin = () => {
     return async (req, res, next) => {
         // Getting customer info - LOGDETAILS
-        const LOGDETAILS = await commerceAPI.getCustomerLogin(req.body.email, req.body.password);
-        const customerLogged = new Customer(
-            LOGDETAILS[0].id,
-            LOGDETAILS[0].email,
-            LOGDETAILS[0].dtAdd,
-            LOGDETAILS[0].fname,
-            LOGDETAILS[0].lname
-        );
+        const Customer = await commerceAPI.getCustomerLogin(req.body.email, req.body.password);
+        console.log(Customer);
         var findFlag = false;
-        if (LOGDETAILS == 'notFound') {
+        if (Customer == 'notFound') {
             findFlag = false;
-            console.log(LOGDETAILS);
+            console.log(Customer);
         } else {
-            req.session.isLogged = true;
-            req.session.profile = customerLogged;
-            findFlag = true;
+            req.session.regenerate(function (err) {
+                if (err) next(err);
+
+                // store user information in session, typically a user id
+                req.session.customer = Customer;
+                req.session.isLogged = true;
+                console.log(req.session);
+                findFlag = true;
+
+                // save the session before redirection to ensure page
+                // load does not happen before session is saved
+            });
         }
-        res.json({ profile: customerLogged, findFlag: findFlag });
+        req.session.save(function (err) {
+            if (err) return next(err);
+            res.json({ customer: Customer, findFlag: findFlag });
+        });
     };
 };
 
@@ -38,7 +43,7 @@ exports.logout = () => {
 exports.checkSession = () => {
     return function (req, res, next) {
         res.on('finish', function () {
-            if (req.session.profile) {
+            if (req.session.customer) {
                 console.log(req.session);
             } else {
                 req.session.isLogged = false;
