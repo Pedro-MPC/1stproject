@@ -4,11 +4,9 @@ exports.validateLogin = () => {
     return async (req, res, next) => {
         // Getting customer info - LOGDETAILS
         const Customer = await commerceAPI.getCustomerLogin(req.body.email, req.body.password);
-        console.log(Customer);
         var findFlag = false;
         if (Customer == 'notFound') {
             findFlag = false;
-            console.log(Customer);
         } else {
             req.session.regenerate(function (err) {
                 if (err) next(err);
@@ -16,7 +14,6 @@ exports.validateLogin = () => {
                 // store user information in session, typically a user id
                 req.session.customer = Customer;
                 req.session.isLogged = true;
-                console.log(req.session);
                 findFlag = true;
 
                 // save the session before redirection to ensure page
@@ -44,10 +41,10 @@ exports.checkSession = () => {
     return function (req, res, next) {
         res.on('finish', function () {
             if (req.session.customer) {
-                console.log(req.session);
+                console.log(req.session.id);
             } else {
                 req.session.isLogged = false;
-                console.log(req.session);
+                console.log(req.session.id);
             }
         });
         next();

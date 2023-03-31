@@ -1,6 +1,10 @@
 $bgColor: rgb(253, 253, 253);
 $textColorHome: white;
 $bgColor404: rgb(18, 24, 47);
+@font-face {
+    font-family: quicksand;
+    src: url('../dist/quicksand.css');
+}
 
 .bodyHome {
     background: url('../img/background.avif');
@@ -92,7 +96,8 @@ a {
 }
 
 .featuredProds {
-    height: 100%;
-    width: 100%;
-    background: url('../img/background-featured.jpg');
+    padding: 20px;
+    background: linear-gradient(rgba(12, 2, 38, 0.554), rgba(32, 19, 19, 0.3)),
+        url('../img/background-featured.avif') no-repeat;
+    background-size: cover;
 }
