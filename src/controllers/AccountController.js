@@ -29,6 +29,35 @@ exports.validateLogin = () => {
     };
 };
 
+exports.checkEmailExist = () => {
+    return async (req, res, next) => {
+        // Getting customer data
+        const checkEmailExist = await commerceAPI.checkEmailExist(req.body.email);
+        const regSuccess = false;
+        if (checkEmailExist == 'emailAlreadyRegistered') {
+            res.json({ msg: 'Email já registado', regSuccess: regSuccess });
+        } else {
+            next();
+        }
+    };
+};
+
+exports.registerCustomer = () => {
+    return async (req, res, next) => {
+        // Getting customer data
+        const registerData = await commerceAPI.registerCustomer(
+            req.body.email,
+            req.body.password,
+            req.body.fname,
+            req.body.lname
+        );
+        const regSuccess = true;
+        if (registerData == 'customerInserted') {
+            res.json({ msg: 'Registado com sucesso!', regSuccess: regSuccess });
+        }
+    };
+};
+
 exports.logout = () => {
     return async (req, res, next) => {
         const LOGOUTMSG = 'Signing out...';
@@ -43,10 +72,10 @@ exports.checkSession = () => {
     return function (req, res, next) {
         res.on('finish', function () {
             if (req.session.customer) {
-                console.log(req.session.id);
+                console.log('Logged ID: ' + req.session.id);
             } else {
                 req.session.isLogged = false;
-                console.log(req.session.id);
+                console.log('Not Logged ID: ' + req.session.id);
             }
         });
         next();

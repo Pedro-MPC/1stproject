@@ -37,6 +37,7 @@ const getAllProducts = async () => {
     });
 };
 
+// Get all the info of Featured Products
 const getFeaturedProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -77,7 +78,48 @@ const getCustomerLogin = async (email, password) => {
     });
 };
 
+// Check if an email is already registered to the Db
+const checkEmailExist = async (email) => {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT email from customer WHERE email = '" + email + "'", function (err, results, fields) {
+            if (err) {
+                return reject(err);
+            }
+            if (results && results.length > 0) {
+                console.log('Exist.');
+                return resolve('emailAlreadyRegistered');
+            } else {
+                return resolve('Dont exist.');
+            }
+        });
+    });
+};
+
+// Register a customer
+const registerCustomer = async (email, password, fname, lname) => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "INSERT INTO customer (email, password, fname, lname, dtAdd) VALUES ('" +
+                email +
+                "',md5('" +
+                password +
+                "'),'" +
+                fname +
+                "','" +
+                lname +
+                "', now())",
+            function (err) {
+                if (err) throw err;
+                console.log('1 record inserted');
+                return resolve('customerInserted');
+            }
+        );
+    });
+};
+
+exports.checkEmailExist = checkEmailExist;
 exports.getProductById = getProductById;
 exports.getCustomerLogin = getCustomerLogin;
 exports.getAllProducts = getAllProducts;
 exports.getFeaturedProducts = getFeaturedProducts;
+exports.registerCustomer = registerCustomer;

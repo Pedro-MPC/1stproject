@@ -11,7 +11,7 @@ exports.renderHome = () => {
             title: title,
             isLoggedIn: isLoggedIn,
             customer: customer,
-            PRODUCTS: res.locals.produtos,
+            PRODUCTS: res.locals.allProducts,
             FEATUREDPRODUCTS: res.locals.featuredProdutos,
             pgTitle: 'P_COMMERCE - Home'
         });

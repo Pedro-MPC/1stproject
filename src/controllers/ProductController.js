@@ -20,7 +20,7 @@ exports.getProductByParam = () => {
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });
         } else {
-            res.render('pages/product', {
+            res.json({
                 productId: productId,
                 productName: productName,
                 productImg: productImg,
@@ -33,7 +33,7 @@ exports.getProductByParam = () => {
 exports.getAllProducts = () => {
     return async (req, res, next) => {
         const PRODUCTS = await commerceAPI.getAllProducts();
-        res.locals.produtos = PRODUCTS;
+        res.locals.allProducts = PRODUCTS;
         next();
     };
 };

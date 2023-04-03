@@ -43,9 +43,7 @@ $(function () {
             }
         }
     });
-});
 
-$(function () {
     $('#form-insert').on('submit', function (event) {
         event.preventDefault();
         let value = $('#inputText').val();
@@ -75,5 +73,14 @@ $(function () {
                 }
             });
         }
+    });
+
+    $('#tglRegister').on('click', function (event) {
+        $('#divLogin').css('display', 'none');
+        $('#divRegister').css('display', 'block');
+    });
+    $('#tglLogin').on('click', function (event) {
+        $('#divRegister').css('display', 'none');
+        $('#divLogin').css('display', 'block');
     });
 });

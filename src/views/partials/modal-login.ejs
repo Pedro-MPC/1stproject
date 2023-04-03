@@ -9,29 +9,111 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-body" style="padding: 40px">
-                <h3 class="display-4" style="font-size: 30px; font-weight: 600">LOGIN TO YOUR ACCOUNT</h3>
-                <br />
-                <form id="loginForm">
+                <div id="divLogin">
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-12">
-                            <input type="mail" class="form-control" id="loginEmail" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-12">
-                            <input type="password" class="form-control" id="loginPassword" />
-                        </div>
-                    </div>
-                    <br />
+                        <div class="col-sm-6" style="border-right: 1px solid rgba(0, 0, 0, 0.16)">
+                            <h3 class="display-4" style="font-size: 30px; font-weight: 600">LOGIN TO YOUR ACCOUNT</h3>
+                            <br />
+                            <form id="loginForm">
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-12">
+                                        <input type="mail" class="form-control" id="loginEmail" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-12">
+                                        <input type="password" class="form-control" id="loginPassword" />
+                                    </div>
+                                </div>
+                                <br />
 
-                    <button type="sumbit" class="btn btn-danger btn-block" style="padding: 10px">Sign in</button>
-                </form>
-                <!-- Submit button -->
+                                <button type="sumbit" class="btn btn-danger btn-block" style="padding: 10px">
+                                    Sign in
+                                </button>
+                            </form>
+                            <!-- Submit button -->
+                        </div>
+                        <div class="col-sm-6 mt-2">
+                            <div style="position: relative; left: 50%; top: 50%; transform: translate(-50%, -50%)">
+                                <img src="img/logo-dark.png" alt="" class="mb-2" style="max-width: 200px" />
+                                <p class="mb-4">
+                                    If you don't have a P_COMMERCE account, click on the button below to create one.
+                                </p>
+                                <button
+                                    type="button"
+                                    id="tglRegister"
+                                    class="btn btn-dark btn-block"
+                                    style="padding: 10px"
+                                >
+                                    Create account
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divRegister" style="display: none">
+                    <div id="divLogin">
+                        <div class="row">
+                            <div class="col-sm-6" style="border-right: 1px solid rgba(0, 0, 0, 0.16)">
+                                <h3 class="display-4" style="font-size: 30px; font-weight: 600">CREATE YOUR ACCOUNT</h3>
+                                <br />
+                                <form id="registerForm">
+                                    <div class="row">
+                                        <label class="col-sm-12 form-label" style="text-align: left">First Name</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="registerFName" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-12 form-label" style="text-align: left">Last Name</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="registerLName" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-12">
+                                            <input type="mail" class="form-control" id="registerEmail" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">Password</label>
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control" id="registerPassword" />
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <button type="sumbit" class="btn btn-danger btn-block" style="padding: 10px">
+                                        Register
+                                    </button>
+                                </form>
+                                <!-- Submit button -->
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <div style="position: relative; left: 50%; top: 50%; transform: translate(-50%, -50%)">
+                                    <img src="img/logo-dark.png" alt="" class="mb-2" style="max-width: 200px" />
+                                    <p class="mb-4">
+                                        If you already have an account, click on the button below to log in.
+                                    </p>
+                                    <button
+                                        type="button"
+                                        id="tglLogin"
+                                        class="btn btn-dark btn-block"
+                                        style="padding: 10px"
+                                    >
+                                        Login to my account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
