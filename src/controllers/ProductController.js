@@ -15,8 +15,6 @@ exports.getProductByParam = () => {
         productDesc = PRODUCT[0].desc;
         productImg = PRODUCT[0].img;
 
-        console.log(PRODUCT[0]);
-
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });
         } else {
@@ -30,10 +28,10 @@ exports.getProductByParam = () => {
     };
 };
 
-exports.getAllProducts = () => {
+exports.getAllProductsPDP = () => {
     return async (req, res, next) => {
-        const PRODUCTS = await commerceAPI.getAllProducts();
-        res.locals.produtos = PRODUCTS;
+        const PRODUCTSPDP = await commerceAPI.getAllProductsPDP();
+        res.locals.productsPDP = PRODUCTSPDP;
         next();
     };
 };

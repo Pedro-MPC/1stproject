@@ -27,13 +27,15 @@
             <form class="form-inline my-2 my-lg-0">
                 <% if (locals.isLoggedIn == true) { %>
                 <div>
-                    <span style="text-align: center" class="btn">Welcome, <%= customer.profile[0].fname %>!</span>
+                    <span style="text-align: center" class="btn">Welcome, <%= customer.profile.fname %>!</span>
                     <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">Logout</button>
                 </div>
                 <%}else{ %>
                 <div>
                     <span style="text-align: center" class="btn">Log in to your account</span>
-                    <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLoginModal">Login</button>
+                    <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLoginModal">
+                        Login/Register
+                    </button>
                 </div>
                 <%} %>
             </form>

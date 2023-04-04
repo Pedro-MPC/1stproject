@@ -29,31 +29,33 @@ a {
     transition: opacity 0.5s;
 }
 
-.ativo {
-    opacity: 0.4;
-    height: 200px;
-    transition: opacity 0.5s;
-}
+@media screen and (min-width: 1200px) {
+    .ativo {
+        opacity: 0.4;
+        height: 200px;
+        transition: opacity 0.5s;
+    }
 
-.owl-item:not(.active) {
-    opacity: 0.4;
-    font-weight: lighter;
-}
-.ativo .textprice {
-    font-weight: lighter;
-    transition: font-weight 0.5s;
-}
+    .owl-item:not(.active) {
+        opacity: 0.4;
+        font-weight: lighter;
+    }
+    .ativo .textprice {
+        font-weight: lighter;
+        transition: font-weight 0.5s;
+    }
 
-.owl-item:not(.active) .textprice {
-    font-weight: lighter;
-    opacity: 0.4;
-    font-weight: lighter;
-}
-.productOnList {
-    transition: box-shadow 1s;
-}
-.productOnList:hover {
-    box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.817);
+    .owl-item:not(.active) .textprice {
+        font-weight: lighter;
+        opacity: 0.4;
+        font-weight: lighter;
+    }
+    .productOnList {
+        transition: box-shadow 1s;
+    }
+    .productOnList:hover {
+        box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.817);
+    }
 }
 
 i {
