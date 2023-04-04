@@ -1,13 +1,15 @@
+const Product = require('../product');
 const newProduct = require('../product');
 
-newProduct.desc = function (desc) {
+const productPDP = function (product, desc, img) {
+    this.product = product;
     this.desc = desc;
-};
-newProduct.img = function (img) {
     this.img = img;
+    //this.output = function () {
+    //    console.log(
+    //        'Decorated: ' + this.name + ', ' + this.price + ', ' + this.category + ', ' + this.desc + ', ' + this.img
+    //    );
+    //};
 };
 
-newProduct.desc('desc');
-newProduct.img('img');
-
-console.log(newProduct);
+module.exports = productPDP;
