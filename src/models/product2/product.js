@@ -11,7 +11,7 @@ class Product {
 const isPDP = (product, desc, img) => {
     return { ...product, desc: desc, img: img };
 };
-
+//decorator 2
 const isTile = (product, img) => {
     return { ...product, img: img };
 };
