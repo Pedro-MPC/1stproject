@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack",
-        "nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node"
+        "nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node",
+        "postinstall": "link-module-alias",
+        "preinstall": "command -v link-module-alias && link-module-alias clean || true"
     },
     "author": "pedro correia",
     "license": "ISC",
@@ -18,6 +20,7 @@
         "express": "^4.18.2",
         "express-session": "^1.17.3",
         "gulp": "^4.0.2",
+        "link-module-alias": "^1.2.0",
         "lodash": "^4.17.21",
         "module-alias": "^2.2.2",
         "mongodb": "5.1",
@@ -31,6 +34,7 @@
     "devDependencies": {
         "@babel/core": "^7.21.3",
         "@babel/preset-env": "^7.20.2",
+        "@types/module-alias": "^2.0.1",
         "babel-loader": "^9.1.2",
         "css-loader": "^6.7.3",
         "gulp-sass": "^5.1.0",
@@ -39,5 +43,15 @@
         "style-loader": "^3.3.2",
         "webpack": "^5.76.3",
         "webpack-cli": "^5.0.1"
+    },
+    "_moduleAliases": {
+        "~root": ".",
+        "@models": "./src/models",
+        "@my_module": "lib/some-file.js",
+        "something": "src/foo",
+        "module-with-typings": {
+            "main": "src/path/to/module.js",
+            "typings": "src/path/to/module/typings.d.ts"
+        }
     }
 }

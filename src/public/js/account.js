@@ -32,7 +32,7 @@ $(function () {
                     } else {
                         swal.Toast.fire({
                             icon: 'success',
-                            title: 'Bem-vindo, ' + res.customer.profile[0].fname + '!'
+                            title: 'Bem-vindo, ' + res.customer.profile.fname + '!'
                         });
 
                         setTimeout(() => {

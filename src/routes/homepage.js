@@ -8,7 +8,7 @@ const customer = require('../controllers/AccountController');
 router.get(
     '/',
     customer.checkSession(),
-    productController.getAllProducts(),
+    productController.getAllProductsPDP(),
     productController.getFeaturedProducts(),
     hpController.renderHome()
 );

@@ -10,13 +10,11 @@ exports.validateLogin = () => {
         } else {
             req.session.regenerate(function (err) {
                 if (err) next(err);
-
                 // store user information in session
                 req.session.customer = Customer;
                 req.session.isLogged = true;
                 //Flag user sucessfully logged in
                 findFlag = true;
-
                 // save the session before redirection to ensure page
                 // load does not happen before session is saved
             });
