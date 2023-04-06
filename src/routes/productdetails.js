@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/ProductController');
 
 /** Rendering Product by Param page */
+router.get('*', productController.getCartProducts());
 router.get('/product', productController.getProductByParam());
 
 module.exports = router;

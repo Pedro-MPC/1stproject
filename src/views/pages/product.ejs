@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('../partials/header') %>
-    <title>P_COMMERCE - <%= productName %></title>
-    <body>
-        <div class="conProductShow">
-            <h1 class="display-5"><%= productId %> | <%= productName %></h1>
-            <img src="<%= productImg %>" alt="" />
+    <link rel="stylesheet" href="/dist/bootstrap.css" />
+    <link rel="stylesheet" href="/stylesheets/product-details.css" />
 
-            <p style="text-align: justify"><%= productDesc %></p>
+    <title>P_COMMERCE - <%- PRODUCTPDP.name %></title>
+    <style>
+        .otherElements.normal {
+            filter: brightness(40%);
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+        }
+        .otherElements {
+            opacity: 1;
+        }
+    </style>
+    <body>
+        <%- include('../partials/nav-bar') %>
+        <div id="otherElements" class="otherElements" style="height: 100vh">
+            <br />
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 mr-5" style="background-color: white; padding: 2%">
+                        <h1 class="display-5"><%- PRODUCTPDP.name %></h1>
+                        <img src="<%= PRODUCTPDP.img %>" class="img-product mt-3" alt="" />
+                    </div>
+                    <div class="col-5 prodDetails">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="font-weight-semibold mb-2 price" style="text-align: left">
+                                    <%- PRODUCTPDP.price.toFixed(2) %>€
+                                </h3>
+                                <p class="font-weight-semibold mb-2" style="text-align: left; font-size: 18px">
+                                    <i class="bx bxs-check-circle" style="color: greenyellow"></i> Avaiable
+                                </p>
+                            </div>
+                            <div class="col">
+                                <button
+                                    id="addToCart"
+                                    class="btn btn-danger mt-1 text-white btn-block"
+                                    data-id="<%- (PRODUCTPDP.id);%>"
+                                >
+                                    <span
+                                        style="font-size: 25px; vertical-align: middle"
+                                        class="bx bx-cart-add mr-2 center-text"
+                                    ></span
+                                    >Add to cart
+                                </button>
+                            </div>
+                        </div>
+                        <br />
+                        <p style="text-align: justify"><%- PRODUCTPDP.desc %></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <%- include('../partials/footer') %>

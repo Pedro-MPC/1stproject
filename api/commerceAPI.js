@@ -1,22 +1,24 @@
-const { forEach } = require('lodash');
 const { connection } = require('../database/db-connect');
 const { Customer } = require('@models/customer/customer');
-const productModel = require('@models/product/index');
 
 // Products API functions
-const getProductById = async (id) => {
+const getProductPDPById = async (id) => {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM products WHERE _id='" + id + "'", function (err, results, fields) {
-            if (err) {
-                return reject(err);
+        connection.query(
+            "SELECT * FROM products, category WHERE products.category = category.id AND _id='" + id + "'",
+            function (err, results, fields) {
+                if (err) {
+                    return reject(err);
+                }
+                if (results && results.length > 0) {
+                    const PRODUCT = results[0];
+                    return resolve(PRODUCT);
+                } else {
+                    var notFound = 'notFound';
+                    return resolve(notFound);
+                }
             }
-            if (results && results.length > 0) {
-                return resolve(results);
-            } else {
-                var notFound = 'notFound';
-                return resolve(notFound);
-            }
-        });
+        );
     });
 };
 
@@ -31,16 +33,14 @@ const getAllProductsPDP = async () => {
                 if (results && results.length > 0) {
                     const PRODUCTSPDP = [];
                     results.forEach((product) => {
-                        PRODUCTSPDP.push(
-                            new productModel.productPDP(
-                                product._id,
-                                product.name,
-                                product.preco,
-                                product.descCat,
-                                product.desc,
-                                product.img
-                            )
-                        );
+                        PRODUCTSPDP.push({
+                            id: product._id,
+                            name: product.name,
+                            price: product.preco,
+                            cat: product.descCat,
+                            img: product.img,
+                            desc: product.desc
+                        });
                     });
                     return resolve(PRODUCTSPDP);
                 } else {
@@ -65,15 +65,13 @@ const getFeaturedProducts = async () => {
                     const PRODUCTSTILE = [];
                     results.forEach((product) => {
                         console.log(product);
-                        PRODUCTSTILE.push(
-                            new productModel.productTile(
-                                product._id,
-                                product.name,
-                                product.preco,
-                                product.descCat,
-                                product.img
-                            )
-                        );
+                        PRODUCTSTILE.push({
+                            id: product._id,
+                            name: product.name,
+                            price: product.preco,
+                            cat: product.descCat,
+                            img: product.img
+                        });
                     });
                     return resolve(PRODUCTSTILE);
                 } else {
@@ -95,7 +93,7 @@ const getCustomerLogin = async (email, password) => {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const customer = new Customer(await getCustomerInfo(email));
+                    const customer = await getCustomerInfo(email);
                     return resolve(customer);
                 } else {
                     var notFound = 'notFound';
@@ -167,7 +165,7 @@ const registerCustomer = async (email, password, fname, lname) => {
 };
 
 exports.checkEmailExist = checkEmailExist;
-exports.getProductById = getProductById;
+exports.getProductPDPById = getProductPDPById;
 exports.getCustomerLogin = getCustomerLogin;
 exports.getAllProductsPDP = getAllProductsPDP;
 exports.getFeaturedProducts = getFeaturedProducts;

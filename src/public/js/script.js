@@ -1,8 +1,23 @@
 import '../stylesheets/sassstyle.css';
 import '../js/account';
 import 'boxicons';
+import './cart';
 
 $(function () {
+    document.onclick = function (e) {
+        if (e.target.id !== 'cart-toggle' && $(e.target).attr('data-cart') !== 'true') {
+            //element clicked wasn't the div; hide the div
+            $('.shopping-cart').css('display', 'none');
+            $('#otherElements').removeClass('normal');
+        }
+        console.log($(e.target).attr('class'));
+    };
+    (function () {
+        $('#cart').on('click', function () {
+            $('.shopping-cart').fadeToggle('fast');
+            $('#otherElements').toggleClass('normal');
+        });
+    })();
     function changeActive(e) {
         // Remove o seletor classe de todos item
         $('.owl-stage .owl-item').removeClass('ativo');
@@ -16,11 +31,11 @@ $(function () {
     owl.on('initialized.owl.carousel', changeActive);
     owl.owlCarousel({
         nav: true,
+        autoplayHoverPause: true,
         margin: 20,
         loop: true,
         autoplay: true,
-        autoplayTimeout: 4000,
-        smartSpeed: 1000,
+        autoplayTimeout: 1500,
         lazyLoad: true,
         animateIn: 'fadeOut',
         animateOut: 'fadeOut',

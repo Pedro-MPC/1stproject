@@ -18,6 +18,7 @@
         "cputemp": "^0.0.1",
         "ejs": "^3.1.9",
         "express": "^4.18.2",
+        "express-pjax": "0.0.1",
         "express-session": "^1.17.3",
         "gulp": "^4.0.2",
         "link-module-alias": "^1.2.0",

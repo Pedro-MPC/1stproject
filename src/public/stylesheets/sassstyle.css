@@ -9,7 +9,6 @@
 .conProductShow {
   width: 70%;
   height: fit-content;
-  background-color: rgba(32, 43, 84, 0.63);
   padding: 5vh;
   position: absolute;
   top: 0;
@@ -19,12 +18,11 @@
   margin: auto;
   max-height: 80vh;
   overflow: hidden;
-  color: white; }
+  color: black; }
 
 .conProductShow img {
   padding: 20px;
-  width: 450px;
-  height: 450px;
+  max-height: 450px;
   object-fit: cover; }
 
 .body404 {

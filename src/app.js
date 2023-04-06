@@ -18,13 +18,15 @@ app.use(
         }
     })
 );
-console.log(session);
 
 /** Getting and setting routes */
-const homeRoute = require('./routes/Homepage');
+const homeRoute = require('./routes/homepage');
 const productRoute = require('./routes/productdetails');
 const errorRoute = require('./routes/404');
 const accountRoute = require('./routes/Account');
+const cartRoute = require('./routes/Cart');
+
+app.use(cartRoute);
 app.use(homeRoute);
 app.use(productRoute);
 app.use(accountRoute);

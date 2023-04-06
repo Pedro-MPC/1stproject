@@ -8,7 +8,7 @@
     <div class="container productsList d-flex justify-content-center mt-30 mb-50">
         <div class="row">
             <% FEATUREDPRODUCTS.forEach(FEATUREDPRODUCTS => {%>
-            <div class="col mt-3">
+            <div class="col mt-3" onclick="window.location='/product?pid=<%=FEATUREDPRODUCTS.id%>';">
                 <div
                     class="card card-body productOnList"
                     style="
@@ -64,7 +64,7 @@
                                 <button type="button" class="btn btn-danger text-white">
                                     <span
                                         style="font-size: 25px; vertical-align: middle"
-                                        class="bx bx-cart-add mr-2 center-text"
+                                        class="bx bx-check-circle mr-2 center-text"
                                     ></span
                                     >Check this Product
                                 </button></a

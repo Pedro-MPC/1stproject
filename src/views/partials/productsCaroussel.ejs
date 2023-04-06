@@ -29,7 +29,6 @@
                             <p
                                 class="mb-3"
                                 style="
-                                    text-align: justify;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     display: -webkit-box;
@@ -47,18 +46,23 @@
                             <h3 class="font-weight-semibold mb-4 textprice" style="color: #dc3545">
                                 <%- PRODUCTS.price.toFixed(2) %>€
                             </h3>
-
-                            <button style="width: 30vh" type="button" class="btn btn-danger mt-1 text-white">
-                                <span
-                                    style="font-size: 25px; vertical-align: middle"
-                                    class="bx bx-cart-add mr-2 center-text"
-                                ></span
-                                >Add to cart
-                            </button>
                         </div>
+                        <button
+                            style="width: 30vh; z-index: 100"
+                            id="addToCart"
+                            class="btn btn-danger mt-1 text-white addToCartDetails"
+                            data-id="<%- (PRODUCTS.id);%>"
+                        >
+                            <span
+                                style="font-size: 25px; vertical-align: middle"
+                                class="bx bx-cart-add mr-2 center-text"
+                            ></span
+                            >Add to cart
+                        </button>
                     </div>
                 </div>
             </div>
+
             <% }) %>
         </div>
     </div>

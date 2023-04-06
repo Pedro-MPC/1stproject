@@ -9,7 +9,6 @@ $(function () {
     // AJAX customer login form
     $('#loginForm').on('submit', function (event) {
         event.preventDefault();
-
         let email = $('#loginEmail').val();
         let password = $('#loginPassword').val();
         if (email == '' || password == '') {
@@ -32,9 +31,8 @@ $(function () {
                     } else {
                         swal.Toast.fire({
                             icon: 'success',
-                            title: 'Bem-vindo, ' + res.customer.profile.fname + '!'
+                            title: 'Bem-vindo, ' + res.customer.first_name + '!'
                         });
-
                         setTimeout(() => {
                             location.reload();
                         }, '1500');
