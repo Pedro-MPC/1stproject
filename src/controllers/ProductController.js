@@ -1,6 +1,5 @@
 const commerceAPI = require('../../api/commerceAPI');
 const productModel = require('../models/product/product');
-var pjax = require('express-pjax');
 
 // Get products with URL params
 exports.getProductByParam = () => {

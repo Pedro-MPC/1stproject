@@ -14,8 +14,7 @@
         <% }else{%>
         <div data-cart="true">
             <ul data-cart="true" class="shopping-cart-items isCart" style="overflow-y: scroll; max-height: 210px">
-                <% var total=0; if(CARTPRODUCTS){CARTPRODUCTS.forEach(CARTPRODUCTS => {%> <%
-                total+=(CARTPRODUCTS.PRODUCT.price*CARTPRODUCTS.quantity) %>
+                <% var total=0; if(CARTPRODUCTS){CARTPRODUCTS.forEach(CARTPRODUCTS => {%> <% total+=1 %>
                 <li data-cart="true" class="clearfix isCart" style="max-height: 150px">
                     <img
                         data-cart="true"

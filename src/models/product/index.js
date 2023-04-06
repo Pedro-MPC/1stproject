@@ -1,7 +1,15 @@
-const { Product } = require('./product');
-const { ProductPDP } = require('./decorators/productPDP');
-const { ProductTile } = require('./decorators/productTile');
+const { setCategory } = require('./decorators/category');
+const { setDesc } = require('./decorators/desc');
+const { setImg } = require('./decorators/img');
+const { setName } = require('./decorators/name');
+const { setPrice } = require('./decorators/price');
+const { setId } = require('./decorators/id');
+const { setIsFeatured } = require('./decorators/isFeatured');
 
-module.exports.product = Product;
-module.exports.productPDP = ProductPDP;
-module.exports.productTile = ProductTile;
+exports.setCategory = setCategory;
+exports.setDesc = setDesc;
+exports.setImg = setImg;
+exports.setName = setName;
+exports.setPrice = setPrice;
+exports.setId = setId;
+exports.setIsFeatured = setIsFeatured;
