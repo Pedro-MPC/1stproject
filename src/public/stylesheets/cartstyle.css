@@ -38,9 +38,10 @@ body {
 }
 
 .shopping-cart {
+    position: fixed;
     display: none;
     top: 14%;
-    right: 34vh;
+    right: 16.5vw;
     float: right;
     background: white;
     width: 320px;

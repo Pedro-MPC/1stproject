@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger navbar-expand" style="height: 120px">
     <div class="container">
         <a class="navbar-brand" href="/" style="font-weight: 500; font-size: 25px"
-            ><img src="/img/logo.png" alt=""
+            ><img class="logoNav" src="/img/logo.png" alt=""
         /></a>
         <button
             class="navbar-toggler"
@@ -28,10 +28,9 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <% if (locals.isLoggedIn == true) { %>
-                <div>
-                    <span style="text-align: center; color: white" class="btn"
-                        >Welcome, <%= customer.first_name %>!</span
-                    >
+                <div class="text-center">
+                    <span style="font-size: 20px; width: 0px" class="bx bxs-user btn"></span>
+                    <span style="font-size: 15px; color: white" class="btn">Welcome, <%= customer.first_name %>!</span>
                     <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">Logout</button>
                 </div>
                 <div class="m-4">
@@ -40,11 +39,14 @@
                     </a>
                 </div>
                 <%}else{ %>
-                <div>
+                <div class="loginFull">
                     <span style="text-align: center; color: white" class="btn">Log in to your account</span>
                     <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLoginModal">
                         Login/Register
                     </button>
+                </div>
+                <div class="loginIcon">
+                    <span style="font-size: 20px; width: 0px" class="bx bxs-user btn"></span>
                 </div>
                 <div class="m-4 mt-1">
                     <a href="#" id="cart">

@@ -2,21 +2,15 @@
 <div data-cart="true" class="container isCart">
     <div data-cart="true" class="shopping-cart isCart">
         <div data-cart="true" class="shopping-cart-header">
-            <span data-cart="true" style="font-size: 20px"
-                >Your Shopping Cart <% if(CARTPRODUCTS){%>(<%- CARTPRODUCTS.length %>)<%} %></span
+            <img src="img/logo-dark.png" alt="" class="mb-2" style="max-width: 100px" /> <br />
+
+            <span data-cart="true" style="font-size: 17px"
+                >Shopping Cart <% if(CARTPRODUCTS){%>(<%- CARTPRODUCTS.length %>)<%} %></span
             >
-            <br />
         </div>
 
         <!--end shopping-cart-header -->
-        <div data-cart="true">
-            <ul
-                data-cart="true"
-                class="shopping-cart-items isCart"
-                style="overflow-y: scroll; max-height: 210px"
-                id="productsListCart"
-            ></ul>
-        </div>
+        <div data-cart="true" id="productsListCart"></div>
 
         <a href="#" data-cart="true" class="btn btn-dark btn-block mt-50">Checkout</a>
     </div>
