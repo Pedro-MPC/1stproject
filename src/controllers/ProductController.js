@@ -16,7 +16,6 @@ exports.getProductByParam = () => {
         } else {
             res.render('pages/product', {
                 PRODUCTPDP: PRODUCTPDP,
-                teste: 'teste',
                 isLoggedIn: isLoggedIn,
                 CARTPRODUCTS: res.locals.cardProducts,
                 customer: customer
@@ -44,7 +43,7 @@ exports.getFeaturedProducts = () => {
 };
 
 // Get product PDP by Id (Used to render unique PDP)
-exports.getProductById = () => {
+exports.getPDPProductById = () => {
     return async (req, res, next) => {
         const PRODUCT = productModel.Product('pdp', req.body.id);
         return PRODUCT;
@@ -98,7 +97,6 @@ exports.addToCart = () => {
 exports.getCartProducts = () => {
     return async (req, res, next) => {
         const CARDPRODUCTS = req.session.cart;
-        console.log(CARDPRODUCTS);
         res.locals.cardProducts = CARDPRODUCTS;
         next();
     };

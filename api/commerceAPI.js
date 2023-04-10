@@ -22,6 +22,7 @@ const getProductPDPById = async (id) => {
     });
 };
 
+//Get all the info of all Products (PDP)
 const getAllProductsPDP = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -37,7 +38,7 @@ const getAllProductsPDP = async () => {
                             id: product._id,
                             name: product.name,
                             price: product.preco,
-                            cat: product.descCat,
+                            category: product.descCat,
                             img: product.img,
                             desc: product.desc
                         });
@@ -69,7 +70,7 @@ const getFeaturedProducts = async () => {
                             id: product._id,
                             name: product.name,
                             price: product.preco,
-                            cat: product.descCat,
+                            category: product.descCat,
                             img: product.img
                         });
                     });
