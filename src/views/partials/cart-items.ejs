@@ -1,0 +1,28 @@
+<% if( empty ){ %>
+<p class="text-center mr-4">Your cart is empty.</p>
+<% }else{ %> <% CartItem.forEach(item => {%>
+<li data-cart="true" class="clearfix isCart" style="max-height: 150px">
+    <img
+        data-cart="true"
+        src="<%- item.PRODUCT.img %>"
+        alt="item1"
+        class="mt-3 mr-2"
+        style="max-width: 75px; padding-right: 5px; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+    />
+    <span data-cart="true" class="item-name" style="text-align: left"
+        ><p style="white-space: nowrap; overflow: hidden; display: block; text-overflow: ellipsis">
+            <%- item.PRODUCT.name %>
+        </p></span
+    >
+    <span data-cart="true" class="item-quantity" style="float: left">Quantity: <%- item.quantity %></span>
+    <span data-cart="true" class="item-price" style="float: right"><%- item.PRODUCT.price.toFixed(2) %>€</span>
+</li>
+<% })}%>
+<div
+    data-cart="true"
+    class="shopping-cart-total mb-50 isCart"
+    style="font-size: 16px; border-top: 1px solid rgb(61, 60, 60)"
+>
+    <span data-cart="true" class="lighter-text mt-3" style="float: left">Total:</span>
+    <span data-cart="true" class="main-color-text mt-3" style="float: right" id="totalCart"><%- Total %>€</span>
+</div>
