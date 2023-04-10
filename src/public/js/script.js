@@ -33,7 +33,7 @@ $(function () {
         nav: true,
         autoplayHoverPause: true,
         margin: 20,
-        loop: false,
+        loop: true,
         autoplay: true,
         autoplayTimeout: 1500,
         lazyLoad: true,
@@ -53,8 +53,7 @@ $(function () {
             },
             1000: {
                 items: 3,
-                nav: true,
-                loop: true
+                nav: true
             }
         }
     });
