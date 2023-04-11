@@ -1,7 +1,9 @@
 const msg = 'Produtos';
 const title = 'Homepage - Projeto';
 
-// Renders home page sending needed variables
+/**
+ * Renders the Homepage
+ */
 exports.renderHome = () => {
     return async function (req, res, next) {
         const isLoggedIn = req.session.isLogged;

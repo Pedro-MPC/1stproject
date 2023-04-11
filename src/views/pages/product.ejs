@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/dist/bootstrap.css" />
     <link rel="stylesheet" href="/stylesheets/product-details.css" />
 
-    <title>P_COMMERCE - <%- PRODUCTPDP.name %></title>
+    <title>P_COMMERCE - <%- PRODUCT.name %></title>
     <style>
         .otherElements.normal {
             filter: brightness(40%);
@@ -21,15 +21,15 @@
             <br />
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 mr-5" style="background-color: white; padding: 2%">
-                        <h1 class="display-5"><%- PRODUCTPDP.name %></h1>
-                        <img src="<%= PRODUCTPDP.img %>" class="img-product mt-3" alt="" />
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 mr-5 prodDetailsImgTitle">
+                        <h1 class="display-5"><%- PRODUCT.name %></h1>
+                        <img src="<%= PRODUCT.img %>" class="img-product mt-3" alt="" />
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 prodDetails" style="padding: 2%">
                         <div class="row">
                             <div class="col">
                                 <h3 class="font-weight-semibold mb-2 price" style="text-align: left">
-                                    <%- PRODUCTPDP.price.toFixed(2) %>€
+                                    <%- PRODUCT.price %>€
                                 </h3>
                                 <p class="font-weight-semibold mb-2" style="text-align: left; font-size: 18px">
                                     <i class="bx bxs-check-circle" style="color: greenyellow"></i> Avaiable
@@ -39,7 +39,7 @@
                                 <button
                                     id="addToCart"
                                     class="btn btn-danger mt-1 text-white btn-block"
-                                    data-id="<%- (PRODUCTPDP.id);%>"
+                                    data-id="<%- (PRODUCT.id);%>"
                                 >
                                     <span
                                         style="font-size: 25px; vertical-align: middle"
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <br />
-                        <p style="text-align: justify"><%- PRODUCTPDP.desc %></p>
+                        <p style="text-align: justify"><%- PRODUCT.desc %></p>
                     </div>
                 </div>
             </div>

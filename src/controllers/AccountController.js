@@ -2,6 +2,11 @@ const commerceAPI = require('../../api/commerceAPI');
 const customerModel = require('../models/customer/customer');
 
 // Validate customer login to check if customer exist and if credentials are correct.
+
+/**
+ * Returns Login status (true if success / false if invalid)
+ * @returns {object, boolean}
+ */
 exports.validateLogin = () => {
     return async (req, res, next) => {
         // Getting customer data
@@ -33,7 +38,26 @@ exports.validateLogin = () => {
     };
 };
 
-// Register a Customer
+/**
+ * Checks if email already exist on database.
+ * @returns {string, boolean}
+ */
+exports.checkEmailExist = () => {
+    return async (req, res, next) => {
+        // Getting customer data
+        const checkEmailExist = await commerceAPI.checkEmailExist(req.body.email);
+        if (checkEmailExist == 'emailAlreadyRegistered') {
+            res.json({ msg: 'Email já registado', regSuccess: false });
+        } else {
+            next();
+        }
+    };
+};
+
+/**
+ * Register a new Customer to database.
+ * @returns {String, Boolean} msg - Sucess message | regSucess - Flag insert succeeded
+ */
 exports.registerCustomer = () => {
     return async (req, res, next) => {
         // Getting customer data
@@ -43,37 +67,24 @@ exports.registerCustomer = () => {
             req.body.fname,
             req.body.lname
         );
-        const regSuccess = true;
         if (registerData == 'customerInserted') {
-            res.json({ msg: 'Registado com sucesso!', regSuccess: regSuccess });
+            res.json({ msg: 'Registado com sucesso!', regSuccess: true });
         }
     };
 };
 
-//Check if email exists when registering a new account
-exports.checkEmailExist = () => {
-    return async (req, res, next) => {
-        // Getting customer data
-        const checkEmailExist = await commerceAPI.checkEmailExist(req.body.email);
-        const regSuccess = false;
-        if (checkEmailExist == 'emailAlreadyRegistered') {
-            res.json({ msg: 'Email já registado', regSuccess: regSuccess });
-        } else {
-            next();
-        }
-    };
-};
-
-// Check if customer is logged or not. If not creates a guest session.
+/**
+ * Check if session exists
+ */
 exports.checkSession = () => {
     return (req, res, next) => {
         if (req.method === 'GET') {
             res.on('finish', function () {
                 if (req.session.customer) {
-                    console.log('Logged Cart: ' + req.session.cart);
+                    // console.log('Logged Cart: ' + req.session.cart);
                 } else {
                     req.session.isLogged = false;
-                    console.log('Not Logged Cart: ' + req.session.cart);
+                    //console.log('Not Logged Cart: ' + req.session.cart);
                 }
             });
         }
@@ -81,20 +92,15 @@ exports.checkSession = () => {
     };
 };
 
-// Customer logout
+/**
+ * Customer logout. Destroy the logged user session.
+ * @returns {String} [LOGOUTMSG] Logout message to client-side
+ */
 exports.logout = () => {
     return async (req, res, next) => {
         const LOGOUTMSG = 'Signing out...';
-        console.log('BEFORE: ' + req.session);
         req.session.destroy();
-        console.log('AFTER: ' + req.session);
         res.json({ response: LOGOUTMSG });
         next();
-    };
-};
-
-exports.globalAccountVariables = () => {
-    return async (req, res, next) => {
-        res.json({ customer: req.session.customer, cart: req.session.cart });
     };
 };

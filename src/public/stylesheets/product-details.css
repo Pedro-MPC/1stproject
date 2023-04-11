@@ -16,9 +16,12 @@ h1 {
 
 .prodDetails {
     box-shadow: rgba(232, 232, 239, 0.2) 0px 7px 29px 0px;
-    padding: 2%;
+    padding: 5%;
     height: fit-content;
     background-color: white;
+}
+.prodDetailsImgTitle {
+    padding: 2%;
 }
 
 .addToCartDetails {

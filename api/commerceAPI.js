@@ -2,6 +2,13 @@ const { connection } = require('../database/db-connect');
 const { Customer } = require('@models/customer/customer');
 
 // Products API functions
+
+/**
+ * Get Product By Id.
+ * @param {Integer} id - Id of product to search on database
+ * @returns {Object} Product - Result of query
+ * @returns {String} notFound - Return not found if product with search id doesn't exist
+ */
 const getProductPDPById = async (id) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -22,8 +29,11 @@ const getProductPDPById = async (id) => {
     });
 };
 
-//Get all the info of all Products (PDP)
-const getAllProductsPDP = async () => {
+/**
+ * Get All Products
+ * @returns {Array} PRODUCTS - Array with all Products on database
+ */
+const getAllProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
             'SELECT * FROM products, category WHERE products.category = category.id',
@@ -32,9 +42,9 @@ const getAllProductsPDP = async () => {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const PRODUCTSPDP = [];
+                    const PRODUCTS = [];
                     results.forEach((product) => {
-                        PRODUCTSPDP.push({
+                        PRODUCTS.push({
                             id: product._id,
                             name: product.name,
                             price: product.preco,
@@ -43,7 +53,7 @@ const getAllProductsPDP = async () => {
                             desc: product.desc
                         });
                     });
-                    return resolve(PRODUCTSPDP);
+                    return resolve(PRODUCTS);
                 } else {
                     var notFound = 'notFound';
                     return resolve(notFound);
@@ -53,20 +63,22 @@ const getAllProductsPDP = async () => {
     });
 };
 
-// Get all the info of Featured Products
+/**
+ * Get Featured Products
+ * @returns {Array} PRODUCTS - Array with all Featured Products on database
+ */
 const getFeaturedProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
-            'SELECT _id, name, preco, img, descCat FROM products, category WHERE products.category = category.id AND products.isFeatured = 1',
+            'SELECT * FROM products, category WHERE products.category = category.id AND products.isFeatured = 1',
             function (err, results, fields) {
                 if (err) {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const PRODUCTSTILE = [];
+                    const PRODUCTS = [];
                     results.forEach((product) => {
-                        console.log(product);
-                        PRODUCTSTILE.push({
+                        PRODUCTS.push({
                             id: product._id,
                             name: product.name,
                             price: product.preco,
@@ -74,7 +86,7 @@ const getFeaturedProducts = async () => {
                             img: product.img
                         });
                     });
-                    return resolve(PRODUCTSTILE);
+                    return resolve(PRODUCTS);
                 } else {
                     var notFound = 'notFound';
                     return resolve(notFound);
@@ -85,6 +97,12 @@ const getFeaturedProducts = async () => {
 };
 
 // Customer API functions
+
+/**
+ * Get Customer Login
+ * @returns {Object} customer - Customer info if login succeed
+ * @returns {String} notFound - If customer login credentials are wrong
+ */
 const getCustomerLogin = async (email, password) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -105,7 +123,11 @@ const getCustomerLogin = async (email, password) => {
     });
 };
 
-// Customer API functions
+/**
+ * Get Customer Info
+ * @returns {Object} customer - All customer information
+ * @returns {String} notFound - If customer doesn't exist
+ */
 const getCustomerInfo = async (email) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -126,7 +148,11 @@ const getCustomerInfo = async (email) => {
     });
 };
 
-// Check if an email is already registered to the Db
+/**
+ * Check if Email exist on database
+ * @returns {String} emailAlreadyRegistered - Email is already registered on database
+ * @returns {String} notRegistered - Email is not registered on database
+ */
 const checkEmailExist = async (email) => {
     return new Promise((resolve, reject) => {
         connection.query("SELECT email from customer WHERE email = '" + email + "'", function (err, results, fields) {
@@ -134,16 +160,18 @@ const checkEmailExist = async (email) => {
                 return reject(err);
             }
             if (results && results.length > 0) {
-                console.log('Exist.');
                 return resolve('emailAlreadyRegistered');
             } else {
-                return resolve('Dont exist.');
+                return resolve('notRegistered');
             }
         });
     });
 };
 
-// Register a customer
+/**
+ * Register customer
+ * @returns {String} customerInserted - Customer inserted to databse
+ */
 const registerCustomer = async (email, password, fname, lname) => {
     return new Promise((resolve, reject) => {
         connection.query(
@@ -158,7 +186,6 @@ const registerCustomer = async (email, password, fname, lname) => {
                 "', now())",
             function (err) {
                 if (err) throw err;
-                console.log('1 record inserted');
                 return resolve('customerInserted');
             }
         );
@@ -168,6 +195,6 @@ const registerCustomer = async (email, password, fname, lname) => {
 exports.checkEmailExist = checkEmailExist;
 exports.getProductPDPById = getProductPDPById;
 exports.getCustomerLogin = getCustomerLogin;
-exports.getAllProductsPDP = getAllProductsPDP;
+exports.getAllProducts = getAllProducts;
 exports.getFeaturedProducts = getFeaturedProducts;
 exports.registerCustomer = registerCustomer;

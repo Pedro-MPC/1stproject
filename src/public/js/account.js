@@ -1,16 +1,13 @@
 const swal = require('./swal');
 
 $(function () {
-    // Open login/register modal
-    $('#btnLoginModal').on('click', function (event) {
-        $('#modalLogin').modal('show');
-    });
-
     // AJAX customer login form
     $('#loginForm').on('submit', function (event) {
         event.preventDefault();
+
         let email = $('#loginEmail').val();
         let password = $('#loginPassword').val();
+
         if (email == '' || password == '') {
             swal.NormalSwal.fire({
                 title: 'Wrong Credentials.',
@@ -41,6 +38,7 @@ $(function () {
             });
         }
     });
+
     // AJAX customer register form
     $('#registerForm').on('submit', function (event) {
         event.preventDefault();

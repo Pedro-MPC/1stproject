@@ -20,7 +20,7 @@ async function Customer(type, email, password) {
                 return customer;
         }
     } else {
-        return 'Customer not found';
+        return 'notFound';
     }
 }
 

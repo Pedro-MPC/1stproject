@@ -1,11 +1,14 @@
 // Add Product to cart (in session)
-const productModel = require('../models/product/product');
-const ejs = require('ejs');
+const productFactory = require('../scripts/factory/product');
 
+/**
+ * Add Product to Cart.
+ * @returns {string, object} response - Success message to the front-end JS | cart - User cart details saved on session.
+ */
 exports.addToCart = () => {
     return async (req, res, next) => {
         const PID = req.body.productId;
-        const PRODUCT = await productModel.Product('tile', PID);
+        const PRODUCT = await productFactory.getProductFactory('tile', PID);
 
         if (!req.session.cart) {
             req.session.cart = [];
@@ -37,16 +40,11 @@ exports.addToCart = () => {
     };
 };
 
-// Get products in cart
+/**
+ * Get the products in Cart and updates the cart on template in real-time
+ * @returns {view} Partial view with the updated Cart items list
+ */
 exports.getCartProducts = () => {
-    return async (req, res, next) => {
-        const CARDPRODUCTS = req.session.cart;
-        res.locals.cardProducts = CARDPRODUCTS;
-        next();
-    };
-};
-
-exports.updateCartHTML = () => {
     return async (req, res, next) => {
         const CARDPRODUCTS = req.session.cart;
         var Total = 0;

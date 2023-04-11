@@ -1,5 +1,4 @@
 const swal = require('./swal');
-import '../stylesheets/cartstyle.css';
 
 let btns = document.querySelectorAll('#addToCart');
 
@@ -34,10 +33,9 @@ $(function () {
                             position: 'top-start',
                             title: 'Product ' + productId + ' added to cart!'
                         });
+                        // Call updateCart() function to automatically update the Cart items without refreshing the page
                         updateCart();
                     }
-
-                    //alert("Searched ID: "+value+"\nProduct ID: "+res.response._id+"\nProduct Name: "+res.response.name)
                 }
             });
         });

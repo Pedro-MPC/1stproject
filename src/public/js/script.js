@@ -1,28 +1,27 @@
-import '../stylesheets/sassstyle.css';
-import '../js/account';
 import 'boxicons';
-import './cart';
 
 $(function () {
+    // Close cart popup when clicking outside the cart
     document.onclick = function (e) {
         if (e.target.id !== 'cart-toggle' && $(e.target).attr('data-cart') !== 'true') {
             //element clicked wasn't the div; hide the div
             $('.shopping-cart').css('display', 'none');
             $('#otherElements').removeClass('normal');
         }
-        console.log($(e.target).attr('class'));
     };
+    // Transparency animation when opening/closing the Cart
     (function () {
         $('#cart').on('click', function () {
             $('.shopping-cart').fadeToggle('fast');
             $('#otherElements').toggleClass('normal');
         });
     })();
+
+    // Owl Caroussel animations
     function changeActive(e) {
         // Remove o seletor classe de todos item
         $('.owl-stage .owl-item').removeClass('ativo');
         setTimeout(function () {
-            // Adiciona o seletor classe nos item da pagina ativa
             $('.owl-stage .active:first').addClass('ativo');
             $('.owl-stage .active:last').addClass('ativo');
         }, 0);
@@ -57,7 +56,7 @@ $(function () {
             }
         }
     });
-
+    /*
     $('#form-insert').on('submit', function (event) {
         event.preventDefault();
         let value = $('#inputText').val();
@@ -88,7 +87,13 @@ $(function () {
             });
         }
     });
+*/
+    // Open login/register modal
+    $('.btnLoginModal').on('click', function (event) {
+        $('#modalLogin').modal('show');
+    });
 
+    // Toggle register/login forms on modal
     $('#tglRegister').on('click', function (event) {
         $('#divLogin').css('display', 'none');
         $('#divRegister').css('display', 'block');
