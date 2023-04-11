@@ -131,3 +131,10 @@ a {
 .visible {
   opacity: 1;
   transition: opacity 0.2s ease-out; }
+
+.toggleSideNav {
+  color: white;
+  font-size: 35px; }
+
+.toggleSideNav:hover {
+  color: #b0a9a9; }

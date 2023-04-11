@@ -167,3 +167,11 @@ a {
     opacity: 1;
     transition: opacity 0.2s ease-out;
 }
+
+.toggleSideNav {
+    color: white;
+    font-size: 35px;
+}
+.toggleSideNav:hover {
+    color: rgb(176, 169, 169);
+}

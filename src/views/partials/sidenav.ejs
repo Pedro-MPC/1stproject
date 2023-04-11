@@ -1,0 +1,40 @@
+<div
+    class="offcanvas offcanvas-start"
+    data-bs-scroll="true"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    id="offcanvasScrolling"
+    aria-labelledby="offcanvasScrollingLabel"
+    style="margin-top: 7%; width: 300px"
+>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-center" id="offcanvasScrollingLabel">P_COMMERCE</h5>
+    </div>
+    <div class="offcanvas-body">
+        <ul
+            data-cart="true"
+            class="shopping-cart-items isCart"
+            style="
+                overflow-y: scroll;
+                max-height: 220px;
+                margin-left: -15px;
+                padding-left: 40px;
+                padding-right: 40px;
+                padding-bottom: 30px;
+            "
+        >
+            <li
+                data-cart="true"
+                class="clearfix isCart"
+                style="max-height: 110px; list-style-type: none; border-bottom: 1px solid rgba(0, 0, 0, 0.14)"
+            >
+                <img class="logoNav" src="/img/logoico.png" alt="" style="width: 40px; float: left" />
+                <span data-cart="true" class="item-name" style="text-align: left"
+                    ><p style="white-space: nowrap; overflow: hidden; display: block; text-overflow: ellipsis"></p
+                ></span>
+                <span data-cart="true" class="item-quantity" style="float: left">Quantity:</span>
+                <span data-cart="true" class="item-price" style="float: right">€</span>
+            </li>
+        </ul>
+    </div>
+</div>

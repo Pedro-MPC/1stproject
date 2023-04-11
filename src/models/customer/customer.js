@@ -1,6 +1,10 @@
 const decorators = require('./index');
 const commerceAPI = require('../../../api/commerceAPI');
 
+/**
+ * Customer with decorated properties
+ * @Customer
+ */
 function defaultCustomer() {
     this.email = decorators.setEmail;
     this.first_name = decorators.setFirstName;
