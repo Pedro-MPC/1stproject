@@ -17,7 +17,7 @@ exports.ProductDetailPageByParam = () => {
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });
         } else {
-            res.render('pages/product', {
+            res.render('pages/product-pdp', {
                 PRODUCT: PRODUCT,
                 isLoggedIn: isLoggedIn,
                 CARTPRODUCTS: res.locals.cardProducts,
@@ -35,7 +35,6 @@ exports.getAllProductsPDP = () => {
     return async (req, res, next) => {
         const PRODUCTS = await productFactory.getProductFactory('allpdp');
         res.locals.allProductsPDP = PRODUCTS;
-        console.log(res.locals.allProductsPDP);
         next();
     };
 };
@@ -46,7 +45,7 @@ exports.getAllProductsPDP = () => {
  */
 exports.getFeaturedProducts = () => {
     return async (req, res, next) => {
-        const PRODUCTS = await commerceAPI.getFeaturedProducts();
+        const PRODUCTS = await productFactory.getProductFactory('featuredtile');
         res.locals.featuredProdutos = PRODUCTS;
         next();
     };

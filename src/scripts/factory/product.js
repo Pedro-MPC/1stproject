@@ -7,14 +7,17 @@ const Product = require('@models/product/product');
  *
  * @async
  * @function getProductFactory
- * @param {string} type - The type of product output. Possible values: 'pdp', 'tile', 'allpdp'.
+ * @param {string} type - The type of product output. Possible values: 'pdp', 'tile', 'allpdp', 'featuredtile'.
  * @param {number} [id] - The ID of the product. If not provided, retrieves all products.
  * @returns {(Object|Array<string>|string)} A Product Object if id provided, an array of Product objects if id not provided, or a String if not found.
  */
+
 async function getProductFactory(type, id) {
     var PRODUCT;
-    if (id === undefined) {
+    if (id === undefined && type == 'allpdp') {
         PRODUCT = await commerceAPI.getAllProducts();
+    } else if (id === undefined && type == 'featuredtile') {
+        PRODUCT = await commerceAPI.getFeaturedProducts();
     } else {
         PRODUCT = await commerceAPI.getProductById(id);
     }
@@ -31,21 +34,35 @@ async function getProductFactory(type, id) {
             case 'pdp':
                 product.desc(PRODUCT.desc);
                 return product;
+
             case 'tile':
                 return product;
+
             case 'allpdp':
-                const products = [];
+                const allProductsPDP = [];
                 PRODUCT.forEach((item) => {
                     const product = new Product();
                     product.id(item._id);
                     product.name(item.name);
                     product.img(item.img);
                     product.price(item.preco);
-                    product.category(item.descCat);
                     product.desc(item.desc);
-                    products.push(product);
+                    product.category(item.descCat);
+
+                    allProductsPDP.push(product);
                 });
-                return products;
+                return allProductsPDP;
+            case 'featuredtile':
+                const featuredProductsTile = [];
+                PRODUCT.forEach((item) => {
+                    const product = new Product();
+                    product.id(item._id);
+                    product.name(item.name);
+                    product.img(item.img);
+                    product.price(item.preco);
+                    featuredProductsTile.push(product);
+                });
+                return featuredProductsTile;
         }
     } else {
         return 'notFound';

@@ -22,7 +22,6 @@ exports.validateLogin = () => {
                 // store user information in session
                 req.session.cart = notLoggedCart;
                 req.session.customer = Customer;
-                console.log(req.session.customer);
                 req.session.isLogged = true;
                 //Flag user sucessfully logged in
                 findFlag = true;

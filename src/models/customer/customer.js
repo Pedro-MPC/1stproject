@@ -16,7 +16,6 @@ async function Customer(type, email, password) {
                 customer.email(CUSTOMER.email);
                 customer.first_name(CUSTOMER.fname);
                 customer.last_name(CUSTOMER.lname);
-                console.log('CUSTOMER: ' + customer);
                 return customer;
         }
     } else {

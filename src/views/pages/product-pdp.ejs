@@ -22,7 +22,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 col-sm-12 col-12 mr-5 prodDetailsImgTitle">
-                        <h1 class="display-5"><%- PRODUCT.name %></h1>
+                        <h1 class="text-center"><%- PRODUCT.name %></h1>
+                        <p class="text-center fa-1x"><%- PRODUCT.category %></p>
                         <img src="<%= PRODUCT.img %>" class="img-product mt-3" alt="" />
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 prodDetails" style="padding: 2%">
@@ -32,7 +33,7 @@
                                     <%- PRODUCT.price %>€
                                 </h3>
                                 <p class="font-weight-semibold mb-2" style="text-align: left; font-size: 18px">
-                                    <i class="bx bxs-check-circle" style="color: greenyellow"></i> Avaiable
+                                    <i class="bx bxs-check-circle" style="color: greenyellow"></i> Available
                                 </p>
                             </div>
                             <div class="col">

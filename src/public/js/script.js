@@ -1,5 +1,10 @@
 $(function () {
-    // Close cart popup when clicking outside the cart
+    const loaderContainer = document.querySelector('.loader-container');
+    document.body.className = 'hidden';
+    window.addEventListener('load', () => {
+        loaderContainer.style.display = 'none';
+        document.body.className = 'visible';
+    });
 
     /**
      *@function

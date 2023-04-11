@@ -50,16 +50,10 @@
                                     <%- FEATUREDPRODUCTS.name %>
                                 </a>
                             </h6>
-
-                            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted" data-abc="true"><%- FEATUREDPRODUCTS.category %></a>
-                                </li>
-                            </ul>
                         </div>
 
                         <div class="ml-lg-3 text-center">
-                            <h3 class="font-weight-semibold mb-2"><%- FEATUREDPRODUCTS.preco %>€</h3>
+                            <h3 class="font-weight-semibold mb-2"><%- FEATUREDPRODUCTS.price.toFixed(2) %>€</h3>
 
                             <a href="/product?pid=<%-FEATUREDPRODUCTS.id%>">
                                 <button type="button" class="btn btn-danger text-white">

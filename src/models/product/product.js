@@ -1,8 +1,10 @@
 const decorators = require('./index');
+
 /**
- * Represents a Product.
- * @constructor
+ * Product with decorated properties
+ * @Product
  */
+
 function Product() {
     this.id = decorators.setId;
     this.name = decorators.setName;

@@ -2,6 +2,7 @@ const { connection } = require('../database/db-connect');
 const { Customer } = require('@models/customer/customer');
 
 // Products API functions
+
 /**
  * Get a product by ID
  * @async
@@ -59,24 +60,22 @@ const getAllProducts = async () => {
  */
 const getFeaturedProducts = async () => {
     return new Promise((resolve, reject) => {
-        connection.query(
-            'SELECT * FROM products, category WHERE products.category = category.id AND products.isFeatured = 1',
-            function (err, results, fields) {
-                if (err) {
-                    return reject(err);
-                }
-                if (results && results.length > 0) {
-                    return resolve(results);
-                } else {
-                    var notFound = 'notFound';
-                    return resolve(notFound);
-                }
+        connection.query('SELECT * FROM products WHERE products.isFeatured = 1', function (err, results, fields) {
+            if (err) {
+                return reject(err);
             }
-        );
+            if (results && results.length > 0) {
+                return resolve(results);
+            } else {
+                var notFound = 'notFound';
+                return resolve(notFound);
+            }
+        });
     });
 };
 
 // Customer API functions
+
 /**
  * Get customer login information
  * @async

@@ -28,9 +28,9 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <% if (locals.isLoggedIn == true) { %>
-                <div class="text-center">
+                <div class="text-center text-white">
                     <span style="font-size: 20px; width: 0px" class="bx bxs-user btn"></span>
-                    <span style="font-size: 15px; color: white" class="btn">Welcome, <%= customer.first_name %>!</span>
+                    <span style="font-size: 15px" class="btn">Welcome, <%= customer.first_name %>!</span>
                     <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">Logout</button>
                 </div>
                 <div class="m-4">
