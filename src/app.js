@@ -1,8 +1,24 @@
+/**
+ * Importing the required modules.
+ */
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
+
+/**
+ * Middleware to serve static files from the 'public' directory
+ * @param {string} 'src/public' - The directory path from which static files are to be served.
+ */
 app.use(express.static('src/public'));
+
+/**
+ * Setting the view engine and the views directory
+ * @param {string} 'views' - The directory path of the views.
+ * @param {string} './src/views' - The directory path of the views.
+ * @param {string} 'view engine' - The view engine used to render views.
+ * @param {string} 'ejs' - The view engine used to render views.
+ */
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());

@@ -3,7 +3,7 @@ const productFactory = require('../scripts/factory/product');
 
 /**
  * Add Product to Cart.
- * @returns {string, object} response - Success message to the front-end JS | cart - User cart details saved on session.
+ * @returns {Function} - Middleware function.
  */
 exports.addToCart = () => {
     return async (req, res, next) => {
@@ -41,8 +41,8 @@ exports.addToCart = () => {
 };
 
 /**
- * Get the products in Cart and updates the cart on template in real-time
- * @returns {view} Partial view with the updated Cart items list
+ * Get Cart products.
+ * @returns {Function} - Middleware function.
  */
 exports.getCartProducts = () => {
     return async (req, res, next) => {

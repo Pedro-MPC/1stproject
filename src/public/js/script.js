@@ -1,6 +1,10 @@
-import 'boxicons';
 $(function () {
     // Close cart popup when clicking outside the cart
+
+    /**
+     *@function
+     *@description Close cart popup when clicking outside the cart
+     */
     document.onclick = function (e) {
         if (e.target.id !== 'cart-toggle' && $(e.target).attr('data-cart') !== 'true') {
             //element clicked wasn't the div; hide the div
@@ -8,7 +12,10 @@ $(function () {
             $('#otherElements').removeClass('normal');
         }
     };
-    // Transparency animation when opening/closing the Cart
+    /**
+     *@function
+     *@description Transparency animation when opening/closing the Cart
+     */
     (function () {
         $('#cart').on('click', function () {
             $('.shopping-cart').fadeToggle('fast');
@@ -16,7 +23,10 @@ $(function () {
         });
     })();
 
-    // Owl Caroussel animations
+    /**
+     *@function
+     *@description Owl Caroussel animations
+     */
     function changeActive(e) {
         // Remove o seletor classe de todos item
         $('.owl-stage .owl-item').removeClass('ativo');
@@ -30,7 +40,6 @@ $(function () {
     owl.owlCarousel({
         nav: true,
         autoplayHoverPause: true,
-        margin: 20,
         rewind: true,
         autoplay: true,
         autoplayTimeout: 2300,
@@ -47,14 +56,41 @@ $(function () {
             },
             900: {
                 items: 2,
-                nav: false
+                nav: true
             },
-            1000: {
+            1335: {
                 items: 3,
                 nav: true
             }
         }
     });
+
+    /**
+     *@function
+     *@description Open login/register modal
+     */
+    $('.btnLoginModal').on('click', function (event) {
+        $('#modalLogin').modal('show');
+    });
+
+    /**
+     *@function
+     *@description Toggle register/login forms on modal
+     */
+    $('#tglRegister').on('click', function (event) {
+        $('#divLogin').css('display', 'none');
+        $('#divRegister').css('display', 'block');
+    });
+    $('#tglLogin').on('click', function (event) {
+        $('#divRegister').css('display', 'none');
+        $('#divLogin').css('display', 'block');
+    }); /*
+
+    /*
+    /**
+     *@function
+     *@description Search Product by Id on homepage
+     */
     /*
     $('#form-insert').on('submit', function (event) {
         event.preventDefault();
@@ -86,19 +122,5 @@ $(function () {
             });
         }
     });
-*/
-    // Open login/register modal
-    $('.btnLoginModal').on('click', function (event) {
-        $('#modalLogin').modal('show');
-    });
-
-    // Toggle register/login forms on modal
-    $('#tglRegister').on('click', function (event) {
-        $('#divLogin').css('display', 'none');
-        $('#divRegister').css('display', 'block');
-    });
-    $('#tglLogin').on('click', function (event) {
-        $('#divRegister').css('display', 'none');
-        $('#divLogin').css('display', 'block');
-    });
+    */
 });

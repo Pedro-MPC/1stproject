@@ -2,9 +2,8 @@ const commerceAPI = require('../../api/commerceAPI');
 const productFactory = require('../scripts/factory/product');
 
 /**
- * Get PDP Data with URL (PID) param
- * @param {Integer} PID - Product id retrieved from URL param.
- * @returns {view} Renders Product Detail Page view
+ * Returns a middleware function to render the product detail page by Id on URL parameter.
+ * @returns {Function} - Middleware function.
  */
 exports.ProductDetailPageByParam = () => {
     return async (req, res) => {
@@ -29,20 +28,21 @@ exports.ProductDetailPageByParam = () => {
 };
 
 /**
- * Get All Products (PDP)
- * @returns {Array} res.locals.productsPDP - Product List
+ * Returns a middleware function to get all products (PDP).
+ * @returns {Function} - Middleware function.
  */
 exports.getAllProductsPDP = () => {
     return async (req, res, next) => {
-        const PRODUCTSPDP = await commerceAPI.getAllProducts();
-        res.locals.productsPDP = PRODUCTSPDP;
+        const PRODUCTS = await productFactory.getProductFactory('allpdp');
+        res.locals.allProductsPDP = PRODUCTS;
+        console.log(res.locals.allProductsPDP);
         next();
     };
 };
 
 /**
- * Get Featured Products (PDP)
- * @returns {Array} res.locals.productsPDP - Featured Product List
+ * Returns a middleware function to get all featured products.
+ * @returns {Function} - Middleware function.
  */
 exports.getFeaturedProducts = () => {
     return async (req, res, next) => {
@@ -53,9 +53,8 @@ exports.getFeaturedProducts = () => {
 };
 
 /**
- * Get PDP By Id
- * @param {Integer} req.body.id - Product Id
- * @returns {Object} PRODUCT - Product
+ * Returns a middleware function to get a product by ID (PDP).
+ * @returns {Function} - The middleware function.
  */
 exports.getPDPProductById = () => {
     return async (req, res, next) => {
