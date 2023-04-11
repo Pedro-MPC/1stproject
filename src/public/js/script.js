@@ -1,5 +1,4 @@
 import 'boxicons';
-
 $(function () {
     // Close cart popup when clicking outside the cart
     document.onclick = function (e) {
@@ -32,9 +31,9 @@ $(function () {
         nav: true,
         autoplayHoverPause: true,
         margin: 20,
-        loop: true,
+        rewind: true,
         autoplay: true,
-        autoplayTimeout: 1500,
+        autoplayTimeout: 2300,
         lazyLoad: true,
         animateIn: 'fadeOut',
         animateOut: 'fadeOut',
