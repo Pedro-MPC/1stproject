@@ -1,7 +1,5 @@
 const swal = require('./swal');
 
-let btns = document.querySelectorAll('#addToCart');
-
 function updateCart() {
     // make an AJAX request to the /update-cart route
     $.ajax({
@@ -14,13 +12,13 @@ function updateCart() {
     });
 }
 
-$(function () {
-    // AJAX customer login form
-    btns.forEach(function (i) {
-        i.addEventListener('click', function () {
-            event.preventDefault();
+// AJAX customer login for
+$(window).on('load', function () {
+    document.querySelectorAll('#addToCart').forEach(function (i) {
+        i.addEventListener('click', function (e) {
+            e.preventDefault();
             let productId = $(i).data('id');
-
+            console.log('tried to add');
             $.ajax({
                 url: '/addtocart',
                 method: 'POST',
@@ -40,6 +38,7 @@ $(function () {
             });
         });
     });
-
+});
+$(function () {
     updateCart();
 });

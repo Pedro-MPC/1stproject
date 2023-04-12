@@ -1,12 +1,14 @@
-const { toString } = require('lodash');
+const loadCaroussel = require('./owlcaroussel-settings');
 
 function getAllProducts() {
     // make an AJAX request to the /update-cart route
+
     $.ajax({
         url: '/getallproducts',
         type: 'GET',
         success: function (data) {
-            $('#itemscaroussel').html(data);
+            $('#carousselItems').html(data);
+            loadCaroussel();
         }
     });
 }

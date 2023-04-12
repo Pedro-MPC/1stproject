@@ -1,0 +1,69 @@
+<% PRODUCTS.forEach(product => {%>
+<div class="item">
+    <div class="card card-body" style="width: 350px; overflow: hidden">
+        <div class="media align-items-center text-center text-lg-left flex-column">
+            <div class="mr-2 mb-3 mb-lg-0">
+                <img
+                    style="margin: auto; display: block"
+                    class="mb-4"
+                    src="<%- product.img %>"
+                    width="200"
+                    height="140"
+                    alt=""
+                />
+            </div>
+            <div class="media-body text-center">
+                <h6 class="media-title font-weight-semibold">
+                    <a href="/product?pid=<%= product.id %>" data-abc="true"> <%- product.name %> </a>
+                </h6>
+                <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                    <li class="list-inline-item">
+                        <a href="#" class="text-muted" data-abc="true"><%- product.category %></a>
+                    </li>
+                </ul>
+                <p
+                    class="mb-3"
+                    style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 5; /* number of lines to show */
+                        line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        font-size: 15px;
+                    "
+                >
+                    <%- (product.desc);%> <%if(product.desc.length> 250){%>...<% } %>
+                </p>
+            </div>
+
+            <div class="mt-lg-3 text-center">
+                <h3 class="font-weight-semibold mb-4 textprice" style="color: #dc3545">
+                    <%-product.price.toFixed(2)%>€
+                </h3>
+            </div>
+            <div style="display: flex">
+                <button
+                    class="btn btn-danger mt-1 text-white border-0 bg-transparent"
+                    onclick="window.location='/product?pid=<%= product.id %>';"
+                >
+                    <span
+                        style="font-size: 25px; vertical-align: middle"
+                        class="bx bx-search-alt-2 center-text center-text text-black"
+                    ></span>
+                </button>
+                <button
+                    id="addToCart"
+                    class="btn btn-danger mt-1 text-white border-0 bg-transparent"
+                    data-id="<%- product.id %>"
+                >
+                    <span
+                        style="font-size: 25px; vertical-align: middle"
+                        class="bx bx-cart-add center-text text-black"
+                    ></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<% }) %>

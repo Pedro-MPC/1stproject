@@ -34,7 +34,7 @@ exports.ProductDetailPageByParam = () => {
 exports.getAllProductsPDP = () => {
     return async (req, res, next) => {
         const PRODUCTS = await productFactory.getProductFactory('allpdp');
-        res.render('partials/productsCaroussel/items-productsCaroussel', { PRODUCTS: PRODUCTS });
+        res.render('partials/items-productsCaroussel', { PRODUCTS: PRODUCTS });
     };
 };
 

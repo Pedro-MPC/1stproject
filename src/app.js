@@ -2,10 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const accController = require('./controllers/AccountController');
 
 app.use(express.static('src/public'));
-
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
@@ -37,7 +35,7 @@ app.use(accountRoute);
 app.use('*', errorRoute);
 
 /** Setting up the server on port 3000 */
-const port = 3000;
+const port = 3001;
 app.listen(port, function (err) {
     if (err) console.log(err);
     console.log(`Servidor iniciado em: localhost:${port}.`);
