@@ -2,6 +2,7 @@ $(function () {
     const loaderContainer = document.querySelector('.loader-container');
     document.body.className = 'hidden';
     window.addEventListener('load', () => {
+        loaderContainer.style.opacity = '0';
         loaderContainer.style.display = 'none';
         document.body.className = 'visible';
     });
@@ -10,6 +11,7 @@ $(function () {
      *@function
      *@description Close cart popup when clicking outside the cart
      */
+
     document.onclick = function (e) {
         if (e.target.id !== 'cart-toggle' && $(e.target).attr('data-cart') !== 'true') {
             //element clicked wasn't the div; hide the div
@@ -49,8 +51,7 @@ $(function () {
         autoplay: true,
         autoplayTimeout: 2300,
         lazyLoad: true,
-        animateIn: 'fadeOut',
-        animateOut: 'fadeOut',
+
         onChanged: changeActive,
         onTranslate: changeActive,
         navText: ["<i class='bx bx-left-arrow-alt'></i>", "<i class='bx bx-right-arrow-alt' ></i>"],

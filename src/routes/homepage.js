@@ -9,13 +9,9 @@ const productController = require('../controllers/ProductController');
  * Route - Renders root '/'
  * @param {function} productController.getAllProductsPDP - get all products
  * @param {function} productController.getFeaturedProducts - get featured products
+ * @param {function} productController.getallCategories - get all categories
  * @param {function} hpController.renderHome - Render homepage
  */
-router.get(
-    '/',
-    productController.getAllProductsPDP(),
-    productController.getFeaturedProducts(),
-    hpController.renderHome()
-);
+router.get('/', productController.getFeaturedProducts(), hpController.renderHome());
 
 module.exports = router;

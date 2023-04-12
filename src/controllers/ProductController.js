@@ -34,8 +34,7 @@ exports.ProductDetailPageByParam = () => {
 exports.getAllProductsPDP = () => {
     return async (req, res, next) => {
         const PRODUCTS = await productFactory.getProductFactory('allpdp');
-        res.locals.allProductsPDP = PRODUCTS;
-        next();
+        res.render('partials/productsCaroussel/items-productsCaroussel', { PRODUCTS: PRODUCTS });
     };
 };
 
@@ -59,5 +58,16 @@ exports.getPDPProductById = () => {
     return async (req, res, next) => {
         const PRODUCT = productModel.Product('pdp', req.body.id);
         return PRODUCT;
+    };
+};
+
+/**
+ * Returns a middleware function to get all categories.
+ * @returns {Function} - The middleware function.
+ */
+exports.getallCategories = () => {
+    return async (req, res, next) => {
+        const CATEGORIES = await commerceAPI.getAllCategories();
+        res.render('partials/categories', { CATEGORIES: CATEGORIES });
     };
 };

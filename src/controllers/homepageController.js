@@ -14,9 +14,8 @@ exports.renderHome = () => {
             title: title,
             isLoggedIn: isLoggedIn,
             customer: customer,
-            PRODUCTSPDP: res.locals.allProductsPDP,
             FEATUREDPRODUCTS: res.locals.featuredProdutos,
-            CARTPRODUCTS: res.locals.cardProducts,
+            CATEGORIES: res.locals.CATEGORIES,
             pgTitle: 'P_COMMERCE - Home'
         });
     };

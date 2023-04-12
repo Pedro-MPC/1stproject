@@ -107,25 +107,25 @@ a {
     .loginFull {
         display: inline-block;
     }
-    .logoNav {
+    .logoNavExtended {
         width: 160px;
     }
 }
-@media (max-width: 655px) {
+@media (max-width: 1100px) {
     .loginIcon {
         display: inline-block;
     }
     .loginFull {
         display: none;
     }
-    .logoNav {
+    .logoNavExtended {
         width: 160px;
     }
 }
 
-@media (max-width: 465) {
-    .logoNav {
-        width: 50px;
+@media (max-width: 560px) {
+    .logoNavExtended {
+        display: none;
     }
 }
 
@@ -174,4 +174,36 @@ a {
 }
 .toggleSideNav:hover {
     color: rgb(176, 169, 169);
+}
+.categoryList {
+    color: black;
+    font-weight: 600;
+    transition: color 0.5s;
+    border: 1px rgb(18, 24, 47);
+    width: 110%;
+    height: 100vh;
+}
+.categoryListIndividual {
+    color: black;
+    font-weight: 400;
+    width: 100%;
+    font-size: 18px;
+    transition: color 0.5s;
+    border-bottom: 1px solid rgba(18, 24, 47, 0.226);
+    padding: 10px;
+}
+
+.categoryListIndividual:hover {
+    color: #dc3545;
+}
+.offcanvas-body {
+    margin-top: -1rem;
+}
+
+.logo-sidenav {
+    width: 200px;
+    margin: 3rem;
+}
+.imageCategorySideNav {
+    width: 40px;
 }

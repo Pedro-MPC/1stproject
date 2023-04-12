@@ -77,16 +77,12 @@ exports.registerCustomer = () => {
  */
 exports.checkSession = () => {
     return (req, res, next) => {
-        if (req.method === 'GET') {
-            res.on('finish', function () {
-                if (req.session.customer) {
-                    // console.log('Logged Cart: ' + req.session.cart);
-                } else {
-                    req.session.isLogged = false;
-                    //console.log('Not Logged Cart: ' + req.session.cart);
-                }
-            });
-        }
+        res.on('finish', function () {
+            if (!req.session.customer) {
+                req.session.isLogged = false;
+            }
+        });
+
         next();
     };
 };

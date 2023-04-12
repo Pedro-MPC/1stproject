@@ -1,12 +1,11 @@
 const { connection } = require('../database/db-connect');
-const { Customer } = require('@models/customer/customer');
 
 // Products API functions
 
 /**
  * Get a product by ID
  * @async
- * @param {string} id - The ID of the product to get
+ * @param {Integer} id - The ID of the product to get
  * @returns {<Object|string>} -The product object, or 'notFound' if the product with the given id doesnt exist
  */
 const getProductById = async (id) => {
@@ -61,6 +60,27 @@ const getAllProducts = async () => {
 const getFeaturedProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM products WHERE products.isFeatured = 1', function (err, results, fields) {
+            if (err) {
+                return reject(err);
+            }
+            if (results && results.length > 0) {
+                return resolve(results);
+            } else {
+                var notFound = 'notFound';
+                return resolve(notFound);
+            }
+        });
+    });
+};
+
+/**
+ * Get all categories
+ * @async
+ * @returns {<Array|String>} - An array with all cateogories, or 'notFound' if no categories were found
+ */
+const getAllCategories = async () => {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM category', function (err, results, fields) {
             if (err) {
                 return reject(err);
             }
@@ -183,3 +203,4 @@ exports.getCustomerLogin = getCustomerLogin;
 exports.getAllProducts = getAllProducts;
 exports.getFeaturedProducts = getFeaturedProducts;
 exports.registerCustomer = registerCustomer;
+exports.getAllCategories = getAllCategories;

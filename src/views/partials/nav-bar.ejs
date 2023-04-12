@@ -1,10 +1,7 @@
 <%- include('../partials/modal-login') %>
 
-<div style="margin-bottom: 8%">
-    <nav
-        class="navbar navbar-expand-lg navbar-dark bg-danger navbar-expand fixed-top"
-        style="height: 120px; z-index: 6"
-    >
+<div style="margin-bottom: 120px">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-danger navbar-expand fixed-top" style="height: 120px">
         <div class="container">
             <a
                 class="toggleSideNav"
@@ -13,11 +10,14 @@
                 role="button"
                 aria-controls="offcanvasExample"
             >
-                <span class="bx bx-menu"></span>
+                <div style="display: flex; align-items: center">
+                    <span class="bx bx-menu fs-1"></span> <span class="fs-6 fw-bold !pointer-event">MENU</span>
+                </div>
             </a>
             <a class="navbar-brand" href="/" style="font-weight: 500; font-size: 25px"
-                ><img class="logoNav" src="/img/logo.png" alt=""
-            /></a>
+                ><img class="logoNavExtended" src="/img/logo.png" alt="" />
+            </a>
+
             <button
                 class="navbar-toggler"
                 type="button"
@@ -42,11 +42,23 @@
                 <form class="form-inline my-2 my-lg-0">
                     <% if (locals.isLoggedIn == true) { %>
                     <div class="text-center text-white">
-                        <span style="font-size: 20px; width: 0px" class="bx bxs-user btn"></span>
-                        <span style="font-size: 15px" class="btn">Welcome, <%= customer.first_name %>!</span>
-                        <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">
-                            Logout
-                        </button>
+                        <div class="loginFull">
+                            <span style="font-size: 20px; width: 0px" class="bx bxs-user btn text-white"></span>
+                            <span style="font-size: 15px" class="btn text-white"
+                                >Welcome, <%= customer.first_name %>!</span
+                            >
+                            <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">
+                                Logout
+                            </button>
+                        </div>
+                        <div class="loginIcon">
+                            <a class="btnLoginModal"
+                                ><span
+                                    style="font-size: 30px; width: 0px; color: white"
+                                    class="mr-3 bx bx-log-out btn"
+                                ></span
+                            ></a>
+                        </div>
                     </div>
                     <div class="m-4">
                         <a href="#" id="cart"
@@ -76,4 +88,4 @@
         </div>
     </nav>
 </div>
-<%- include('./cart-dropdown.ejs') %>
+<%- include('./cart-dropdown.ejs') %> <%- include('./sidenav-categories.ejs') %>

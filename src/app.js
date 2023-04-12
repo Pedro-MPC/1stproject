@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const accController = require('./controllers/AccountController');
 
 app.use(express.static('src/public'));
 
@@ -23,14 +24,15 @@ app.use(
 
 /** Getting and setting routes */
 const homeRoute = require('./routes/homepage');
-const productRoute = require('./routes/productdetails');
+const productRoute = require('./routes/Product');
 const errorRoute = require('./routes/404');
 const accountRoute = require('./routes/Account');
 const cartRoute = require('./routes/Cart');
 
 app.use(cartRoute);
-app.use(homeRoute);
 app.use(productRoute);
+
+app.use(homeRoute);
 app.use(accountRoute);
 app.use('*', errorRoute);
 
