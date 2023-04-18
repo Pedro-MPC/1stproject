@@ -26,6 +26,9 @@ function loadAddToCartButtons() {
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ productId: productId }),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                },
                 success: function (res) {
                     if (res.response == 'success') {
                         swal.Toast.fire({

@@ -1,8 +1,9 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
-
+const app = express();
+var cookieParser = require('cookie-parser');
+var csrf = require('csurf');
 app.use(express.static('src/public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -28,13 +29,14 @@ const accountRoute = require('./routes/Account');
 const cartRoute = require('./routes/Cart');
 const categoryRoute = require('./routes/Category');
 
+app.use(cookieParser('fsgdesgsdYYFCCXXX'));
+app.use(csrf({ cookie: true }));
 app.use(cartRoute);
 app.use(productRoute);
 app.use(homeRoute);
 app.use(accountRoute);
 app.use(categoryRoute);
 app.use('*', errorRoute);
-app.disable('view cache');
 
 /** Setting up the server on port 3000 */
 const port = 3000;

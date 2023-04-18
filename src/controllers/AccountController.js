@@ -82,7 +82,7 @@ exports.checkSession = () => {
                 req.session.isLogged = false;
             }
         });
-
+        console.log(req.session);
         next();
     };
 };
@@ -99,19 +99,24 @@ exports.isAuthenticated = () => {
  * Customer logout. Destroy the logged user session.
  * @returns {String} [LOGOUTMSG] Logout message to client-side
  */
+
 exports.accountPage = () => {
     return async (req, res, next) => {
         res.render('pages/my-account', {
             customer: req.session.customer,
             pgTitle: 'My Account',
-            isLoggedIn: req.session.isLogged
+            isLoggedIn: req.session.isLogged,
+            csrfToken: req.csrfToken()
         });
     };
 };
 
 exports.accountPageDetails = () => {
     return async (req, res, next) => {
-        res.render('partials/account/my-account-details', { customer: req.session.customer });
+        res.render('partials/account/my-account-details', {
+            customer: req.session.customer,
+            csrfToken: req.csrfToken()
+        });
     };
 };
 

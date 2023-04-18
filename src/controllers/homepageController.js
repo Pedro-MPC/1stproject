@@ -13,7 +13,8 @@ exports.renderHome = () => {
             title: title,
             isLoggedIn: isLoggedIn,
             customer: req.session.customer,
-            pgTitle: 'P_COMMERCE - Home'
+            pgTitle: 'P_COMMERCE - Home',
+            csrfToken: req.csrfToken()
         });
     };
 };

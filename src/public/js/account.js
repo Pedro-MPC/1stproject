@@ -17,6 +17,9 @@ function postUpdateDetails() {
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ fname: fname, lname: lname, email: email }),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                },
                 success: function (res) {
                     swal.Toast.fire({
                         icon: 'success',
@@ -33,6 +36,7 @@ $('#loginForm').on('submit', function (event) {
 
     let email = $('#loginEmail').val();
     let password = $('#loginPassword').val();
+    console.log($('#token').val());
 
     if (email == '' || password == '') {
         swal.NormalSwal.fire({
@@ -44,7 +48,14 @@ $('#loginForm').on('submit', function (event) {
             url: '/validateLogin',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ email: email, password: password }),
+
+            data: JSON.stringify({
+                email: email,
+                password: password
+            }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+            },
             success: function (res) {
                 if (res.findFlag == false) {
                     swal.NormalSwal.fire({
@@ -187,6 +198,9 @@ $(function () {
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ fname: fname, lname: lname, email: email }),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                    },
                     success: function (res) {
                         swal.Toast.fire({
                             icon: 'success',
@@ -207,7 +221,9 @@ $(function () {
                 url: '/logout',
                 method: 'POST',
                 contentType: 'application/json',
-
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                },
                 success: function (res) {
                     swal.Toast.fire({
                         icon: 'error',
