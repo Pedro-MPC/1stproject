@@ -11,13 +11,16 @@ const { connection } = require('../database/db-connect');
 const getProductById = async (id) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT * FROM products, category WHERE products.category = category.id AND _id='" + id + "'",
+            "SELECT products._id, products.online, products.desc, products.img, products.name, products.preco, GROUP_CONCAT(category.Id, category.descCat SEPARATOR ', ') AS category FROM products JOIN products_categories ON products._id = products_categories.id_product JOIN category ON products_categories.id_category = category.id WHERE products._id = '" +
+                id +
+                "'  GROUP BY products._id",
             function (err, results, fields) {
                 if (err) {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const PRODUCT = results[0];
+                    const PRODUCT = results;
+                    console.log('SUCESOOO');
                     return resolve(PRODUCT);
                 } else {
                     var notFound = 'notFound';
@@ -36,7 +39,7 @@ const getProductById = async (id) => {
 const getAllProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
-            'SELECT * FROM products, category WHERE products.category = category.id',
+            'SELECT products._id, products.desc, products.img, products.isFeatured, products.name, products.preco, GROUP_CONCAT(category.Id, category.descCat SEPARATOR ",") AS category FROM products JOIN products_categories ON products._id = products_categories.id_product JOIN category ON products_categories.id_category = category.id GROUP BY products._id',
             function (err, results, fields) {
                 if (err) {
                     return reject(err);
@@ -49,27 +52,6 @@ const getAllProducts = async () => {
                 }
             }
         );
-    });
-};
-
-/**
- * Get featured products
- * @async
- * @returns {<Array|String>} - An array with the featured Product objects, or 'notFound' if no products were found
- */
-const getFeaturedProducts = async () => {
-    return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM products WHERE products.isFeatured = 1', function (err, results, fields) {
-            if (err) {
-                return reject(err);
-            }
-            if (results && results.length > 0) {
-                return resolve(results);
-            } else {
-                var notFound = 'notFound';
-                return resolve(notFound);
-            }
-        });
     });
 };
 
@@ -112,10 +94,11 @@ const getCustomerLogin = async (email, password) => {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const customer = await getCustomerInfo(email);
-                    return resolve(customer);
+                    console.log('logged');
+                    return resolve(results);
                 } else {
                     var notFound = 'notFound';
+                    console.log(notFound);
                     return resolve(notFound);
                 }
             }
@@ -131,7 +114,7 @@ const getCustomerLogin = async (email, password) => {
 const getCustomerInfo = async (email) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT fname, lname, email FROM customer WHERE email='" + email + "'",
+            "SELECT id, fname, lname, email FROM customer WHERE email='" + email + "'",
             function (err, results, fields) {
                 if (err) {
                     return reject(err);
@@ -197,10 +180,31 @@ const registerCustomer = async (email, password, fname, lname) => {
     });
 };
 
+const updateCustomerDetails = async (id, fname, lname, email) => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "UPDATE customer SET email = '" +
+                email +
+                "', fname = '" +
+                fname +
+                "', lname= '" +
+                lname +
+                "' WHERE id = '" +
+                id +
+                "'",
+            function (err) {
+                if (err) throw err;
+                return resolve('detailsUpdated');
+            }
+        );
+    });
+};
+
 exports.checkEmailExist = checkEmailExist;
 exports.getProductById = getProductById;
 exports.getCustomerLogin = getCustomerLogin;
 exports.getAllProducts = getAllProducts;
-exports.getFeaturedProducts = getFeaturedProducts;
 exports.registerCustomer = registerCustomer;
 exports.getAllCategories = getAllCategories;
+exports.updateCustomerDetails = updateCustomerDetails;
+exports.getCustomerInfo = getCustomerInfo;

@@ -57,14 +57,14 @@ exports.getCartProducts = () => {
                 CartSize += cart.quantity;
             });
             req.session.cart.total = Total;
-            res.render('partials/cart-items', {
+            res.render('partials/cart/cart-items', {
                 CartItem: CartItem,
                 Total: Total,
                 CartSize: CartSize,
                 empty: false
             });
         } else {
-            res.render('partials/cart-items', {
+            res.render('partials/cart/cart-items', {
                 empty: true,
                 CartSize: CartSize,
                 Total: 0

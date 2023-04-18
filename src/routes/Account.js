@@ -32,6 +32,39 @@ router.post('/registercustomer', accController.checkEmailExist(), accController.
  * Route - Register a customer from the login/register modal
  * @param {function} accController.logout Logout of customer account
  */
+router.get(
+    '/my-account',
+    accController.isAuthenticated(),
+    accController.getCustomerDetails(),
+    accController.accountPage()
+);
+
+/**
+ * Route - Register a customer from the login/register modal
+ * @param {function} accController.logout Logout of customer account
+ */
+router.get('/my-account-details', accController.accountPageDetails());
+/**
+ * Route - Register a customer from the login/register modal
+ * @param {function} accController.logout Logout of customer account
+ */
+router.get('/my-account-settings', accController.accountPageSettings());
+
+/**
+ * Route - Register a customer from the login/register modal
+ * @param {function} accController.logout Logout of customer account
+ */
+router.post(
+    '/save-details',
+    accController.saveCustomerDetails(),
+    accController.getCustomerDetails(),
+    accController.accountPage()
+);
+
+/**
+ * Route - Register a customer from the login/register modal
+ * @param {function} accController.logout Logout of customer account
+ */
 router.post('/logout', accController.logout());
 
 module.exports = router;

@@ -1,7 +1,16 @@
-<%- include('../partials/modal-login') %>
+<%- include('./modal-login') %>
 
 <div style="margin-bottom: 120px">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-danger navbar-expand fixed-top" style="height: 120px">
+    <nav
+        class="navbar navbar-expand-sm navbar-dark bg-danger navbar-expand fixed-top"
+        style="
+            height: 85px;
+            background-image: radial-gradient(circle, rgba(49, 64, 142, 0.9) 65%, rgba(125, 20, 42, 1) 100%),
+                url('../img//customers-choice.jpg');
+            background-size: auto;
+            padding: 10px;
+        "
+    >
         <div class="container">
             <a
                 class="toggleSideNav"
@@ -10,8 +19,14 @@
                 role="button"
                 aria-controls="offcanvasExample"
             >
-                <div style="display: flex; align-items: center">
-                    <span class="bx bx-menu fs-1"></span> <span class="fs-6 fw-bold !pointer-event">MENU</span>
+                <div class="d-flex left-navbar">
+                    <div class="d-flex align-items-center" style="display: flex; align-items: center">
+                        <span class="bx bx-menu fs-2 a-buttons text-white"></span>
+                        <span class="fs-6 fw-bold menu-nav text-white">MENU</span>
+                    </div>
+                    <div class="home-nav">
+                        <a href=""><span class="bx bxs-home fs-2 ml-4 text-white" href="/"></span></a>
+                    </div>
                 </div>
             </a>
             <a class="navbar-brand" href="/" style="font-weight: 500; font-size: 25px"
@@ -43,26 +58,25 @@
                     <% if (locals.isLoggedIn == true) { %>
                     <div class="text-center text-white">
                         <div class="loginFull">
-                            <span style="font-size: 20px; width: 0px" class="bx bxs-user btn text-white"></span>
-                            <span style="font-size: 15px" class="btn text-white"
+                            <span style="font-size: 15px" id="navabar-fname" class="btn text-white"
                                 >Welcome, <%= customer.first_name %>!</span
                             >
-                            <button class="btn btn-light my-2 my-sm-0 btn-block" type="button" id="btnLogout">
-                                Logout
-                            </button>
+                            <a href="/my-account#details" class="btn btn-light my-2 my-sm-0 btn-block">My Account</a>
                         </div>
                         <div class="loginIcon">
-                            <a class="btnLoginModal"
-                                ><span
-                                    style="font-size: 30px; width: 0px; color: white"
-                                    class="mr-3 bx bx-log-out btn"
-                                ></span
+                            <a href="/my-account#details" class="my-2 my-sm-0 btn-block"
+                                ><span style="font-size: 30px; color: white" class="mr-3 bx bxs-user"></span
                             ></a>
                         </div>
                     </div>
                     <div class="m-4">
-                        <a href="#" id="cart"
-                            ><span id="cart-toggle" style="font-size: 40px; color: white" class="bx bx-cart"></span>
+                        <a
+                            data-bs-toggle="offcanvas"
+                            href="#offcanvasCart"
+                            role="button"
+                            aria-controls="offcanvasExample"
+                            id="cart"
+                            ><span style="font-size: 40px; color: white" class="bx bx-cart"></span>
                         </a>
                     </div>
                     <%}else{ %>
@@ -73,13 +87,18 @@
                         </a>
                     </div>
                     <div class="loginIcon">
-                        <a class="btnLoginModal"
-                            ><span style="font-size: 30px; width: 0px; color: white" class="mr-3 bx bxs-user btn"></span
+                        <a class="btnLoginModal" style="width: 100px; margin-right: -2rem"
+                            ><span style="font-size: 30px; color: white" class="mr-3 bx bxs-user btn"></span
                         ></a>
                     </div>
                     <div class="m-4 mt-1">
-                        <a href="#" id="cart">
-                            <span id="cart-toggle" style="font-size: 40px; color: white" class="bx bx-cart"></span>
+                        <a
+                            data-bs-toggle="offcanvas"
+                            href="#offcanvasCart"
+                            role="button"
+                            aria-controls="offcanvasExample"
+                            id="cart"
+                            ><span style="font-size: 40px; color: white" class="bx bx-cart"></span>
                         </a>
                     </div>
                     <%} %>
@@ -88,4 +107,4 @@
         </div>
     </nav>
 </div>
-<%- include('./cart-dropdown.ejs') %> <%- include('./sidenav-categories.ejs') %>
+<%- include('../categories/sidenav-categories') %> <%- include('../cart/sidenav-cart') %>

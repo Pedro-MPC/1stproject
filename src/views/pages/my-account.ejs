@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header') %>
+    <title><%- pgTitle %></title>
+    <link rel="stylesheet" href="/dist/bootstrap.css" />
+
+    <body class="bodyHome">
+        <%- include('../partials/navbar/nav-bar') %>
+        <div id="page-content" style="background-color: white; height: 100%" class="page-content container p-3">
+            <br />
+            <div class="container">
+                <div class="row mt-2">
+                    <div class="col-lg-3 col-md-12 col-sm-12 account-menu" id="account-menu">
+                        <h3 class="fw-bold mb-4" id="profile_fname">Hi, <%- customer.first_name %>!</h3>
+                        <div>
+                            <div class="p-1 myaccount-opts">
+                                <a href="#details"
+                                    ><div id="op-profile" class="profile-menu-item d-flex">
+                                        <span class="bx bx-user fs-3 mr-2 ml-1"></span>
+                                        <span class="fs-6 op-profile">Profile</span>
+                                    </div></a
+                                >
+                                <a href="#settings"
+                                    ><div id="op-settings" class="mt-1 profile-menu-item">
+                                        <span class="bx bx-cog fs-3 mr-2 ml-1"></span>
+                                        <span class="fs-6">Settings</span>
+                                    </div></a
+                                >
+                                <a href="">
+                                    <div class="btnLogout profile-menu-item" id="logout" class="mt-1">
+                                        <span class="fs-3 mr-2 ml-1 bx bx-log-out"></span>
+                                        <span class="fs-6">Logout</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12 col-sm-12" id="account-details"></div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </body>
+    <%- include('../partials/footer') %>
+</html>

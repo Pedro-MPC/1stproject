@@ -4,7 +4,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    confirmButtonColor: '#dc3545',
+    confirmButtonColor: 'rgba(49, 64, 142, 1)',
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
@@ -15,7 +15,7 @@ const Toast = Swal.mixin({
 
 const NormalSwal = Swal.mixin({
     icon: 'error',
-    confirmButtonColor: '#c82333',
+    confirmButtonColor: 'rgba(49, 64, 142, 1)',
     confirmButtonText: 'OK'
 });
 

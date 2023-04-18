@@ -6,25 +6,34 @@ const commerceAPI = require('../../../api/commerceAPI');
  * @Customer
  */
 function defaultCustomer() {
+    this.id = decorators.setId;
     this.email = decorators.setEmail;
     this.first_name = decorators.setFirstName;
     this.last_name = decorators.setLastName;
 }
+async function validateLoginCustomer(type, email, password) {
+    const CUSTOMEREMAIL = await commerceAPI.getCustomerLogin(email, password);
+    if (CUSTOMEREMAIL[0].email != 'notFound') {
+        return CustomerDetails(type, CUSTOMEREMAIL[0].email);
+    }
+}
 
-async function Customer(type, email, password) {
-    const CUSTOMER = await commerceAPI.getCustomerLogin(email, password);
+async function CustomerDetails(type, email) {
+    const CUSTOMER = await commerceAPI.getCustomerInfo(email);
     if (CUSTOMER != 'notFound') {
         const customer = new defaultCustomer();
         switch (type) {
             case 'basic':
+                customer.id(CUSTOMER.id);
                 customer.email(CUSTOMER.email);
                 customer.first_name(CUSTOMER.fname);
                 customer.last_name(CUSTOMER.lname);
+                console.log(customer);
                 return customer;
         }
     } else {
         return 'notFound';
     }
 }
-
-exports.Customer = Customer;
+exports.Customer = validateLoginCustomer;
+exports.CustomerDetails = CustomerDetails;

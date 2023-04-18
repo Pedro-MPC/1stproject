@@ -1,10 +1,5 @@
 const decorators = require('./index');
 
-/**
- * Product with decorated properties
- * @Product
- */
-
 function Product() {
     this.id = decorators.setId;
     this.name = decorators.setName;
@@ -12,7 +7,7 @@ function Product() {
     this.price = decorators.setPrice;
     this.category = decorators.setCategory;
     this.desc = decorators.setDesc;
-    this.isFeatured = decorators.setIsFeatured;
+    this.online = decorators.setOnline;
 }
 
 module.exports = Product;

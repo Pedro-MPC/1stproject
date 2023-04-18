@@ -1,6 +1,6 @@
-const { isArray } = require('lodash');
 const commerceAPI = require('../../../api/commerceAPI');
 const Product = require('@models/product/product');
+const decorators = require('../../models/product/index');
 
 /**
  * Returns a product object with product data.
@@ -14,30 +14,27 @@ const Product = require('@models/product/product');
 
 async function getProductFactory(type, id) {
     var PRODUCT;
-    if (id === undefined && type == 'allpdp') {
+    if (id === undefined && (type == 'allpdp' || type == 'alltile' || type == 'featuredtile')) {
         PRODUCT = await commerceAPI.getAllProducts();
-    } else if (id === undefined && type == 'featuredtile') {
-        PRODUCT = await commerceAPI.getFeaturedProducts();
     } else {
         PRODUCT = await commerceAPI.getProductById(id);
     }
+
     if (PRODUCT != 'notFound') {
-        const product = new Product();
-        if (!isArray(PRODUCT)) {
-            product.id(PRODUCT._id);
-            product.name(PRODUCT.name);
-            product.img(PRODUCT.img);
-            product.price(PRODUCT.preco);
-            product.category(PRODUCT.descCat);
-        }
+        var product = new Product();
+        product.id(PRODUCT[0]._id);
+        product.name(PRODUCT[0].name);
+        product.img(PRODUCT[0].img);
+        product.price(PRODUCT[0].preco);
+        var categories = PRODUCT[0].category.split(',');
+        product.category(categories);
+        product.online(PRODUCT[0].online);
         switch (type) {
             case 'pdp':
-                product.desc(PRODUCT.desc);
+                product.desc(PRODUCT[0].desc);
                 return product;
-
             case 'tile':
                 return product;
-
             case 'allpdp':
                 const allProductsPDP = [];
                 PRODUCT.forEach((item) => {
@@ -46,23 +43,37 @@ async function getProductFactory(type, id) {
                     product.name(item.name);
                     product.img(item.img);
                     product.price(item.preco);
-                    product.desc(item.desc);
-                    product.category(item.descCat);
-
+                    var categories = item.category.split(',');
+                    product.category(categories);
                     allProductsPDP.push(product);
                 });
                 return allProductsPDP;
-            case 'featuredtile':
-                const featuredProductsTile = [];
+            case 'alltile':
+                const AllProductsTile = [];
                 PRODUCT.forEach((item) => {
                     const product = new Product();
                     product.id(item._id);
                     product.name(item.name);
                     product.img(item.img);
+                    var categories = item.category.split(',');
+                    product.category(categories);
                     product.price(item.preco);
-                    featuredProductsTile.push(product);
+                    AllProductsTile.push(product);
                 });
-                return featuredProductsTile;
+                return AllProductsTile;
+            case 'featuredtile':
+                const FeaturedTile = [];
+                PRODUCT.forEach((item) => {
+                    if (item.isFeatured == 1) {
+                        const product = new Product();
+                        product.id(item._id);
+                        product.name(item.name);
+                        product.img(item.img);
+                        product.price(item.preco);
+                        FeaturedTile.push(product);
+                    }
+                });
+                return FeaturedTile;
         }
     } else {
         return 'notFound';

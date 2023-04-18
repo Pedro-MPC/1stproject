@@ -15,7 +15,6 @@ body {
   color: #000000; }
 
 .container {
-  margin: auto;
   width: 80%; }
 
 .badge {
@@ -31,20 +30,14 @@ body {
   white-space: nowrap; }
 
 .shopping-cart {
-  display: none;
-  top: 14%;
-  right: 17.5%;
+  left: 0;
+  width: 400px;
   float: right;
   background: white;
-  width: 320px;
   border-radius: 3px;
   padding: 20px;
   color: black;
-  position: absolute;
-  z-index: 3;
-  box-shadow: 100px 100px 100px #00000076;
-  border: 1px solid rgba(0, 0, 0, 0.126);
-  border-radius: 10px; }
+  position: absolute; }
   .shopping-cart .shopping-cart-header {
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 15px; }

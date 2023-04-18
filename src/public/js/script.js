@@ -9,29 +9,6 @@ $(function () {
 
     /**
      *@function
-     *@description Close cart popup when clicking outside the cart
-     */
-
-    document.onclick = function (e) {
-        if (e.target.id !== 'cart-toggle' && $(e.target).attr('data-cart') !== 'true') {
-            //element clicked wasn't the div; hide the div
-            $('.shopping-cart').css('display', 'none');
-            $('#otherElements').removeClass('normal');
-        }
-    };
-    /**
-     *@function
-     *@description Transparency animation when opening/closing the Cart
-     */
-    (function () {
-        $('#cart').on('click', function () {
-            $('.shopping-cart').fadeToggle('fast');
-            $('#otherElements').toggleClass('normal');
-        });
-    })();
-
-    /**
-     *@function
      *@description Owl Caroussel animations
      */
 

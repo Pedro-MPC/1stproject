@@ -1,5 +1,6 @@
 const commerceAPI = require('../../api/commerceAPI');
 const productFactory = require('../scripts/factory/product');
+const categoryModel = require('../models/category/category');
 
 /**
  * Returns a middleware function to render the product detail page by Id on URL parameter.
@@ -13,6 +14,7 @@ exports.ProductDetailPageByParam = () => {
         const PRODUCT = await productFactory.getProductFactory('pdp', PID);
         const customer = req.session.customer;
         const isLoggedIn = req.session.isLogged;
+        console.log(PRODUCT);
 
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });
@@ -31,10 +33,11 @@ exports.ProductDetailPageByParam = () => {
  * Returns a middleware function to get all products (PDP).
  * @returns {Function} - Middleware function.
  */
-exports.getAllProductsPDP = () => {
+exports.getAllProductsCaroussel = () => {
     return async (req, res, next) => {
-        const PRODUCTS = await productFactory.getProductFactory('allpdp');
-        res.render('partials/items-productsCaroussel', { PRODUCTS: PRODUCTS });
+        const PRODUCTS = await productFactory.getProductFactory('alltile');
+
+        res.render('partials/products-lists/productsCaroussel', { PRODUCTS: PRODUCTS });
     };
 };
 
@@ -42,11 +45,10 @@ exports.getAllProductsPDP = () => {
  * Returns a middleware function to get all featured products.
  * @returns {Function} - Middleware function.
  */
-exports.getFeaturedProducts = () => {
+exports.getFeaturedProductsHome = () => {
     return async (req, res, next) => {
         const PRODUCTS = await productFactory.getProductFactory('featuredtile');
-        res.locals.featuredProdutos = PRODUCTS;
-        next();
+        res.render('partials/products-lists/featuredProductsList', { PRODUCTS: PRODUCTS });
     };
 };
 
@@ -68,6 +70,6 @@ exports.getPDPProductById = () => {
 exports.getallCategories = () => {
     return async (req, res, next) => {
         const CATEGORIES = await commerceAPI.getAllCategories();
-        res.render('partials/categories', { CATEGORIES: CATEGORIES });
+        res.render('partials/categories/categories', { CATEGORIES: CATEGORIES });
     };
 };

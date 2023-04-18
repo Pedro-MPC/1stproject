@@ -86,6 +86,60 @@ exports.checkSession = () => {
         next();
     };
 };
+exports.isAuthenticated = () => {
+    return (req, res, next) => {
+        if (req.session.customer) {
+            console.log('next');
+            next();
+        } else {
+            console.log('nope');
+            res.redirect('/'); // Redirect to login page if user is not authenticated
+        }
+    };
+};
+/**
+ * Customer logout. Destroy the logged user session.
+ * @returns {String} [LOGOUTMSG] Logout message to client-side
+ */
+exports.accountPage = () => {
+    return async (req, res, next) => {
+        res.render('pages/my-account', {
+            customer: req.session.customer,
+            pgTitle: 'My Account',
+            isLoggedIn: req.session.isLogged
+        });
+    };
+};
+
+exports.accountPageDetails = () => {
+    return async (req, res, next) => {
+        res.render('partials/account/my-account-details', { customer: req.session.customer });
+    };
+};
+
+exports.accountPageSettings = () => {
+    return async (req, res, next) => {
+        res.render('partials/account/my-account-settings', { customer: req.session.customer });
+    };
+};
+
+exports.saveCustomerDetails = () => {
+    return async (req, res, next) => {
+        const SAVEDETAILS = await commerceAPI.updateCustomerDetails(
+            req.session.customer.id,
+            req.body.fname,
+            req.body.lname,
+            req.body.email
+        );
+        if (SAVEDETAILS == 'detailsUpdated') {
+            res.json({
+                customer_fname: req.body.fname,
+                customer_lname: req.body.lname,
+                customer_email: req.body.email
+            });
+        }
+    };
+};
 
 /**
  * Customer logout. Destroy the logged user session.
@@ -96,6 +150,21 @@ exports.logout = () => {
         const LOGOUTMSG = 'Signing out...';
         req.session.destroy();
         res.json({ response: LOGOUTMSG });
+        next();
+    };
+};
+
+/**
+ * Customer logout. Destroy the logged user session.
+ * @returns {String} [LOGOUTMSG] Logout message to client-side
+ */
+exports.getCustomerDetails = () => {
+    return async (req, res, next) => {
+        if (req.session.customer) {
+            const CUSTOMER = await customerModel.CustomerDetails('basic', req.session.customer.email);
+            req.session.customer = CUSTOMER;
+            console.log(req.session);
+        }
         next();
     };
 };

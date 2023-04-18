@@ -1,0 +1,38 @@
+<div>
+    <div class="mr-4 container">
+        <h3 class="fw-bold mb-4">Your Profile</h3>
+
+        <div class="fs-6">
+            <form id="save-details">
+                <label class="form-label mt-3" for="">First Name</label>
+                <input
+                    class="form-control"
+                    id="fname"
+                    style="height: 55px"
+                    type="text"
+                    value="<%- customer.first_name %>"
+                />
+                <label class="form-label mt-3" for="">Last Name</label>
+                <input
+                    class="form-control"
+                    id="lname"
+                    style="height: 55px"
+                    type="text"
+                    value="<%- customer.last_name %>"
+                />
+                <label class="form-label mt-3" for="">Email</label>
+                <input
+                    disabled
+                    class="form-control"
+                    id="email"
+                    style="height: 55px"
+                    type=""
+                    value="<%- customer.email %>"
+                />
+                <button type="submit" class="btn btn-dark btn-block mt-4" style="height: 50px; border-radius: 15px">
+                    Save
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

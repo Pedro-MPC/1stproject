@@ -4,7 +4,7 @@
     font-size: 40px;
 }
 .img-product {
-    max-height: 300px;
+    max-width: 80%;
 }
 
 h1 {
@@ -22,8 +22,26 @@ h1 {
 .prodDetailsImgTitle {
     padding: 2%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 
 .addToCartDetails {
     width: 30vh;
+}
+
+@media screen and (max-width: 575px) {
+    .price-stock {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .price {
+        margin-left: 10px;
+    }
 }

@@ -26,16 +26,18 @@ const productRoute = require('./routes/Product');
 const errorRoute = require('./routes/404');
 const accountRoute = require('./routes/Account');
 const cartRoute = require('./routes/Cart');
+const categoryRoute = require('./routes/Category');
 
 app.use(cartRoute);
 app.use(productRoute);
-
 app.use(homeRoute);
 app.use(accountRoute);
+app.use(categoryRoute);
 app.use('*', errorRoute);
+app.disable('view cache');
 
 /** Setting up the server on port 3000 */
-const port = 3001;
+const port = 3000;
 app.listen(port, function (err) {
     if (err) console.log(err);
     console.log(`Servidor iniciado em: localhost:${port}.`);

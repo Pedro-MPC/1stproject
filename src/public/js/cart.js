@@ -12,11 +12,13 @@ function updateCart() {
     });
 }
 
-// AJAX customer login for
-$(window).on('load', function () {
-    document.querySelectorAll('#addToCart').forEach(function (i) {
+function loadAddToCartButtons() {
+    let btns = document.querySelectorAll('#addToCart');
+    btns.forEach(function (i) {
         i.addEventListener('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
+
             let productId = $(i).data('id');
             console.log('tried to add');
             $.ajax({
@@ -33,12 +35,16 @@ $(window).on('load', function () {
                         });
                         // Call updateCart() function to automatically update the Cart items without refreshing the page
                         updateCart();
+                        console.log('asd');
                     }
                 }
             });
         });
     });
-});
+}
+
 $(function () {
+    loadAddToCartButtons();
     updateCart();
 });
+module.exports = loadAddToCartButtons;

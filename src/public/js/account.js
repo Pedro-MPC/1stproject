@@ -1,43 +1,69 @@
 const swal = require('./swal');
 
-$(function () {
-    // AJAX customer login form
-    $('#loginForm').on('submit', function (event) {
+function postUpdateDetails() {
+    $('#save-details').on('submit', function (event) {
         event.preventDefault();
-
-        let email = $('#loginEmail').val();
-        let password = $('#loginPassword').val();
-
-        if (email == '' || password == '') {
+        let fname = $('#fname').val();
+        let lname = $('#lname').val();
+        let email = $('#email').val();
+        if (email == '' || fname == '' || lname == '') {
             swal.NormalSwal.fire({
-                title: 'Wrong Credentials.',
-                text: 'Your email or password is incorrect.'
+                title: 'Attention.',
+                text: 'Please fill all fields.'
             });
         } else {
             $.ajax({
-                url: '/validateLogin',
+                url: '/save-details',
                 method: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ email: email, password: password }),
+                data: JSON.stringify({ fname: fname, lname: lname, email: email }),
                 success: function (res) {
-                    if (res.findFlag == false) {
-                        swal.NormalSwal.fire({
-                            title: 'Wrong Credentials.',
-                            text: 'Your email or password is incorrect.'
-                        });
-                    } else {
-                        swal.Toast.fire({
-                            icon: 'success',
-                            title: 'Bem-vindo, ' + res.customer.first_name + '!'
-                        });
-                        setTimeout(() => {
-                            location.reload();
-                        }, '1500');
-                    }
+                    swal.Toast.fire({
+                        icon: 'success',
+                        title: 'Update sucessfully!'
+                    });
                 }
             });
         }
     });
+}
+// AJAX customer login form
+$('#loginForm').on('submit', function (event) {
+    event.preventDefault();
+
+    let email = $('#loginEmail').val();
+    let password = $('#loginPassword').val();
+
+    if (email == '' || password == '') {
+        swal.NormalSwal.fire({
+            title: 'Wrong Credentials.',
+            text: 'Your email or password is incorrect.'
+        });
+    } else {
+        $.ajax({
+            url: '/validateLogin',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ email: email, password: password }),
+            success: function (res) {
+                if (res.findFlag == false) {
+                    swal.NormalSwal.fire({
+                        icon: 'error',
+                        title: 'Wrong Credentials.',
+                        text: 'Your email or password is incorrect.'
+                    });
+                } else {
+                    swal.Toast.fire({
+                        icon: 'success',
+                        title: 'Welcome, ' + res.customer.first_name + '!'
+                    });
+                    setTimeout(() => {
+                        location.reload();
+                    }, '1500');
+                }
+            }
+        });
+    }
 
     // AJAX customer register form
     $('#registerForm').on('submit', function (event) {
@@ -79,26 +105,120 @@ $(function () {
             });
         }
     });
+});
 
-    // Logout button
-    $('#btnLogout').on('click', function (event) {
-        event.preventDefault();
+// AJAX customer register form
+function loadMyAccountPage() {
+    $.ajax({
+        url: '/my-account',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (res) {}
+    });
+}
 
-        $.ajax({
-            url: '/logout',
-            method: 'POST',
-            contentType: 'application/json',
+// AJAX customer register form
+function loadAccountSettings() {
+    $.ajax({
+        url: '/my-account-settings',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (res) {
+            $('#account-details').html(res);
+            $('#op-settings').addClass('op-active');
+            $('#op-profile').removeClass('op-active');
+        }
+    });
+}
 
-            success: function (res) {
-                swal.Toast.fire({
-                    icon: 'error',
-                    title: 'A terminar sessão...'
-                });
+let isDetailsLoaded = false;
 
-                setTimeout(() => {
-                    location.reload();
-                }, '1500');
+function loadAccountDetails() {
+    $.ajax({
+        url: '/my-account-details',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (res) {
+            $('#account-details').html(res);
+            $('#op-profile').addClass('op-active');
+            $('#op-settings').removeClass('op-active');
+            isDetailsLoaded = true; // set the flag to true
+        }
+    });
+}
+
+$(function () {
+    if (window.location.pathname === '/my-account') {
+        loadMyAccountPage();
+
+        // Check for hash change and call loadAccountDetails() if the hash is #details or loadAccountSettings() if the had is #settings
+        $(window).on('hashchange', function () {
+            if (window.location.hash === '#details') {
+                loadAccountDetails();
+            }
+            if (window.location.hash === '#settings') {
+                loadAccountSettings();
             }
         });
-    });
+        if (window.location.hash === '#details') {
+            loadAccountDetails();
+        }
+        if (window.location.hash === '#settings') {
+            loadAccountSettings();
+        }
+
+        // Attach the event listener only if isDetailsLoaded is true
+        $(document).on('submit', '#save-details', function (event) {
+            event.preventDefault();
+            if (!isDetailsLoaded) {
+                return; // exit if isDetailsLoaded is false
+            }
+            let fname = $('#fname').val();
+            let lname = $('#lname').val();
+            let email = $('#email').val();
+            if (email == '' || fname == '' || lname == '') {
+                swal.NormalSwal.fire({
+                    title: 'Attention.',
+                    text: 'Please fill all fields.'
+                });
+            } else {
+                $.ajax({
+                    url: '/save-details',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ fname: fname, lname: lname, email: email }),
+                    success: function (res) {
+                        swal.Toast.fire({
+                            icon: 'success',
+                            title: 'Profile updated!'
+                        });
+                        $('#navabar-fname').html('Welcome, ' + res.customer_fname + '!');
+                        $('#profile_fname').html('Hi, ' + res.customer_fname + '!');
+                    }
+                });
+            }
+        });
+
+        // Logout button
+        $('.btnLogout').on('click', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: '/logout',
+                method: 'POST',
+                contentType: 'application/json',
+
+                success: function (res) {
+                    swal.Toast.fire({
+                        icon: 'error',
+                        title: 'A terminar sessão...'
+                    });
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, '1500');
+                }
+            });
+        });
+    }
 });

@@ -1,0 +1,72 @@
+<center>
+    <div class="container">
+        <div class="owl-carousel owl-theme caroussel-item" style="color: black">
+            <% PRODUCTS.forEach(product => {%>
+            <div
+                class="item"
+                onclick="window.location='/product?pid=<%=product.id%>';
+                "
+            >
+                <div class="card card-body content" style="overflow: hidden">
+                    <div class="media align-items-center text-center text-lg-left flex-column">
+                        <div class="mr-2 mb-3 mb-lg-0 image">
+                            <img
+                                style="margin: auto; display: block"
+                                class="mb-4"
+                                src="<%- product.img %>"
+                                width="200"
+                                height="140"
+                                alt=""
+                            />
+                        </div>
+                        <div class="media-body text-center">
+                            <h6 class="media-title font-weight-semibold">
+                                <a href="/product?pid=<%= product.id %>" data-abc="true"> <%- product.name %> </a>
+                            </h6>
+                            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                                <li class="list-inline-item">
+                                    <% product.category.forEach(category => {%>
+                                    <a
+                                        href="/categories?cid=<%=category.match(/\d+/g)%>"
+                                        class="caroussel-category"
+                                        data-abc="true"
+                                        ><%- category.match(/[a-zA-Z]+/g) %></a
+                                    >
+                                    <% }) %>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-lg-3 text-center">
+                            <h3 class="font-weight-semibold mb-4 textprice" style="color: #dc3545">
+                                <%-product.price.toFixed(2)%>€
+                            </h3>
+                        </div>
+                        <div style="display: flex">
+                            <button
+                                class="btn btn-danger mt-1 text-white border-0 bg-transparent"
+                                onclick="window.location='/product?pid=<%= product.id %>'; event.stopPropagation()"
+                            >
+                                <span
+                                    style="font-size: 25px; vertical-align: middle"
+                                    class="bx bx-search-alt-2 center-text center-text text-black"
+                                ></span>
+                            </button>
+                            <button
+                                id="addToCart"
+                                class="btn btn-danger mt-1 text-white border-0 bg-transparent"
+                                data-id="<%- product.id %>"
+                            >
+                                <span
+                                    style="font-size: 25px; vertical-align: middle"
+                                    class="bx bx-cart-add center-text text-black"
+                                ></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</center>
