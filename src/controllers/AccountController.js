@@ -88,12 +88,10 @@ exports.checkSession = () => {
 };
 exports.isAuthenticated = () => {
     return (req, res, next) => {
-        if (req.session.customer) {
-            console.log('next');
-            next();
-        } else {
-            console.log('nope');
+        if (!req.session.customer) {
             res.redirect('/'); // Redirect to login page if user is not authenticated
+        } else {
+            next();
         }
     };
 };
@@ -155,15 +153,13 @@ exports.logout = () => {
 };
 
 /**
- * Customer logout. Destroy the logged user session.
- * @returns {String} [LOGOUTMSG] Logout message to client-side
+ * Get Customer Details and update the customer on the session variable
  */
 exports.getCustomerDetails = () => {
     return async (req, res, next) => {
         if (req.session.customer) {
             const CUSTOMER = await customerModel.CustomerDetails('basic', req.session.customer.email);
             req.session.customer = CUSTOMER;
-            console.log(req.session);
         }
         next();
     };

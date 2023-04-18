@@ -1,6 +1,5 @@
 const commerceAPI = require('../../../api/commerceAPI');
 const Product = require('@models/product/product');
-const decorators = require('../../models/product/index');
 
 /**
  * Returns a product object with product data.
