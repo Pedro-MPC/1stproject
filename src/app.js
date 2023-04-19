@@ -31,6 +31,11 @@ const categoryRoute = require('./routes/Category');
 
 app.use(cookieParser('fsgdesgsdYYFCCXXX'));
 app.use(csrf({ cookie: true }));
+
+app.use(function (req, res, next) {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
 app.use(cartRoute);
 app.use(productRoute);
 app.use(homeRoute);

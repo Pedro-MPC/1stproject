@@ -22,8 +22,7 @@ exports.ProductDetailPageByParam = () => {
                 PRODUCT: PRODUCT,
                 isLoggedIn: isLoggedIn,
                 CARTPRODUCTS: res.locals.cardProducts,
-                customer: customer,
-                csrfToken: req.csrfToken()
+                customer: customer
             });
         }
     };

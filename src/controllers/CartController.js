@@ -34,8 +34,6 @@ exports.addToCart = () => {
             req.session.cart.push({ PRODUCT: PRODUCT, quantity: 1 });
         }
 
-        this.getCartProducts;
-
         res.json({ response: 'success', cart: req.session.cart });
     };
 };

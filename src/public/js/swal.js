@@ -2,10 +2,10 @@ const Swal = require('sweetalert2');
 
 const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'top',
     showConfirmButton: false,
     confirmButtonColor: 'rgba(49, 64, 142, 1)',
-    timer: 3000,
+    timer: 1500,
     timerProgressBar: true,
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer);

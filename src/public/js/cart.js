@@ -20,14 +20,13 @@ function loadAddToCartButtons() {
             e.stopPropagation();
 
             let productId = $(i).data('id');
-            console.log('tried to add');
             $.ajax({
                 url: '/addtocart',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ productId: productId }),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                    xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
                 },
                 success: function (res) {
                     if (res.response == 'success') {
@@ -38,7 +37,6 @@ function loadAddToCartButtons() {
                         });
                         // Call updateCart() function to automatically update the Cart items without refreshing the page
                         updateCart();
-                        console.log('asd');
                     }
                 }
             });

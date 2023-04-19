@@ -18,7 +18,7 @@ function postUpdateDetails() {
                 contentType: 'application/json',
                 data: JSON.stringify({ fname: fname, lname: lname, email: email }),
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                    xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
                 },
                 success: function (res) {
                     swal.Toast.fire({
@@ -36,7 +36,6 @@ $('#loginForm').on('submit', function (event) {
 
     let email = $('#loginEmail').val();
     let password = $('#loginPassword').val();
-    console.log($('#token').val());
 
     if (email == '' || password == '') {
         swal.NormalSwal.fire({
@@ -54,7 +53,7 @@ $('#loginForm').on('submit', function (event) {
                 password: password
             }),
             beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
             },
             success: function (res) {
                 if (res.findFlag == false) {
@@ -75,47 +74,49 @@ $('#loginForm').on('submit', function (event) {
             }
         });
     }
+});
+// AJAX customer register form
+$('#registerForm').on('submit', function (event) {
+    event.preventDefault();
 
-    // AJAX customer register form
-    $('#registerForm').on('submit', function (event) {
-        event.preventDefault();
+    let fname = $('#registerFName').val();
+    let lname = $('#registerLName').val();
+    let email = $('#registerEmail').val();
+    let password = $('#registerPassword').val();
 
-        let fname = $('#registerFName').val();
-        let lname = $('#registerLName').val();
-        let email = $('#registerEmail').val();
-        let password = $('#registerPassword').val();
+    if (email == '' || password == '' || fname == '' || lname == '') {
+        swal.NormalSwal.fire({
+            title: 'Atention!',
+            text: 'Please fill out all fields.'
+        });
+    } else {
+        $.ajax({
+            url: '/registercustomer',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ email: email, password: password, fname: fname, lname: lname }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
+            },
+            success: function (res) {
+                if (res.regSuccess) {
+                    swal.Toast.fire({
+                        icon: 'success',
+                        title: '' + res.msg
+                    });
 
-        if (email == '' || password == '' || fname == '' || lname == '') {
-            swal.NormalSwal.fire({
-                title: 'Atention!',
-                text: 'Please fill out all fields.'
-            });
-        } else {
-            $.ajax({
-                url: '/registercustomer',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ email: email, password: password, fname: fname, lname: lname }),
-                success: function (res) {
-                    if (res.regSuccess) {
-                        swal.Toast.fire({
-                            icon: 'success',
-                            title: '' + res.msg
-                        });
-
-                        setTimeout(() => {
-                            location.reload();
-                        }, '1500');
-                    } else {
-                        swal.NormalSwal.fire({
-                            title: 'Error!',
-                            text: 'Email is already registered.'
-                        });
-                    }
+                    setTimeout(() => {
+                        location.reload();
+                    }, '1500');
+                } else {
+                    swal.NormalSwal.fire({
+                        title: 'Error!',
+                        text: 'Email is already registered.'
+                    });
                 }
-            });
-        }
-    });
+            }
+        });
+    }
 });
 
 // AJAX customer register form
@@ -199,7 +200,7 @@ $(function () {
                     contentType: 'application/json',
                     data: JSON.stringify({ fname: fname, lname: lname, email: email }),
                     beforeSend: function (xhr) {
-                        xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                        xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
                     },
                     success: function (res) {
                         swal.Toast.fire({
@@ -222,17 +223,19 @@ $(function () {
                 method: 'POST',
                 contentType: 'application/json',
                 beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('#token').val());
+                    xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
                 },
                 success: function (res) {
-                    swal.Toast.fire({
-                        icon: 'error',
-                        title: 'A terminar sessão...'
-                    });
+                    if (res.response == 'success') {
+                        swal.Toast.fire({
+                            icon: 'error',
+                            title: 'Logging out...'
+                        });
 
-                    setTimeout(() => {
-                        location.reload();
-                    }, '1500');
+                        setTimeout(() => {
+                            location.reload();
+                        }, '1500');
+                    }
                 }
             });
         });

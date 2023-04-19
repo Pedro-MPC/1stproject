@@ -99,7 +99,6 @@ exports.isAuthenticated = () => {
  * Customer logout. Destroy the logged user session.
  * @returns {String} [LOGOUTMSG] Logout message to client-side
  */
-
 exports.accountPage = () => {
     return async (req, res, next) => {
         res.render('pages/my-account', {
@@ -150,10 +149,8 @@ exports.saveCustomerDetails = () => {
  */
 exports.logout = () => {
     return async (req, res, next) => {
-        const LOGOUTMSG = 'Signing out...';
         req.session.destroy();
-        res.json({ response: LOGOUTMSG });
-        next();
+        res.json({ response: 'success' });
     };
 };
 
