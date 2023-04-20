@@ -6,7 +6,8 @@ module.exports = {
         './src/public/js/product.js',
         './src/public/js/account.js',
         './src/public/js/category.js',
-        './src/public/js/cart.js'
+        './src/public/js/cart.js',
+        './src/public/js/checkout.js'
     ],
     output: {
         filename: 'bundle.js',

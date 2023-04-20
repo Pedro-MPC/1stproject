@@ -48,7 +48,8 @@ router.get('/my-account-details', accController.accountPageDetails());
  * Route - Register a customer from the login/register modal
  * @param {function} accController.logout Logout of customer account
  */
-router.get('/my-account-settings', accController.accountPageSettings());
+router.get('/my-account-orders', accController.ordersByCustomers(), accController.accountPageOrders());
+router.get('/order-details-id', accController.orderDetailsById());
 
 /**
  * Route - Register a customer from the login/register modal

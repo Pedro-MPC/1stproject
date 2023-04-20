@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header') %>
+    <title><%- pgTitle %></title>
+    <link rel="stylesheet" href="/dist/bootstrap.css" />
+    <link rel="stylesheet" href="stylesheets/cartstyle-checkout.css" />
+
+    <body class="bodyHome">
+        <%- include('../partials/navbar/nav-bar') %>
+        <div id="page-content" style="background-color: white; height: auto" class="page-content container p-3">
+            <div class="container mt-3" style="height: auto">
+                <h1 class="fw-bold">Checkout</h1>
+                <div class="row mb-4" style="align-items: baseline">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <form id="checkoutForm">
+                        <!-- If not logged -->
+                        <% if(!customer) {%>
+                            <a href=""></a>
+                        <p class="text-center lighter-text">Do you have an account? Log in <a href="#" class="btnLoginModal"><span>here</span></a>.</p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <label class="form-label mt-2" for="">First Name</label
+                                ><span class="text-danger">*</span>
+                                <input
+                                    class="form-control"
+                                    style="height: 50px"
+                                    id="fname"
+                                    type="text"
+                                    placeholder="First Name"
+                                />
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <label class="form-label mt-2" for="">Last Name</label
+                                ><span class="text-danger">*</span>
+                                <input
+                                    class="form-control"
+                                    style="height: 50px"
+                                    id="lname"
+                                    type="text"
+                                    placeholder="Last Name"
+                                />
+                            </div>
+                        </div>
+                        <label class="form-label mt-2" for="">Email</label><span class="text-danger">*</span>
+                        <input
+                            class="form-control"
+                            style="height: 50px"
+                            id="email"
+                            type=""
+                            placeholder="mail@mail.com"
+                        />
+                        <% }else{ %>
+                        <p class="text-center lighter-text">(Using your account details as personal info.)</p>
+                        <% } %>
+                        <!--  -->
+                        <label class="form-label mt-1" for="">Address</label><span class="text-danger">*</span>
+                        <input
+                            class="form-control"
+                            id="address"
+                            type=""
+                            style="height: 50px"
+                            placeholder="Street Line 1"
+                        />
+                        <label class="form-label mt-1" for="">City</label><span class="text-danger">*</span>
+                        <input class="form-control" id="city" style="height: 50px" type="" placeholder="City" />
+                        <button
+                        type="submit"
+                            class="btn btn-block btn-dark p-2 mt-4"
+                            style="border-radius: 20px"
+                            >Checkout</button
+                        >
+                    </div>
+                </form>
+                    <div class="col-lg-6 col-md-12 col-sm-12 mt-sm-4 bg-white" style="width: auto">
+                        <div data-cart="true" class="isCart checkout-cart" style="height: 60vh">
+                            <div data-cart="true" class="shopping-cart-checkout isCart">
+                                <!--end shopping-cart-checkout-header -->
+                                <div data-cart="true" id="productsListCheckout" style="overflow-y: auto"></div>
+                            </div>
+                            <!--end shopping-cart-checkout -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <%- include('../partials/footer') %>
+</html>

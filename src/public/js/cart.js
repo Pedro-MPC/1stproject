@@ -1,3 +1,4 @@
+const { update } = require('lodash');
 const swal = require('./swal');
 
 function updateCart() {
@@ -8,6 +9,11 @@ function updateCart() {
         success: function (data) {
             $('#productsListCart').html(data);
             $('totalCart').html(data.total);
+            var cartSize = $('#cart-size-container').data('cart-size');
+            if (cartSize) {
+                $('#cart-items-count').addClass('count');
+                $('#cart-items-count').html('<span id="cart-items-count" class="count">' + cartSize + '</span>');
+            }
         }
     });
 }
@@ -43,9 +49,8 @@ function loadAddToCartButtons() {
         });
     });
 }
-
-$(function () {
-    loadAddToCartButtons();
-    updateCart();
-});
 module.exports = loadAddToCartButtons;
+$(function () {
+    updateCart();
+    loadAddToCartButtons();
+});

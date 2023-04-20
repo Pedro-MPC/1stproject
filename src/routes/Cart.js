@@ -15,4 +15,5 @@ router.post('/addtocart', cartController.addToCart());
  * @param {function} cartController.getCartProducts - get Cart Products
  */
 router.get('/update-cart', cartController.getCartProducts());
+
 module.exports = router;

@@ -130,18 +130,30 @@ function loadMyAccountPage() {
 }
 
 // AJAX customer register form
-function loadAccountSettings() {
+function loadAccountOrders() {
     $.ajax({
-        url: '/my-account-settings',
+        url: '/my-account-orders',
         method: 'GET',
         contentType: 'application/json',
         success: function (res) {
             $('#account-details').html(res);
-            $('#op-settings').addClass('op-active');
+            $('#op-orders').addClass('op-active');
             $('#op-profile').removeClass('op-active');
         }
     });
 }
+
+// AJAX customer register form
+$('#registerForm').on('click', function (event) {
+    $.ajax({
+        url: '/order-details-id',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (res) {
+            $('#detailsModal').html(res);
+        }
+    });
+});
 
 let isDetailsLoaded = false;
 
@@ -153,7 +165,7 @@ function loadAccountDetails() {
         success: function (res) {
             $('#account-details').html(res);
             $('#op-profile').addClass('op-active');
-            $('#op-settings').removeClass('op-active');
+            $('#op-orders').removeClass('op-active');
             isDetailsLoaded = true; // set the flag to true
         }
     });
@@ -163,20 +175,20 @@ $(function () {
     if (window.location.pathname === '/my-account') {
         loadMyAccountPage();
 
-        // Check for hash change and call loadAccountDetails() if the hash is #details or loadAccountSettings() if the had is #settings
+        // Check for hash change and call loadAccountDetails() if the hash is #details or loadAccountOrders() if the had is #orders
         $(window).on('hashchange', function () {
             if (window.location.hash === '#details') {
                 loadAccountDetails();
             }
-            if (window.location.hash === '#settings') {
-                loadAccountSettings();
+            if (window.location.hash === '#orders') {
+                loadAccountOrders();
             }
         });
         if (window.location.hash === '#details') {
             loadAccountDetails();
         }
-        if (window.location.hash === '#settings') {
-            loadAccountSettings();
+        if (window.location.hash === '#orders') {
+            loadAccountOrders();
         }
 
         // Attach the event listener only if isDetailsLoaded is true

@@ -1,6 +1,5 @@
 const { isEmpty } = require('lodash');
 const commerceAPI = require('../../api/commerceAPI');
-const productFactory = require('../scripts/factory/product');
 const categoryModel = require('../models/category/category');
 
 /**

@@ -1,0 +1,67 @@
+<div>
+    <div class="mr-4 container">
+        <h3 class="fw-bold mb-4">Your Orders</h3>
+
+        <div class="fs-6" id="orderList">
+            <% if(ORDERS != 'notFound') { %> <% ORDERS.forEach(order => {%>
+            <div class="mb-2">
+                <div
+                    style="
+                        height: auto;
+                        border: 1px solid rgba(0, 0, 0, 0.235);
+                        width: 100%;
+                        height: 80px;
+                        border-radius: 20px;
+                    "
+                >
+                    <div class="row">
+                        <div class="col-3">
+                            <% if(order.status == 1){ %>
+                            <img src="img/order-processing.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <% } else if(order.status == 2){%>
+                            <img src="img/order-delivered.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <% } else if(order.status == 3){%>
+                            <img src="img/order-error.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <% }%>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <div>
+                                <p style="margin: 0px 0; font-size: 14px">Order Nº <%- order.id %></p>
+                            </div>
+                            <div
+                                style="
+                                    display: flex !important;
+                                    flex-direction: row;
+                                    align-items: flex-end;
+                                    font-size: 14px;
+                                "
+                            >
+                                <a id="shipping-order" data-orderid="<%- order.id %>" href="">Shipping Details</a>
+                                <p class="mr-2 ml-2" style="margin: 0px 0">|</p>
+                                <a id="products-order" data-orderid="<%- order.id %>" href="">Products</a>
+                            </div>
+                        </div>
+                        <div
+                            class="col-3 mt-3"
+                            style="display: flex !important; flex-direction: column; align-items: center"
+                        >
+                            <div class="mr-2 text-center">
+                                <% if(order.status == 1){ %>
+                                <p style="margin: 1px 0" class="fw-bold">Processing</p>
+                                <% } else if(order.status == 2){%>
+                                <p style="margin: 1px 0" class="fw-bold text-success">Delivered</p>
+                                <% } else if(order.status == 3){%>
+                                <p style="margin: 1px 0" class="fw-bold text-danger">Error</p>
+
+                                <% }%>
+                                <p><%- order.total_price.toFixed(2) %>€</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% })%> <% }%>
+        </div>
+    </div>
+</div>

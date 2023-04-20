@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="stylesheets/cartstyle.css" />
+<link rel="stylesheet" href="stylesheets/cartstyle-checkout.css" />
 
 <div data-cart="true" class="shopping-cart-header text-center">
     <span data-cart="true" style="font-size: 17px" id="titleCart"
-        >Shopping Cart <% if(CartSize){%>(<%- CartSize %>)<%} %></span
+        >Your Shopping Cart <% if(CartSize){%>(<%- CartSize %>)<%} %></span
     >
 </div>
 
@@ -10,12 +10,11 @@
 <p class="text-center m-4">Your cart is empty.</p>
 
 <% }else{ %>
-<div id="cart-size-container" data-cart-size="<%- CartSize %>"></div>
 
 <ul
     data-cart="true"
-    class="shopping-cart-items isCart"
-    style="max-height: calc(100vh - 15rem); overflow: auto"
+    class="shopping-cart-checkout-items isCart"
+    style="max-height: calc(45vh - 1rem); overflow: auto"
     id="productsListCart"
 >
     <% CartItem.forEach(item => {%>
@@ -41,18 +40,18 @@
 </ul>
 <div
     style="
-        min-height: 10vh;
-
+        min-height: 1vh;
         background-color: white;
-        position: fixed;
         bottom: 10px;
-        width: 350px;
+        position: absolute;
         border-top: 1px solid rgba(0, 0, 0, 0.253);
+        padding: 0px 20px 20px 20px;
+        right: 3em;
+        left: 3em;
     "
 >
     <span data-cart="true" class="lighter-text mt-3" style="float: left">Total:</span>
-    <span data-cart="true" class="main-color-text mt-3" style="float: right" id="totalCart"
+    <span data-cart="true" class="main-color-text mt-3 fw-bold" style="float: right" id="totalCart"
         ><%- Total.toFixed(2) %>€</span
     >
-    <a href="/checkout" data-cart="true" class="btn btn-block btn-dark mt-50">Checkout</a>
 </div>

@@ -1,6 +1,5 @@
 const commerceAPI = require('../../api/commerceAPI');
 const productFactory = require('../scripts/factory/product');
-const categoryModel = require('../models/category/category');
 
 /**
  * Returns a middleware function to render the product detail page by Id on URL parameter.
@@ -59,16 +58,5 @@ exports.getPDPProductById = () => {
     return async (req, res, next) => {
         const PRODUCT = productModel.Product('pdp', req.body.id);
         return PRODUCT;
-    };
-};
-
-/**
- * Returns a middleware function to get all categories.
- * @returns {Function} - The middleware function.
- */
-exports.getallCategories = () => {
-    return async (req, res, next) => {
-        const CATEGORIES = await commerceAPI.getAllCategories();
-        res.render('partials/categories/categories', { CATEGORIES: CATEGORIES });
     };
 };

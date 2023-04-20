@@ -82,7 +82,6 @@ exports.checkSession = () => {
                 req.session.isLogged = false;
             }
         });
-        console.log(req.session);
         next();
     };
 };
@@ -119,9 +118,15 @@ exports.accountPageDetails = () => {
     };
 };
 
-exports.accountPageSettings = () => {
+exports.accountPageOrders = () => {
     return async (req, res, next) => {
-        res.render('partials/account/my-account-settings', { customer: req.session.customer });
+        var customerOrders;
+        if (res.locals.ORDERS) {
+            customerOrders = res.locals.ORDERS;
+        } else {
+            customerOrders = 'notFound';
+        }
+        res.render('partials/account/my-account-orders', { customer: req.session.customer, ORDERS: customerOrders });
     };
 };
 
@@ -164,5 +169,29 @@ exports.getCustomerDetails = () => {
             req.session.customer = CUSTOMER;
         }
         next();
+    };
+};
+
+exports.ordersByCustomers = () => {
+    return async (req, res, next) => {
+        const ORDERS = await commerceAPI.ordersByCustomers(req.session.customer.email);
+        if (ORDERS[0] == 'notFound') {
+            next();
+        } else {
+            res.locals.ORDERS = ORDERS;
+            next();
+        }
+    };
+};
+
+exports.orderDetailsById = () => {
+    return async (req, res, next) => {
+        const ORDERS = await commerceAPI.orderDetailsById(req.session.customer.email);
+        if (ORDERS[0] == 'notFound') {
+            next();
+        } else {
+            res.locals.ORDERDETAILS = ORDERS;
+            next();
+        }
     };
 };

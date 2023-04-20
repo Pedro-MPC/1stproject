@@ -9,7 +9,6 @@ const productController = require('../controllers/ProductController');
  * @param {function} productController.ProductDetailPageByParam - Render Product Detail Page
  * @param {function} productController.getallCategories - get all categories
  */
-router.get('/getcategories', productController.getallCategories());
 router.get('/getallproducts', productController.getAllProductsCaroussel());
 router.get('/getfeaturedproducts', productController.getFeaturedProductsHome());
 router.get('/product', productController.ProductDetailPageByParam());

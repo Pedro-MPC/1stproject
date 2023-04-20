@@ -54,7 +54,9 @@ exports.getCartProducts = () => {
                 Total += cart.PRODUCT.price * cart.quantity;
                 CartSize += cart.quantity;
             });
+
             req.session.cart.total = Total;
+
             res.render('partials/cart/cart-items', {
                 CartItem: CartItem,
                 Total: Total,
@@ -63,6 +65,55 @@ exports.getCartProducts = () => {
             });
         } else {
             res.render('partials/cart/cart-items', {
+                empty: true,
+                CartSize: CartSize,
+                Total: 0
+            });
+        }
+    };
+};
+
+exports.cartItemsCount = () => {
+    return async (req, res, next) => {
+        if (req.session.cart) {
+            const CARDPRODUCTS = req.session.cart;
+            var count = 0;
+            CARDPRODUCTS.forEach((product) => {
+                count += product.quantity;
+            });
+            res.locals.CartItemsCount = count;
+        }
+        next();
+    };
+};
+
+/**
+ * Get Cart products to checkout page.
+ * @returns {Function} - Middleware function.
+ */
+exports.getCartProductsCheckout = () => {
+    return async (req, res, next) => {
+        const CARDPRODUCTS = req.session.cart;
+        var Total = 0;
+        var CartItem = [];
+        var CartSize = 0;
+        if (CARDPRODUCTS && CARDPRODUCTS.length > 0) {
+            CARDPRODUCTS.forEach((cart) => {
+                CartItem.push(cart);
+                Total += cart.PRODUCT.price * cart.quantity;
+                CartSize += cart.quantity;
+            });
+
+            req.session.cart.total = Total;
+
+            res.render('partials/cart/cart-items-checkout', {
+                CartItem: CartItem,
+                Total: Total,
+                CartSize: CartSize,
+                empty: false
+            });
+        } else {
+            res.render('partials/cart/cart-items-checkout', {
                 empty: true,
                 CartSize: CartSize,
                 Total: 0

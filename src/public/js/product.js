@@ -22,12 +22,9 @@ function featuredProducts() {
         }
     });
 }
-
-window.onload = function () {
-    if (window.location.pathname == '/') {
-        console.log('Acrousell');
-        carousselAllProducts();
-        loadCaroussel();
-        featuredProducts();
-    }
-};
+$(function () {
+    console.log('Acrousell');
+    carousselAllProducts();
+    loadCaroussel();
+    featuredProducts();
+});

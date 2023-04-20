@@ -28,6 +28,7 @@ const errorRoute = require('./routes/404');
 const accountRoute = require('./routes/Account');
 const cartRoute = require('./routes/Cart');
 const categoryRoute = require('./routes/Category');
+const CheckoutRoute = require('./routes/Checkout');
 
 app.use(cookieParser('fsgdesgsdYYFCCXXX'));
 app.use(csrf({ cookie: true }));
@@ -41,6 +42,7 @@ app.use(productRoute);
 app.use(homeRoute);
 app.use(accountRoute);
 app.use(categoryRoute);
+app.use(CheckoutRoute);
 app.use('*', errorRoute);
 
 /** Setting up the server on port 3000 */

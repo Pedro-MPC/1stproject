@@ -11,5 +11,6 @@ const categoryController = require('../controllers/CategoryController');
  */
 router.get('/categories', categoryController.ProductListByCategoryPage());
 router.get('/getcategoryproducts', categoryController.ProductListByCategory());
+router.get('/getcategories', categoryController.getallCategories());
 
 module.exports = router;

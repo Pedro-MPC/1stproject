@@ -1,0 +1,52 @@
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="modalLogin"
+    style="color: black"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body" style="padding: 40px">
+                <form id="checkoutForm">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <label class="form-label mt-2" for="">First Name</label><span class="text-danger">*</span>
+                            <input
+                                class="form-control"
+                                style="height: 50px"
+                                id="fname"
+                                type="text"
+                                placeholder="First Name"
+                            />
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label class="form-label mt-2" for="">Last Name</label><span class="text-danger">*</span>
+                            <input
+                                class="form-control"
+                                style="height: 50px"
+                                id="lname"
+                                type="text"
+                                placeholder="Last Name"
+                            />
+                        </div>
+                    </div>
+                    <label class="form-label mt-2" for="">Email</label><span class="text-danger">*</span>
+                    <input class="form-control" style="height: 50px" id="email" type="" placeholder="mail@mail.com" />
+                    <!--  -->
+                    <label class="form-label mt-1" for="">Address</label><span class="text-danger">*</span>
+                    <input class="form-control" id="address" type="" style="height: 50px" placeholder="Street Line 1" />
+                    <label class="form-label mt-1" for="">City</label><span class="text-danger">*</span>
+                    <input class="form-control" id="city" style="height: 50px" type="" placeholder="City" />
+                    <button type="submit" class="btn btn-block btn-dark p-2 mt-4" style="border-radius: 20px">
+                        Checkout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
