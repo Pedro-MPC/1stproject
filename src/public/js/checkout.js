@@ -61,8 +61,8 @@ $('#checkoutForm').on('submit', function (event) {
                     });
                 } else if (res.response == 'noproductsoncart') {
                     swal.NormalSwal.fire({
-                        title: 'Error',
-                        text: "You don't have any products on your cart.",
+                        title: 'Oops...',
+                        text: 'Your cart is empty.',
                         icon: 'error'
                     });
                 }
