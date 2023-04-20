@@ -126,7 +126,10 @@ exports.accountPageOrders = () => {
         } else {
             customerOrders = 'notFound';
         }
-        res.render('partials/account/my-account-orders', { customer: req.session.customer, ORDERS: customerOrders });
+        res.render('partials/account/my-account-orders', {
+            customer: req.session.customer,
+            ORDERS: customerOrders
+        });
     };
 };
 
@@ -186,12 +189,13 @@ exports.ordersByCustomers = () => {
 
 exports.orderDetailsById = () => {
     return async (req, res, next) => {
-        const ORDERS = await commerceAPI.orderDetailsById(req.session.customer.email);
-        if (ORDERS[0] == 'notFound') {
-            next();
+        const ORDER = await commerceAPI.orderDetailsById(req.query.order_id, req.query.limit);
+        console.log(req.query.order_id);
+        if (ORDER == 'notFound') {
+            console.log('ORDER NOT FOUND');
         } else {
-            res.locals.ORDERDETAILS = ORDERS;
-            next();
+            console.log(ORDER);
+            res.render('partials/account/orders/modal-details', { ORDER: ORDER });
         }
     };
 };

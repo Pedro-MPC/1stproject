@@ -148,12 +148,13 @@ const ordersByCustomers = async (customer_email) => {
     });
 };
 
-const orderDetailsById = async (order_id) => {
+const orderDetailsById = async (order_id, limit) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT orders.id,orders.status, orders.customer_fname, orders.customer_lname, orders.email, GROUP_CONCAT(products._id SEPARATOR ', ') AS productID, SUM(orders_products.quantity * products.preco) AS total_price FROM orders JOIN orders_products ON orders.id = orders_products.order_id JOIN products ON orders_products.product_id = products._id WHERE orders.id= '" +
+            "SELECT orders.id,orders.status, orders.city, orders.address, orders.order_date, orders.customer_fname, orders.customer_lname, orders.email, GROUP_CONCAT(products._id SEPARATOR ', ') AS productID, SUM(orders_products.quantity * products.preco) AS total_price FROM orders JOIN orders_products ON orders.id = orders_products.order_id JOIN products ON orders_products.product_id = products._id WHERE orders.id= '" +
                 order_id +
-                "' GROUP BY orders.id",
+                "' GROUP BY orders.id LIMIT " +
+                limit,
             function (err, results, fields) {
                 if (err) {
                     return reject(err);
@@ -304,3 +305,4 @@ exports.updateCustomerDetails = updateCustomerDetails;
 exports.getCustomerInfo = getCustomerInfo;
 exports.orderProducts = orderProducts;
 exports.ordersByCustomers = ordersByCustomers;
+exports.orderDetailsById = orderDetailsById;

@@ -139,24 +139,55 @@ function loadAccountOrders() {
             $('#account-details').html(res);
             $('#op-orders').addClass('op-active');
             $('#op-profile').removeClass('op-active');
+            loadOrderDetailButtons();
+            btnsorderdetails = document.querySelectorAll('#shipping-order');
         }
     });
 }
+function loadOrderDetailButtons() {
+    let btns = document.querySelectorAll('#shipping-order');
 
-// AJAX customer register form
-$('#registerForm').on('click', function (event) {
-    $.ajax({
-        url: '/order-details-id',
-        method: 'GET',
-        contentType: 'application/json',
-        success: function (res) {
-            $('#detailsModal').html(res);
-        }
+    // AJAX customer register form
+    btns.forEach(function (i) {
+        i.addEventListener('click', function (e) {
+            console.log('clicked');
+            e.preventDefault();
+            e.stopPropagation();
+            let order_id = $(i).data('orderid');
+            console.log(order_id);
+            let limit = 4; // set initial limit to 4
+            $.ajax({
+                url: '/order-details-id',
+                method: 'GET',
+                contentType: 'application/json',
+                data: { order_id: order_id, limit: limit },
+                success: function (res) {
+                    console.log('SUCCESS JAVASCRIPT');
+                    $('#modal-details').html(res);
+                    $('#modalORDERDetails').modal('show');
+                }
+            });
+
+            let showMoreBtn = document.querySelector('#show-more');
+            showMoreBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                limit += 4; // increase limit by 4
+                $.ajax({
+                    url: '/order-details-id',
+                    method: 'GET',
+                    contentType: 'application/json',
+                    data: { order_id: order_id, limit: limit },
+                    success: function (res) {
+                        console.log('SUCCESS JAVASCRIPT');
+                        $('#modal-details').html(res);
+                    }
+                });
+            });
+        });
     });
-});
+}
 
 let isDetailsLoaded = false;
-
 function loadAccountDetails() {
     $.ajax({
         url: '/my-account-details',

@@ -3,15 +3,28 @@
 <!-- Modal -->
 <div
     class="modal fade"
-    id="modalLogin"
+    id="modalORDERDetails"
     style="color: black"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
 >
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="border-radius: 40px">
             <div class="modal-body" style="padding: 40px">
+                <div class="text-center d-flex" style="align-items: baseline; justify-content: center; font-size: 30px">
+                    <div>
+                        <% if(ORDER.status == 1){ %>
+                        <img src="img/order-processing.png" alt="" class="mb-2" style="height: 35px" />
+                        <% } else if(ORDER.status == 2){%>
+                        <img src="img/order-delivered.png" alt="" class="mb-2" style="height: 35px" />
+                        <% } else if(ORDER.status == 3){%>
+                        <img src="img/order-error.png" alt="" class="mb-2" style="height: 35px" />
+                        <% }%>
+                    </div>
+                    <p class="text-center fw-light mr-2 ml-2">Shipping Details - Order <%- ORDER.id %></p>
+                </div>
+
                 <form id="checkoutForm">
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
@@ -22,6 +35,8 @@
                                 id="fname"
                                 type="text"
                                 placeholder="First Name"
+                                value="<%- ORDER.customer_fname %>"
+                                disabled
                             />
                         </div>
                         <div class="col-lg-6 col-md-12">
@@ -32,18 +47,49 @@
                                 id="lname"
                                 type="text"
                                 placeholder="Last Name"
+                                value="<%- ORDER.customer_lname %>"
+                                disabled
                             />
                         </div>
                     </div>
                     <label class="form-label mt-2" for="">Email</label><span class="text-danger">*</span>
-                    <input class="form-control" style="height: 50px" id="email" type="" placeholder="mail@mail.com" />
+                    <input
+                        class="form-control"
+                        style="height: 50px"
+                        id="email"
+                        type=""
+                        placeholder="mail@mail.com"
+                        value="<%- ORDER.email %>"
+                        disabled
+                    />
                     <!--  -->
                     <label class="form-label mt-1" for="">Address</label><span class="text-danger">*</span>
-                    <input class="form-control" id="address" type="" style="height: 50px" placeholder="Street Line 1" />
+                    <input
+                        class="form-control"
+                        id="address"
+                        type=""
+                        style="height: 50px"
+                        placeholder="Street Line 1"
+                        value="<%- ORDER.address %>"
+                        disabled
+                    />
                     <label class="form-label mt-1" for="">City</label><span class="text-danger">*</span>
-                    <input class="form-control" id="city" style="height: 50px" type="" placeholder="City" />
-                    <button type="submit" class="btn btn-block btn-dark p-2 mt-4" style="border-radius: 20px">
-                        Checkout
+                    <input
+                        class="form-control"
+                        id="city"
+                        style="height: 50px"
+                        type=""
+                        placeholder="City"
+                        value="<%- ORDER.city %>"
+                        disabled
+                    />
+                    <button
+                        data-bs-dismiss="modal"
+                        class="btn btn-block btn-main-style p-2 mt-4"
+                        style="border-radius: 20px"
+                        type="button"
+                    >
+                        Close
                     </button>
                 </form>
             </div>

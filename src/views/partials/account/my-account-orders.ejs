@@ -1,8 +1,7 @@
 <div>
     <div class="mr-4 container">
-        <h3 class="fw-bold mb-4">Your Orders</h3>
-
-        <div class="fs-6" id="orderList">
+        <h3 class="fw-bold mb-4">Your Orders <% if(ORDERS != 'notFound') { %> (<%- ORDERS.length%>)<% }%></h3>
+        <div class="fs-6" id="orderList" style="max-height: calc(40vh - 1rem); overflow: auto">
             <% if(ORDERS != 'notFound') { %> <% ORDERS.forEach(order => {%>
             <div class="mb-2">
                 <div
@@ -10,18 +9,29 @@
                         height: auto;
                         border: 1px solid rgba(0, 0, 0, 0.235);
                         width: 100%;
-                        height: 80px;
+                        height: auto;
+                        min-height: 90px;
                         border-radius: 20px;
                     "
                 >
                     <div class="row">
                         <div class="col-3">
                             <% if(order.status == 1){ %>
-                            <img src="img/order-processing.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <img
+                                src="img/order-processing.png"
+                                alt="Order Processing"
+                                class="ml-3 mt-2"
+                                style="height: 60px"
+                            />
                             <% } else if(order.status == 2){%>
-                            <img src="img/order-delivered.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <img
+                                src="img/order-delivered.png"
+                                alt="Order Delivered"
+                                class="ml-3 mt-2"
+                                style="height: 60px"
+                            />
                             <% } else if(order.status == 3){%>
-                            <img src="img/order-error.png" alt="" class="ml-3 mt-2" style="height: 60px" />
+                            <img src="img/order-error.png" alt="Order Error" class="ml-3 mt-2" style="height: 60px" />
                             <% }%>
                         </div>
                         <div class="col-6 mt-3">
@@ -36,9 +46,10 @@
                                     font-size: 14px;
                                 "
                             >
-                                <a id="shipping-order" data-orderid="<%- order.id %>" href="">Shipping Details</a>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                                <a id="shipping-order" data-orderid="<%- order.id %>" href="#">Shipping Details</a>
                                 <p class="mr-2 ml-2" style="margin: 0px 0">|</p>
-                                <a id="products-order" data-orderid="<%- order.id %>" href="">Products</a>
+                                <a id="products-order" data-orderid="<%- order.id %>" href="#">Products</a>
                             </div>
                         </div>
                         <div
