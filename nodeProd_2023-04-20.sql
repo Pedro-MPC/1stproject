@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.4.27-MariaDB)
 # Base de Dados: nodeProd
-# Tempo de Geração: 2023-04-20 09:59:25 +0000
+# Tempo de Geração: 2023-04-20 16:30:14 +0000
 # ************************************************************
 
 
@@ -75,7 +75,8 @@ LOCK TABLES `customer` WRITE;
 
 INSERT INTO `customer` (`id`, `email`, `dtAdd`, `password`, `fname`, `lname`)
 VALUES
-	(1,'mail','2023-03-27','8fe4c11451281c094a6578e6ddbf5eed','Pedro','Correia');
+	(1,'mail','2023-03-27','8fe4c11451281c094a6578e6ddbf5eed','Pedro','Correia'),
+	(13,'mail1','2023-04-20','8fe4c11451281c094a6578e6ddbf5eed','Pedro','Teste');
 
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -103,9 +104,13 @@ LOCK TABLES `orders` WRITE;
 
 INSERT INTO `orders` (`id`, `address`, `city`, `order_date`, `customer_fname`, `customer_lname`, `email`, `status`)
 VALUES
-	(1,'asd','asd',NULL,'asd','pedro','mail',3),
-	(2,'asd','asd',NULL,'asd','pedro','mail',2),
-	(3,'asd','asd',NULL,'asd','pedro','mail',1);
+	(1,'address','city',NULL,'pedro','correia','mail',3),
+	(2,'asd','asd',NULL,'order','2','mail',2),
+	(3,'asd','asd',NULL,'order','3','mail',3),
+	(39,'Capgemini','Évora','2023-04-20 14:28:05','Pedro','Correia','mail',2),
+	(41,'Rua de Cima','Arraiolos','2023-04-20 14:55:07','Pedro','Correia','mail',1),
+	(42,'Capgemini','Évora','2023-04-20 15:54:10','Pedro','Correia','mail',3),
+	(43,'asd','asd','2023-04-20 15:56:13','Pedro','Correia','mail',1);
 
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -120,9 +125,9 @@ CREATE TABLE `orders_products` (
   `order_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
-  CONSTRAINT `orders_products_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  KEY `orders_products_ibfk_1` (`order_id`),
+  CONSTRAINT `orders_products_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
   CONSTRAINT `orders_products_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -133,7 +138,21 @@ INSERT INTO `orders_products` (`order_id`, `product_id`, `quantity`)
 VALUES
 	(2,1,1),
 	(3,2,1),
-	(1,3,2);
+	(1,3,2),
+	(39,1,1),
+	(39,2,1),
+	(39,3,1),
+	(39,4,1),
+	(39,5,1),
+	(39,6,1),
+	(41,2,1),
+	(41,1,1),
+	(41,3,1),
+	(42,2,4),
+	(42,1,3),
+	(42,3,697),
+	(43,2,1),
+	(43,1,1);
 
 /*!40000 ALTER TABLE `orders_products` ENABLE KEYS */;
 UNLOCK TABLES;
