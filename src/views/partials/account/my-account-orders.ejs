@@ -1,9 +1,14 @@
+<link rel="stylesheet" href="stylesheets/account-order-details.css" />
 <div>
-    <div class="mr-4 container">
+    <div class="container bg-transparent" style="width: 100%; max-width: 650px">
         <h3 class="fw-bold mb-4">Your Orders <% if(ORDERS != 'notFound') { %> (<%- ORDERS.length%>)<% }%></h3>
-        <div class="fs-6" id="orderList" style="max-height: calc(40vh - 1rem); overflow: auto">
+        <div
+            class="fs-6 bg-transparent"
+            id="orderList"
+            style="max-height: calc(40vh - 1rem); overflow-y: auto; overflow-x: hidden"
+        >
             <% if(ORDERS != 'notFound') { %> <% ORDERS.forEach(order => {%>
-            <div class="mb-2">
+            <div class="mb-2" style="max-width: 100%; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px">
                 <div
                     style="
                         height: auto;
@@ -58,7 +63,7 @@
                         >
                             <div class="mr-2 text-center">
                                 <% if(order.status == 1){ %>
-                                <p style="margin: 1px 0" class="fw-bold">Processing</p>
+                                <p style="margin: 1px 0" class="fw-bold text-blue">Processing</p>
                                 <% } else if(order.status == 2){%>
                                 <p style="margin: 1px 0" class="fw-bold text-success">Delivered</p>
                                 <% } else if(order.status == 3){%>
@@ -72,7 +77,12 @@
                 </div>
             </div>
 
-            <% })%> <% }%>
+            <% })}%>
         </div>
+        <% if(ORDERS != 'notFound'){%>
+        <p class="lighter-text text-center mt-4">Here are all the details for your last orders.</p>
+        <% }else{%>
+        <p class="lighter-text text-center mt-4">You have no orders to list.</p>
+        <% }%>
     </div>
 </div>

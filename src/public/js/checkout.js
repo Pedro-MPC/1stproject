@@ -14,14 +14,22 @@ function renderCheckoutPage() {
 // AJAX customer register form
 $('#checkoutForm').on('submit', function (event) {
     event.preventDefault();
-
+    let customer_fname = undefined;
+    let customer_lname = undefined;
+    let email = undefined;
     let address = $('#address').val();
     let city = $('#city').val();
-    let customer_fname = $('#fname').val();
-    let customer_lname = $('#lname').val();
-    let email = $('#email').val();
+    if ($('#fname').val()) {
+        customer_fname = $('#fname').val();
+    }
+    if ($('#fname').val()) {
+        customer_lname = $('#lname').val();
+    }
+    if ($('#email').val()) {
+        email = $('#email').val();
+    }
 
-    if (email == '' || fname == '' || lname == '') {
+    if (email == '' || customer_fname == '' || customer_lname == '' || city == '' || address == '') {
         swal.NormalSwal.fire({
             title: 'Atention!',
             text: 'Please fill out all fields.'
@@ -47,6 +55,9 @@ $('#checkoutForm').on('submit', function (event) {
                         title: 'Success!',
                         text: 'Your order as been completed.',
                         icon: 'success'
+                    }).then((result) => {
+                        // Reload the Page
+                        window.location.replace('/');
                     });
                 } else if (res.response == 'noproductsoncart') {
                     swal.NormalSwal.fire({

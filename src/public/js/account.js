@@ -140,7 +140,6 @@ function loadAccountOrders() {
             $('#op-orders').addClass('op-active');
             $('#op-profile').removeClass('op-active');
             loadOrderDetailButtons();
-            btnsorderdetails = document.querySelectorAll('#shipping-order');
         }
     });
 }
@@ -168,7 +167,6 @@ function loadOrderDetailButtons() {
                 }
             });
 
-            let showMoreBtn = document.querySelector('#show-more');
             showMoreBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 limit += 4; // increase limit by 4

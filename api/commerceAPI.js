@@ -87,7 +87,7 @@ const getAllCategories = async () => {
 const checkoutOrder = async (address, city, customer_fname, customer_lname, email, products) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "INSERT INTO orders (address, city, order_date, customer_fname, customer_lname, email) VALUES ('" +
+            "INSERT INTO orders (address, city, order_date, customer_fname, customer_lname, email, status) VALUES ('" +
                 address +
                 "','" +
                 city +
@@ -97,7 +97,7 @@ const checkoutOrder = async (address, city, customer_fname, customer_lname, emai
                 customer_lname +
                 "','" +
                 email +
-                "')",
+                "',1)",
             function (err, result, fields) {
                 if (err) throw err;
 
@@ -131,7 +131,7 @@ const ordersByCustomers = async (customer_email) => {
         connection.query(
             "SELECT orders.id,orders.status, orders.customer_fname, orders.customer_lname, orders.email, GROUP_CONCAT(products._id SEPARATOR ', ') AS productID, SUM(orders_products.quantity * products.preco) AS total_price FROM orders JOIN orders_products ON orders.id = orders_products.order_id JOIN products ON orders_products.product_id = products._id WHERE orders.email= '" +
                 customer_email +
-                "' GROUP BY orders.id",
+                "' GROUP BY orders.id ORDER BY orders.id DESC",
             function (err, results, fields) {
                 if (err) {
                     return reject(err);

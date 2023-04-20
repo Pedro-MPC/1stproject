@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="stylesheets/cartstyle.css" />
 
 <div data-cart="true" class="shopping-cart-header text-center">
-    <span data-cart="true" style="font-size: 17px" id="titleCart"
+    <span data-cart="true" style="font-size: 18px" class="fw-bold" id="titleCart"
         >Shopping Cart <% if(CartSize){%>(<%- CartSize %>)<%} %></span
     >
 </div>
 
 <% if( empty ){ %>
-<p class="text-center m-4">Your cart is empty.</p>
+<p class="text-center m-4 lighter-text fs-6">Your cart is empty.</p>
 
 <% }else{ %>
 <div id="cart-size-container" data-cart-size="<%- CartSize %>"></div>

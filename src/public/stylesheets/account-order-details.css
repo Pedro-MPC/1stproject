@@ -1,0 +1,46 @@
+.container {
+    max-width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .fs-6 {
+        font-size: 14px;
+    }
+
+    .fw-bold {
+        font-weight: 600;
+    }
+
+    .mb-4 {
+        margin-bottom: 2rem;
+    }
+
+    .mt-3 {
+        margin-top: 1rem;
+    }
+
+    .ml-3 {
+        margin-left: 1rem;
+    }
+
+    .mr-2 {
+        margin-right: 0.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-success {
+        color: green;
+    }
+
+    .text-danger {
+        color: red;
+    }
+}
