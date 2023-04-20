@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="stylesheets/account-order-details.css" />
 <div>
     <div class="container bg-transparent" style="width: 100%; max-width: 650px">
-        <h3 class="fw-bold mb-4">Your Orders <% if(ORDERS != 'notFound') { %> (<%- ORDERS.length%>)<% }%></h3>
+        <h3 class="fw-bold mb-4 text-lg-left text-md-center text-sm-center mt-2">
+            Your Orders <% if(ORDERS != 'notFound') { %> (<%- ORDERS.length%>)<% }%>
+        </h3>
         <div
             class="fs-6 bg-transparent"
             id="orderList"
@@ -20,27 +22,34 @@
                     "
                 >
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-2 col-md-12 text-center text-md-center text-sm-center">
                             <% if(order.status == 1){ %>
                             <img
                                 src="img/order-processing.png"
                                 alt="Order Processing"
-                                class="ml-3 mt-2"
+                                class="ml-lg-3 mt-2"
                                 style="height: 60px"
                             />
                             <% } else if(order.status == 2){%>
                             <img
                                 src="img/order-delivered.png"
                                 alt="Order Delivered"
-                                class="ml-3 mt-2"
+                                class="ml-lg-3 mt-2"
                                 style="height: 60px"
                             />
                             <% } else if(order.status == 3){%>
-                            <img src="img/order-error.png" alt="Order Error" class="ml-3 mt-2" style="height: 60px" />
+                            <img
+                                src="img/order-error.png"
+                                alt="Order Error"
+                                class="ml-lg-3 mt-2"
+                                style="height: 60px"
+                            />
                             <% }%>
                         </div>
-                        <div class="col-6 mt-3">
-                            <div>
+                        <div class="col-lg-7 col-md-12 col-sm-12 mt-3">
+                            <div
+                                class="d-flex justify-content-md-center justify-content-lg-start justify-content-center"
+                            >
                                 <p style="margin: 0px 0; font-size: 14px">Order Nº <%- order.id %></p>
                             </div>
                             <div
@@ -50,6 +59,7 @@
                                     align-items: flex-end;
                                     font-size: 14px;
                                 "
+                                class="justify-content-lg-start justify-content-md-center justify-content-center"
                             >
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                                 <a id="shipping-order" data-orderid="<%- order.id %>" href="#">Shipping Details</a>
@@ -58,7 +68,7 @@
                             </div>
                         </div>
                         <div
-                            class="col-3 mt-3"
+                            class="col-lg-3 col-md-12 col-sm-12 mt-3 text-md-center text-sm-center"
                             style="display: flex !important; flex-direction: column; align-items: center"
                         >
                             <div class="mr-2 text-center">
@@ -70,7 +80,7 @@
                                 <p style="margin: 1px 0" class="fw-bold text-danger">Error</p>
 
                                 <% }%>
-                                <p><%- order.total_price.toFixed(2) %>€</p>
+                                <p><%- order.total_price.toLocaleString('en-US', { minimumFractionDigits: 2 }) %>€</p>
                             </div>
                         </div>
                     </div>

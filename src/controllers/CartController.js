@@ -59,7 +59,7 @@ exports.getCartProducts = () => {
 
             res.render('partials/cart/cart-items', {
                 CartItem: CartItem,
-                Total: Total,
+                Total: Total.toLocaleString('en-US', { minimumFractionDigits: 2 }),
                 CartSize: CartSize,
                 empty: false
             });
@@ -104,11 +104,11 @@ exports.getCartProductsCheckout = () => {
                 CartSize += cart.quantity;
             });
 
-            req.session.cart.total = Total;
+            req.session.cart.total = Total.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
             res.render('partials/cart/cart-items-checkout', {
                 CartItem: CartItem,
-                Total: Total,
+                Total: Total.toLocaleString('en-US', { minimumFractionDigits: 2 }),
                 CartSize: CartSize,
                 empty: false
             });
