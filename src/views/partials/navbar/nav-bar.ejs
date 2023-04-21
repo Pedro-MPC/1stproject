@@ -29,6 +29,15 @@
                     </div>
                 </div>
             </a>
+            <a
+                href="#"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#searchbar"
+                aria-controls="offcanvasTop"
+                ><span class="fs-2 a-buttons text-white bx bx-search-alt-2 ml-4"></span
+            ></a>
+
             <a class="navbar-brand" href="/" style="font-weight: 500; font-size: 25px"
                 ><img class="logoNavExtended" src="/img/logo.png" alt="" />
             </a>
@@ -115,4 +124,21 @@
         </div>
     </nav>
 </div>
+
+<div
+    class="offcanvas offcanvas-top"
+    style="margin-top: 10vh; width: 25%; margin-left: 10.9%"
+    tabindex="-1"
+    id="searchbar"
+    aria-labelledby="offcanvasTopLabel"
+>
+    <div class="offcanvas-header p-3">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <div class="d-flex" style="width: 100%; flex-direction: column; align-items: flex-start">
+            <input type="text" id="searchbar-input" class="form-control" />
+            <div class="mt-2" style="width: 100%; overflow-y: auto" id="search-results"></div>
+        </div>
+    </div>
+</div>
+
 <%- include('../categories/sidenav-categories') %> <%- include('../cart/sidenav-cart') %>

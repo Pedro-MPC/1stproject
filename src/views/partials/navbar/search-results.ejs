@@ -1,0 +1,9 @@
+<div id="search-results" style="max-height: 200px; background-color: white">
+    <% if(SEARCH.length > 1 && SEARCH != 'notFound'){ SEARCH.forEach(item => {%>
+    <div>
+        <p><%- item.result.name %></p>
+    </div>
+    <% })}else{ %>
+    <p><%- SEARCH.result.name %></p>
+    <% } %>
+</div>

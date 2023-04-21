@@ -170,6 +170,35 @@ const orderDetailsById = async (order_id, limit) => {
         );
     });
 };
+
+/**
+ * Get all products
+ * @async
+ * @returns {<Array|String>} - An array of Product objects, or 'notFound' if no products were found.
+ */
+const searchBarProduct = async (searchTerm) => {
+    return new Promise((resolve, reject) => {
+        connection.query(
+            "SELECT products.name, products.img, products._id FROM products WHERE products.name LIKE '%" +
+                searchTerm +
+                "%' OR products._id LIKE '%" +
+                searchTerm +
+                "%'",
+            function (err, results, fields) {
+                if (err) {
+                    return reject(err);
+                }
+                if (results && results.length > 0) {
+                    return resolve(results);
+                } else {
+                    var notFound = 'notFound';
+                    return resolve(notFound);
+                }
+            }
+        );
+    });
+};
+
 // Customer API functions
 
 /**
@@ -306,3 +335,4 @@ exports.getCustomerInfo = getCustomerInfo;
 exports.orderProducts = orderProducts;
 exports.ordersByCustomers = ordersByCustomers;
 exports.orderDetailsById = orderDetailsById;
+exports.searchBarProduct = searchBarProduct;

@@ -1,5 +1,6 @@
 const commerceAPI = require('../../api/commerceAPI');
 const productFactory = require('../scripts/factory/product');
+const searchModel = require('../models/search/searchModel');
 
 /**
  * Returns a middleware function to render the product detail page by Id on URL parameter.
@@ -58,5 +59,12 @@ exports.getPDPProductById = () => {
     return async (req, res, next) => {
         const PRODUCT = productModel.Product('pdp', req.body.id);
         return PRODUCT;
+    };
+};
+
+exports.searchBarProduct = () => {
+    return async (req, res, next) => {
+        const SEARCH = await searchModel.FindSearch(req.body.searchTerm);
+        res.render('partials/navbar/search-results', { SEARCH: SEARCH, csrfToken: req.csrfToken() });
     };
 };

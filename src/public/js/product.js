@@ -22,9 +22,29 @@ function featuredProducts() {
         }
     });
 }
+
+function searchBarProduct() {
+    console.log($('#searchbar-input').val());
+    $.ajax({
+        url: '/searchproduct',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            searchTerm: $('#searchbar-input').val()
+        }),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('input[name=_csrf]').val());
+        },
+        success: function (data) {
+            $('#search-results').html(data);
+        }
+    });
+}
 $(function () {
     console.log('Acrousell');
     carousselAllProducts();
     loadCaroussel();
+    const input = document.querySelector('#searchbar-input');
+    input.addEventListener('input', searchBarProduct);
     featuredProducts();
 });

@@ -1,4 +1,28 @@
 $(function () {
+    const offCanvas = document.querySelector('#searchbar');
+    const searchResults = document.querySelector('#search-results');
+
+    function adjustOffCanvasHeight() {
+        const headerHeight = offCanvas.querySelector('.offcanvas-header').offsetHeight;
+        const resultsHeight = searchResults.offsetHeight;
+        offCanvas.style.height = `${headerHeight + resultsHeight}px`;
+    }
+
+    // Call the adjustOffCanvasHeight function initially to set the correct height
+    adjustOffCanvasHeight();
+
+    // Use the MutationObserver API to listen for changes in the content of the searchResults div and adjust the offCanvas height accordingly
+    const observer = new MutationObserver(() => {
+        adjustOffCanvasHeight();
+    });
+
+    observer.observe(searchResults, { childList: true, subtree: true });
+
+    // Use the resize event to adjust the offCanvas height if the window size changes
+    window.addEventListener('resize', () => {
+        adjustOffCanvasHeight();
+    });
+
     const loaderContainer = document.querySelector('.loader-container');
     document.body.className = 'hidden';
     window.addEventListener('load', () => {
