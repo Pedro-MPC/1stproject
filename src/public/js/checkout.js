@@ -72,6 +72,8 @@ $('#checkoutForm').on('submit', function (event) {
 });
 
 $(function () {
-    renderCheckoutPage();
-    console.log('Checkout page loaded.');
+    if (window.location.href.includes('/checkout')) {
+        renderCheckoutPage();
+        console.log('Checkout page loaded.');
+    }
 });

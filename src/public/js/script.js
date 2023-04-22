@@ -5,7 +5,7 @@ $(function () {
     function adjustOffCanvasHeight() {
         const headerHeight = offCanvas.querySelector('.offcanvas-header').offsetHeight;
         const resultsHeight = searchResults.offsetHeight;
-        offCanvas.style.height = `${headerHeight + resultsHeight}px`;
+        offCanvas.style.height = `${headerHeight}px`;
     }
 
     // Call the adjustOffCanvasHeight function initially to set the correct height

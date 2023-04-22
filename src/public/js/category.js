@@ -1,12 +1,14 @@
 const loadAddToCartButtons = require('./cart');
 
 // Get all categories
+var categoriesLoaded = false;
 function getCategories() {
     $.ajax({
         url: '/getcategories',
         method: 'GET',
         success: function (data) {
             $('#sidenav-items').html(data);
+            categoriesLoaded = true;
         }
     });
 }
@@ -22,9 +24,14 @@ function ProductListByCategory() {
         }
     });
 }
+$('.toggleSideNav').on('click', function (event) {
+    if (!categoriesLoaded) {
+        getCategories();
+    }
+});
+
 $(function () {
-    getCategories();
-    if (window.location.href.indexOf('http://localhost:3000/categories?cid=') === 0) {
+    if (window.location.href.includes('/categories?cid=')) {
         ProductListByCategory();
         console.log('asd');
     }

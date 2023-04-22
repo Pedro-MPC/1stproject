@@ -1,4 +1,3 @@
-const { update } = require('lodash');
 const swal = require('./swal');
 
 function updateCart() {

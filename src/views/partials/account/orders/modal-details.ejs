@@ -15,11 +15,11 @@
                 <div class="text-center d-flex" style="align-items: baseline; justify-content: center; font-size: 30px">
                     <div>
                         <% if(ORDER.status == 1){ %>
-                        <img src="img/order-processing.png" alt="" class="mb-2" style="height: 35px" />
+                        <img src="img/order-processing.png" loading="lazy" alt="" class="mb-2" style="height: 35px" />
                         <% } else if(ORDER.status == 2){%>
-                        <img src="img/order-delivered.png" alt="" class="mb-2" style="height: 35px" />
+                        <img src="img/order-delivered.png" loading="lazy" alt="" class="mb-2" style="height: 35px" />
                         <% } else if(ORDER.status == 3){%>
-                        <img src="img/order-error.png" alt="" class="mb-2" style="height: 35px" />
+                        <img src="img/order-error.png" loading="lazy" alt="" class="mb-2" style="height: 35px" />
                         <% }%>
                     </div>
                     <p class="text-center fw-light mr-2 ml-2">Shipping Details - Order <%- ORDER.id %></p>

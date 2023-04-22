@@ -179,7 +179,7 @@ const orderDetailsById = async (order_id, limit) => {
 const searchBarProduct = async (searchTerm) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT products.name, products.img, products._id FROM products WHERE products.name LIKE '%" +
+            "SELECT products.name, products.preco, products.img, products._id FROM products WHERE products.name LIKE '%" +
                 searchTerm +
                 "%' OR products._id LIKE '%" +
                 searchTerm +

@@ -238,7 +238,10 @@ a {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; }
 
 .container {
-  max-width: 100%; }
+  width: 80%; }
 
 .text-blue {
   color: #006eb7; }
+
+.container-w100 {
+  max-width: 100%; }

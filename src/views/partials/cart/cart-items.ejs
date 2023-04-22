@@ -22,6 +22,7 @@
     <li data-cart="true" class="clearfix isCart">
         <img
             data-cart="true"
+            loading="lazy"
             src="<%- item.PRODUCT.img %>"
             alt="item1"
             class="mt-3 mr-2"
@@ -51,6 +52,6 @@
     "
 >
     <span data-cart="true" class="lighter-text mt-3" style="float: left">Total:</span>
-    <span data-cart="true" class="main-color-text mt-3" style="float: right" id="totalCart"><%- Total%>€</span>
+    <span data-cart="true" class="main-color-text mt-3" style="float: right" id="totalCart"><%- Total %>€</span>
     <a href="/checkout" data-cart="true" class="btn btn-block btn-dark mt-50">Checkout</a>
 </div>

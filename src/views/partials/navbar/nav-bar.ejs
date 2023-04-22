@@ -11,7 +11,7 @@
             padding: 10px;
         "
     >
-        <div class="container">
+        <div class="container container-w100">
             <a
                 class="toggleSideNav"
                 data-bs-toggle="offcanvas"
@@ -24,22 +24,22 @@
                         <span class="bx bx-menu fs-2 a-buttons text-white"></span>
                         <span class="fs-6 fw-bold menu-nav text-white">MENU</span>
                     </div>
+                    <a
+                        href="#"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#searchbar"
+                        aria-controls="offcanvasTop"
+                        ><span class="fs-2 mt-1 a-buttons text-white bx bx-search-alt-2 ml-4"></span
+                    ></a>
                     <div class="home-nav">
                         <a href=""><span class="bx bxs-home fs-2 ml-4 text-white" href="/"></span></a>
                     </div>
                 </div>
             </a>
-            <a
-                href="#"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#searchbar"
-                aria-controls="offcanvasTop"
-                ><span class="fs-2 a-buttons text-white bx bx-search-alt-2 ml-4"></span
-            ></a>
 
             <a class="navbar-brand" href="/" style="font-weight: 500; font-size: 25px"
-                ><img class="logoNavExtended" src="/img/logo.png" alt="" />
+                ><img class="logoNavExtended" src="/img/logo.png" loading="lazy" alt="" loading="lazy" />
             </a>
 
             <button
@@ -55,14 +55,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <!--<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a-->
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"></a>
-                    </li>
-                </ul>
+                <ul class="navbar-nav mr-auto"></ul>
                 <form class="form-inline my-2 my-lg-0">
                     <% if (locals.isLoggedIn == true) { %>
                     <div class="text-center text-white">
@@ -74,7 +67,7 @@
                         </div>
                         <div class="loginIcon">
                             <a href="/my-account#details" class="my-2 my-sm-0 btn-block"
-                                ><span style="font-size: 30px; color: white" class="mr-3 bx bxs-user"></span
+                                ><span style="color: white" class="fs-2 bx bxs-user"></span
                             ></a>
                         </div>
                     </div>
@@ -88,7 +81,7 @@
                             ><div class="cart">
                                 <span id="cart-items-count"></span>
                                 <!--   <span class="count">1</span> -->
-                                <i style="font-size: 40px; color: white" class="bx bx-cart"></i>
+                                <i style="color: white" class="bx bx-cart fs-2"></i>
                             </div>
                         </a>
                     </div>
@@ -101,7 +94,7 @@
                     </div>
                     <div class="loginIcon">
                         <a class="btnLoginModal" style="width: 100px; margin-right: -2rem"
-                            ><span style="font-size: 30px; color: white" class="mr-3 bx bxs-user btn"></span
+                            ><span style="color: white" class="fs-2 bx bxs-user btn"></span
                         ></a>
                     </div>
                     <div class="m-4 mt-1">
@@ -114,7 +107,7 @@
                             ><div class="cart">
                                 <span id="cart-items-count"></span>
                                 <!--   <span class="count">1</span> -->
-                                <i style="font-size: 40px; color: white" class="bx bx-cart"></i>
+                                <i style="color: white" class="bx bx-cart fs-2"></i>
                             </div>
                         </a>
                     </div>
@@ -127,16 +120,22 @@
 
 <div
     class="offcanvas offcanvas-top"
-    style="margin-top: 10vh; width: 25%; margin-left: 10.9%"
+    style="margin-top: 10vh; max-width: 55vh; border-radius: 0 0 30px 10px"
     tabindex="-1"
     id="searchbar"
     aria-labelledby="offcanvasTopLabel"
 >
     <div class="offcanvas-header p-3">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-        <div class="d-flex" style="width: 100%; flex-direction: column; align-items: flex-start">
-            <input type="text" id="searchbar-input" class="form-control" />
-            <div class="mt-2" style="width: 100%; overflow-y: auto" id="search-results"></div>
+        <div class="d-flex div-height-anim" style="width: 100%; flex-direction: column; align-items: flex-start">
+            <input placeholder="Search" type="text" id="searchbar-input" class="form-control" />
+            <div
+                class="mt-2 div-height-anim"
+                style="width: 100%; max-height: 60vh; overflow-y: auto"
+                id="search-results"
+            >
+                <p class="text-center lighter-text mt-3">Search by product name or id.</p>
+            </div>
         </div>
     </div>
 </div>
