@@ -10,7 +10,7 @@
             style="max-height: calc(40vh - 1rem); overflow-y: auto; overflow-x: hidden"
         >
             <% if(ORDERS != 'notFound') { %> <% ORDERS.forEach(order => {%>
-            <div class="mb-2" style="max-width: 100%; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px">
+            <div class="mb-2 container" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px">
                 <div
                     style="
                         height: auto;
@@ -65,9 +65,9 @@
                                 class="justify-content-lg-start justify-content-md-center justify-content-center"
                             >
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                                <a id="shipping-order" data-orderid="<%- order.id %>" href="#">Shipping Details</a>
-                                <p class="mr-2 ml-2" style="margin: 0px 0">|</p>
-                                <a id="products-order" data-orderid="<%- order.id %>" href="#">Products</a>
+                                <a id="shipping-order" data-orderid="<%- order.id %>" href="#"
+                                    ><span class="bx bx-detail" style="vertical-align: middle"></span> Order Details</a
+                                >
                             </div>
                         </div>
                         <div

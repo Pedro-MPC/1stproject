@@ -40,7 +40,9 @@ function searchBarProduct() {
             }
         });
     } else {
-        $('#search-results').html('<p class="text-center lighter-text mt-1">Search by product name or id.</p>');
+        $('#search-results').html(
+            '                <p class="text-center lighter-text mt-4">Search by product name or id.</p>'
+        );
     }
 }
 const debounce = (func, wait) => {

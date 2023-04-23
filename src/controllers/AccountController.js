@@ -1,5 +1,6 @@
 const commerceAPI = require('../../api/commerceAPI');
 const customerModel = require('../models/customer/customer');
+const productFactory = require('../scripts/factory/product');
 
 // Validate customer login to check if customer exist and if credentials are correct.
 
@@ -44,7 +45,7 @@ exports.validateLogin = () => {
 exports.checkEmailExist = () => {
     return async (req, res, next) => {
         // Getting customer data
-        const checkEmailExist = await commerceAPI.checkEmailExist(req.body.email);
+        const checkEmailExist = commerceAPI.checkEmailExist(req.body.email);
         if (checkEmailExist == 'emailAlreadyRegistered') {
             res.json({ msg: 'Email já registado', regSuccess: false });
         } else {
@@ -60,7 +61,7 @@ exports.checkEmailExist = () => {
 exports.registerCustomer = () => {
     return async (req, res, next) => {
         // Getting customer data
-        const registerData = await commerceAPI.registerCustomer(
+        const registerData = commerceAPI.registerCustomer(
             req.body.email,
             req.body.password,
             req.body.fname,
@@ -178,6 +179,8 @@ exports.getCustomerDetails = () => {
 exports.ordersByCustomers = () => {
     return async (req, res, next) => {
         const ORDERS = await commerceAPI.ordersByCustomers(req.session.customer.email);
+
+        console.log(ORDERS[0]);
         if (ORDERS[0] == 'notFound') {
             next();
         } else {
@@ -190,6 +193,19 @@ exports.ordersByCustomers = () => {
 exports.orderDetailsById = () => {
     return async (req, res, next) => {
         const ORDER = await commerceAPI.orderDetailsById(req.query.order_id, req.query.limit);
+
+        const orderProducts = ORDER.productID.split(',');
+        const products = await Promise.all(
+            orderProducts.map(async (product) => {
+                const products = await Promise.all(
+                    orderProducts.map(async (product) => {
+                        const PRODUCT = await productFactory.getProductFactory('tile', product);
+                        return PRODUCT;
+                    })
+                );
+                ORDER.products = products;
+            })
+        );
         console.log(req.query.order_id);
         if (ORDER == 'notFound') {
             console.log('ORDER NOT FOUND');
