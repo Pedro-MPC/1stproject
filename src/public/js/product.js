@@ -9,6 +9,7 @@ function carousselAllProducts() {
             $('#carousselItems').html(data);
             loadCaroussel();
             loadAddToCartButtons();
+            lazyLoad();
         }
     });
 }
@@ -19,6 +20,7 @@ function featuredProducts() {
         type: 'GET',
         success: function (data) {
             $('#featuredProducts').html(data);
+            lazyLoad();
         }
     });
 }
@@ -45,6 +47,7 @@ function searchBarProduct() {
         );
     }
 }
+
 const debounce = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
@@ -58,18 +61,43 @@ const debounce = (func, wait) => {
 };
 
 window.onload = function () {
-    console.log('Acrousell');
+    console.log('Carousel');
     if (window.location.pathname === '/') {
         carousselAllProducts();
         loadCaroussel();
         featuredProducts();
+        lazyLoad();
     }
-
     // Search bar w/ Debounce function working :)
     const searchInput = document.querySelector('#searchbar-input'); // Get the Search bar
     const debouncedSearch = debounce(searchBarProduct, 300); // Call the Debouce function and send searchBarProduct() function and the timer as arguments
     searchInput.addEventListener('input', (event) => {
-        // Event listerner for input on the search bar
+        // Event listener for input on the search bar
         debouncedSearch(event);
     });
 };
+
+function lazyLoad() {
+    console.log('running');
+    const images = document.querySelectorAll('img[data-src]');
+    const imageOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const image = entry.target;
+                const newURL = image.getAttribute('data-src');
+                image.src = newURL;
+                observer.unobserve(image);
+            }
+        });
+    }, imageOptions);
+
+    images.forEach((image) => {
+        observer.observe(image);
+    });
+}

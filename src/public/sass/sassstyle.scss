@@ -115,7 +115,6 @@ a {
     width: 100%;
     height: 100vh;
     position: fixed;
-    background: #ffffff center no-repeat;
     z-index: 1;
 }
 .spinner {
@@ -141,7 +140,7 @@ a {
 }
 
 .hidden {
-    opacity: 0.1;
+    opacity: 0.6;
 }
 
 .visible {
