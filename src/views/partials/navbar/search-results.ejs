@@ -2,7 +2,13 @@
     <% if(SEARCH != 'notFound' ){ %> <% if(SEARCH.length > 1 ){ SEARCH.forEach(item => {%>
     <div class="d-flex align-items-center p-2">
         <div style="width: 60px">
-            <img style="width: 50px" loading="lazy" src="<%- item.result.img %>" alt="" />
+            <img
+                style="width: 50px"
+                loading="lazy"
+                src="img/loading-img.webp"
+                data-src="<%- item.result.img %>"
+                alt=""
+            />
         </div>
         <div>
             <div style="max-width: 200px; flex-grow: 1">
@@ -31,7 +37,13 @@
     <% })}else{ %>
     <div class="d-flex align-items-center p-2">
         <div style="width: 60px">
-            <img loading="lazy" style="width: 50px" src="<%- SEARCH.result.img %>" alt="" />
+            <img
+                loading="lazy"
+                style="width: 50px"
+                src="img/loading-img.webp"
+                data-src="<%- SEARCH.result.img %>"
+                alt=""
+            />
         </div>
         <div>
             <p class="mb-0"><%- SEARCH.result.name %></p>

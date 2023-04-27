@@ -39,6 +39,7 @@ function searchBarProduct() {
             },
             success: function (data) {
                 $('#search-results').html(data);
+                lazyLoad();
             }
         });
     } else {
@@ -61,7 +62,9 @@ const debounce = (func, wait) => {
 };
 
 window.onload = function () {
-    console.log('Carousel');
+    if (window.location.pathname === '/product') {
+        lazyLoad();
+    }
     if (window.location.pathname === '/') {
         carousselAllProducts();
         loadCaroussel();
@@ -78,7 +81,6 @@ window.onload = function () {
 };
 
 function lazyLoad() {
-    console.log('running');
     const images = document.querySelectorAll('img[data-src]');
     const imageOptions = {
         root: null,
@@ -101,3 +103,5 @@ function lazyLoad() {
         observer.observe(image);
     });
 }
+
+module.exports = lazyLoad;

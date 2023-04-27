@@ -17,7 +17,7 @@
     <body>
         <%- include('../partials/navbar/nav-bar') %>
 
-        <div id="otherElements" class="otherElements" style="height: 100vh">
+        <div id="otherElements" class="otherElements" style="height: auto">
             <div class="container">
                 <br />
                 <div class="row">
@@ -40,7 +40,12 @@
                             >
                             <% } %>
                         </div>
-                        <img src="<%= PRODUCT.img %>" class="img-product mt-3" alt="" />
+                        <img
+                            src="img/loading-img.webp"
+                            data-src="<%= PRODUCT.img %>"
+                            class="img-product mt-3 w-75"
+                            alt=""
+                        />
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 prodDetails" style="padding: 2%; height: auto">
                         <div class="row">
@@ -78,9 +83,6 @@
                     </div>
                 </div>
             </div>
-            <center>
-                <div class="container mt-3" style="height: 700px" id="productsSameCategory"></div>
-            </center>
         </div>
     </body>
     <%- include('../partials/footer') %>

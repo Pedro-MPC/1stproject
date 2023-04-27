@@ -1,6 +1,5 @@
-<link rel="stylesheet" href="stylesheets/account-order-details.css" />
 <div>
-    <div class="container bg-transparent" style="width: 100%; max-width: 650px">
+    <div class="container bg-transparent" style="width: 100%">
         <h3 class="fw-bold mb-4 text-lg-left text-md-center text-sm-center mt-2">
             Your Orders <% if(ORDERS != 'notFound') { %> (<%- ORDERS.length%>)<% }%>
         </h3>
@@ -10,7 +9,7 @@
             style="max-height: calc(40vh - 1rem); overflow-y: auto; overflow-x: hidden"
         >
             <% if(ORDERS != 'notFound') { %> <% ORDERS.forEach(order => {%>
-            <div class="mb-2 container" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px">
+            <div class="mb-2" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; width: 90%">
                 <div
                     style="
                         height: auto;

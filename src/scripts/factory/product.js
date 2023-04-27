@@ -1,5 +1,7 @@
 const commerceAPI = require('../../../api/commerceAPI');
 const Product = require('@models/product/product');
+const ProductTile = require('@models/product/productTile');
+const ProductPDP = require('@models/product/productPDP');
 
 /**
  * Returns a product object with product data.
@@ -20,43 +22,41 @@ async function getProductFactory(type, id) {
     }
 
     if (PRODUCT != 'notFound') {
-        var product = new Product();
-        product.id(PRODUCT[0]._id);
-        product.name(PRODUCT[0].name);
-        product.img(PRODUCT[0].img);
-        product.price(PRODUCT[0].preco);
-        var categories = PRODUCT[0].category.split(',');
-        product.category(categories);
-        product.online(PRODUCT[0].online);
         switch (type) {
             case 'pdp':
-                product.desc(PRODUCT[0].desc);
+                var product = new ProductPDP();
+                product.id(PRODUCT._id);
+                product.name(PRODUCT.name);
+                product.img(PRODUCT.img);
+                product.price(PRODUCT.preco);
+                var categories = PRODUCT.category.split(',');
+                product.category(categories);
+                product.online(PRODUCT.online);
+                product.desc(PRODUCT.desc);
+                console.log(product);
                 return product;
             case 'tile':
+                var product = new ProductTile();
+                product.id(PRODUCT._id);
+                product.name(PRODUCT.name);
+                product.img(PRODUCT.img);
+                product.price(PRODUCT.preco);
+                product.online(PRODUCT.online);
+                var categories = PRODUCT.category.split(',');
+                product.category(categories);
+
                 return product;
-            case 'allpdp':
-                const allProductsPDP = [];
-                PRODUCT.forEach((item) => {
-                    const product = new Product();
-                    product.id(item._id);
-                    product.name(item.name);
-                    product.img(item.img);
-                    product.price(item.preco);
-                    var categories = item.category.split(',');
-                    product.category(categories);
-                    allProductsPDP.push(product);
-                });
-                return allProductsPDP;
             case 'alltile':
                 const AllProductsTile = [];
                 PRODUCT.forEach((item) => {
-                    const product = new Product();
+                    const product = new ProductTile();
                     product.id(item._id);
                     product.name(item.name);
                     product.img(item.img);
                     var categories = item.category.split(',');
                     product.category(categories);
                     product.price(item.preco);
+                    product.online(item.online);
                     AllProductsTile.push(product);
                 });
                 return AllProductsTile;
@@ -64,10 +64,12 @@ async function getProductFactory(type, id) {
                 const FeaturedTile = [];
                 PRODUCT.forEach((item) => {
                     if (item.isFeatured == 1) {
-                        const product = new Product();
+                        const product = new ProductTile();
                         product.id(item._id);
                         product.name(item.name);
                         product.img(item.img);
+                        var categories = item.category.split(',');
+                        product.category(categories);
                         product.price(item.preco);
                         FeaturedTile.push(product);
                     }

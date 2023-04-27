@@ -14,6 +14,7 @@ exports.ProductDetailPageByParam = () => {
         const PRODUCT = await productFactory.getProductFactory('pdp', PID);
         const customer = req.session.customer;
         const isLoggedIn = req.session.isLogged;
+        console.log(PRODUCT);
 
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });

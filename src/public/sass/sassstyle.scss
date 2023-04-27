@@ -116,6 +116,8 @@ a {
     height: 100vh;
     position: fixed;
     z-index: 1;
+    background-color: white;
+    transition: background-color 2s;
 }
 .spinner {
     width: 64px;
@@ -128,6 +130,7 @@ a {
     border-color: rgba(49, 64, 142, 0.9) transparent rgba(49, 64, 142, 0.9) transparent;
     border-radius: 50%;
     animation: spin-anim 1.2s linear infinite;
+    transition: background-color 2s;
 }
 
 @keyframes spin-anim {
@@ -299,4 +302,12 @@ a {
 
 .container-w100 {
     max-width: 100%;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.footer {
+    margin-top: auto;
 }

@@ -2,7 +2,13 @@
 <a href="/categories?cid=<%- item.id %>" class="">
     <li data-cart="true" class="clearfix isCart p-2 list-unstyled categoryListIndividual">
         <div class="d-flex align-items-center">
-            <img loading="lazy" class="imageCategorySideNav" src="<%- item.imgCat %>" alt="catImg" />
+            <img
+                loading="lazy"
+                class="imageCategorySideNav"
+                src="img/loading-img.webp"
+                data-src="<%- item.imgCat %>"
+                alt="catImg"
+            />
             <span data-cart="true" class="item-name"
                 ><p style="white-space: nowrap; overflow: hidden; display: block; text-overflow: ellipsis"></p
             ></span>

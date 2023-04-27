@@ -22,7 +22,22 @@
                         </div>
                         <div class="media-body text-center">
                             <h6 class="media-title font-weight-semibold">
-                                <a href="/product?pid=<%= product.id %>" data-abc="true"> <%- product.name %> </a>
+                                <a
+                                    href="/product?pid=<%= product.id %>"
+                                    style="
+                                        text-align: center;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 1; /* number of lines to show */
+                                        line-clamp: 2;
+                                        -webkit-box-orient: vertical;
+                                        font-size: 15px;
+                                    "
+                                    data-abc="true"
+                                >
+                                    <%- product.name %>
+                                </a>
                             </h6>
                             <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
                                 <li class="list-inline-item">
@@ -53,6 +68,7 @@
                                     class="bx bx-search-alt-2 center-text center-text text-black"
                                 ></span>
                             </button>
+                            <% if(product.online){ %>
                             <button
                                 id="addToCart"
                                 class="btn btn-danger mt-1 text-white border-0 bg-transparent"
@@ -63,6 +79,7 @@
                                     class="bx bx-cart-add center-text text-black"
                                 ></span>
                             </button>
+                            <% } %>
                         </div>
                     </div>
                 </div>

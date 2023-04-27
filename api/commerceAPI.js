@@ -19,7 +19,7 @@ const getProductById = async (id) => {
                     return reject(err);
                 }
                 if (results && results.length > 0) {
-                    const PRODUCT = results;
+                    const PRODUCT = results[0];
                     return resolve(PRODUCT);
                 } else {
                     var notFound = 'notFound';
@@ -38,7 +38,7 @@ const getProductById = async (id) => {
 const getAllProducts = async () => {
     return new Promise((resolve, reject) => {
         connection.query(
-            'SELECT products._id, products.desc, products.img, products.isFeatured, products.name, products.preco, GROUP_CONCAT(category.Id, category.descCat SEPARATOR ",") AS category FROM products JOIN products_categories ON products._id = products_categories.id_product JOIN category ON products_categories.id_category = category.id GROUP BY products._id',
+            'SELECT products._id, products.desc, products.img, products.isFeatured, products.online, products.name, products.preco, GROUP_CONCAT(category.Id, category.descCat SEPARATOR ",") AS category FROM products JOIN products_categories ON products._id = products_categories.id_product JOIN category ON products_categories.id_category = category.id GROUP BY products._id ORDER BY RAND() ',
             function (err, results, fields) {
                 if (err) {
                     return reject(err);

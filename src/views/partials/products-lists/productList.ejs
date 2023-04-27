@@ -13,7 +13,8 @@
                             <img
                                 style="margin: auto; display: block; object-fit: contain"
                                 class="mb-4"
-                                src="<%- product.img %>"
+                                data-src="<%- product.img %>"
+                                src="img/loading-img.webp"
                                 width="200"
                                 height="140"
                                 alt=""
@@ -28,7 +29,7 @@
                                         overflow: hidden;
                                         text-overflow: ellipsis;
                                         display: -webkit-box;
-                                        -webkit-line-clamp: 2; /* number of lines to show */
+                                        -webkit-line-clamp: 1; /* number of lines to show */
                                         line-clamp: 2;
                                         -webkit-box-orient: vertical;
                                         font-size: 15px;

@@ -1,5 +1,5 @@
 const loadAddToCartButtons = require('./cart');
-
+const lazyLoad = require('./product');
 // Get all categories
 var categoriesLoaded = false;
 function getCategories() {
@@ -9,6 +9,7 @@ function getCategories() {
         success: function (data) {
             $('#sidenav-items').html(data);
             categoriesLoaded = true;
+            lazyLoad();
         }
     });
 }
@@ -21,6 +22,7 @@ function ProductListByCategory() {
         success: function (data) {
             $('#productList').html(data);
             loadAddToCartButtons();
+            lazyLoad();
         }
     });
 }
