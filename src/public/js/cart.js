@@ -1,5 +1,5 @@
 const swal = require('./swal');
-const lazyLoad = require('./product');
+const productJS = require('./product');
 
 function updateCart() {
     // make an AJAX request to the /update-cart route
@@ -13,8 +13,8 @@ function updateCart() {
             if (cartSize) {
                 $('#cart-items-count').addClass('count');
                 $('#cart-items-count').html('<span id="cart-items-count" class="count">' + cartSize + '</span>');
+                productJS.lazyLoad();
             }
-            lazyLoad();
         }
     });
 }

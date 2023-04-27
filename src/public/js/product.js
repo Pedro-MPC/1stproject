@@ -104,4 +104,4 @@ function lazyLoad() {
     });
 }
 
-module.exports = lazyLoad;
+exports.lazyLoad = lazyLoad;
