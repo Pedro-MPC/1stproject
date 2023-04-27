@@ -9,7 +9,7 @@ function getCategories() {
         success: function (data) {
             $('#sidenav-items').html(data);
             categoriesLoaded = true;
-            lazyLoad();
+            lazyLoad.lazyLoad();
         }
     });
 }
@@ -22,7 +22,7 @@ function ProductListByCategory() {
         success: function (data) {
             $('#productList').html(data);
             loadAddToCartButtons();
-            lazyLoad();
+            lazyLoad.lazyLoad();
         }
     });
 }

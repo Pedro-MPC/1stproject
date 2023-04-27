@@ -237,7 +237,7 @@ const getCustomerLogin = async (email, password) => {
 const getCustomerInfo = async (email) => {
     return new Promise((resolve, reject) => {
         connection.query(
-            "SELECT id, fname, lname, email FROM customer WHERE email='" + email + "'",
+            "SELECT id, fname, lname, email, dtAdd FROM customer WHERE email='" + email + "'",
             function (err, results, fields) {
                 if (err) {
                     return reject(err);

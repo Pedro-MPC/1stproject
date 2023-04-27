@@ -10,6 +10,7 @@ function defaultCustomer() {
     this.email = decorators.setEmail;
     this.first_name = decorators.setFirstName;
     this.last_name = decorators.setLastName;
+    this.add_date = decorators.setAddDate;
 }
 async function validateLoginCustomer(type, email, password) {
     const CUSTOMEREMAIL = await commerceAPI.getCustomerLogin(email, password);
@@ -17,7 +18,6 @@ async function validateLoginCustomer(type, email, password) {
         return CustomerDetails(type, CUSTOMEREMAIL[0].email);
     }
 }
-
 async function CustomerDetails(type, email) {
     const CUSTOMER = await commerceAPI.getCustomerInfo(email);
     if (CUSTOMER != 'notFound') {
@@ -28,6 +28,15 @@ async function CustomerDetails(type, email) {
                 customer.email(CUSTOMER.email);
                 customer.first_name(CUSTOMER.fname);
                 customer.last_name(CUSTOMER.lname);
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const cAddedDateFormated =
+                    CUSTOMER.dtAdd.getDate() +
+                    '-' +
+                    monthNames[CUSTOMER.dtAdd.getMonth()] +
+                    '-' +
+                    CUSTOMER.dtAdd.getFullYear();
+                customer.add_date(cAddedDateFormated);
+
                 console.log(customer);
                 return customer;
         }
