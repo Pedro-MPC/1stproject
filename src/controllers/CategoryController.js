@@ -22,6 +22,10 @@ exports.ProductListByCategoryPage = () => {
     };
 };
 
+/**
+ * Gets all the products from a category.
+ * @returns {View} - Renders partial with product(s) if any or render notFound partial.
+ */
 exports.ProductListByCategory = () => {
     return async (req, res) => {
         const PRODUCTS = await categoryModel.Category(CID);
@@ -31,14 +35,14 @@ exports.ProductListByCategory = () => {
                 PRODUCTS: PRODUCTS
             });
         } else {
-            res.render('partials/notFound', { msg: 'Ups... No products found.' });
+            res.render('partials/notFound');
         }
     };
 };
 
 /**
  * Returns a middleware function to get all categories.
- * @returns {Function} - The middleware function.
+ * @returns {View} - Renders partial with all categories list
  */
 exports.getallCategories = () => {
     return async (req, res, next) => {

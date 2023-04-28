@@ -108,7 +108,7 @@ $('#registerForm').on('submit', function (event) {
                     setTimeout(() => {
                         location.reload();
                     }, '1500');
-                } else {
+                } else if (!res.regSuccess) {
                     swal.NormalSwal.fire({
                         title: 'Error!',
                         text: 'Email is already registered.'
@@ -249,7 +249,7 @@ $(function () {
                             title: 'Profile updated!'
                         });
                         $('#navabar-fname').html('Welcome, ' + res.customer_fname + '!');
-                        $('#profile_fname').html('Hi, ' + res.customer_fname + '!');
+                        $('#profile_fname').html('Hi, <br />' + res.customer_fname + '! 👋');
                     }
                 });
             }

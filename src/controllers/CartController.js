@@ -72,7 +72,9 @@ exports.getCartProducts = () => {
         }
     };
 };
-
+/**
+ * Count the number of items on the Cart.
+ */
 exports.cartItemsCount = () => {
     return async (req, res, next) => {
         if (req.session.cart) {
@@ -88,8 +90,8 @@ exports.cartItemsCount = () => {
 };
 
 /**
- * Get Cart products to checkout page.
- * @returns {Function} - Middleware function.
+ * Get Cart products to checkout.
+ * Render the cart-items-checkout partial.
  */
 exports.getCartProductsCheckout = () => {
     return async (req, res, next) => {

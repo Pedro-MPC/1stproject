@@ -1,7 +1,6 @@
 const commerceAPI = require('../../api/commerceAPI');
 /**
- * Customer logout. Destroy the logged user session.
- * @returns {String} [LOGOUTMSG] Logout message to client-side
+ * Renders Checkout page.
  */
 exports.renderCheckout = () => {
     return async (req, res, next) => {
@@ -14,6 +13,10 @@ exports.renderCheckout = () => {
     };
 };
 
+/**
+ * Save/Register checkout on databse.
+ * @returns {String} - 'success' if checkout sucessful or 'noproductsoncart' if the customer doesn't have any product on his cart.
+ */
 exports.saveCheckout = () => {
     return async (req, res, next) => {
         if (req.session.cart) {

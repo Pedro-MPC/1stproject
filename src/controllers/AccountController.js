@@ -45,10 +45,12 @@ exports.validateLogin = () => {
 exports.checkEmailExist = () => {
     return async (req, res, next) => {
         // Getting customer data
-        const checkEmailExist = commerceAPI.checkEmailExist(req.body.email);
+        const checkEmailExist = await commerceAPI.checkEmailExist(req.body.email);
         if (checkEmailExist == 'emailAlreadyRegistered') {
-            res.json({ msg: 'Email já registado', regSuccess: false });
-        } else {
+            console.log(' registered');
+            res.json({ regSuccess: false });
+        } else if (checkEmailExist == 'notRegistered') {
+            console.log('not registered');
             next();
         }
     };
@@ -61,7 +63,7 @@ exports.checkEmailExist = () => {
 exports.registerCustomer = () => {
     return async (req, res, next) => {
         // Getting customer data
-        const registerData = commerceAPI.registerCustomer(
+        const registerData = await commerceAPI.registerCustomer(
             req.body.email,
             req.body.password,
             req.body.fname,
@@ -74,7 +76,7 @@ exports.registerCustomer = () => {
 };
 
 /**
- * Check if session exists
+ * Check if session exists middleware
  */
 exports.checkSession = () => {
     return (req, res, next) => {
@@ -86,6 +88,9 @@ exports.checkSession = () => {
         next();
     };
 };
+/**
+ * Middleware to check if User is Authenticated
+ */
 exports.isAuthenticated = () => {
     return (req, res, next) => {
         if (!req.session.customer) {
@@ -96,8 +101,8 @@ exports.isAuthenticated = () => {
     };
 };
 /**
- * Customer logout. Destroy the logged user session.
- * @returns {String} [LOGOUTMSG] Logout message to client-side
+ * Get User account page.
+ * @returns {View} - Renders account page view.
  */
 exports.accountPage = () => {
     return async (req, res, next) => {
@@ -110,6 +115,10 @@ exports.accountPage = () => {
     };
 };
 
+/**
+ * Renders the Account Page Details partial.
+ * @returns {View} - Renders account page details partial.
+ */
 exports.accountPageDetails = () => {
     return async (req, res, next) => {
         res.render('partials/account/my-account-details', {
@@ -119,6 +128,10 @@ exports.accountPageDetails = () => {
     };
 };
 
+/**
+ * Renders the Account Page Orders partial.
+ * @returns {View} - Renders account page orders partial.
+ */
 exports.accountPageOrders = () => {
     return async (req, res, next) => {
         var customerOrders;
@@ -134,6 +147,10 @@ exports.accountPageOrders = () => {
     };
 };
 
+/**
+ * Save customer details from Account page.
+ * @returns {String} - Updated customer details
+ */
 exports.saveCustomerDetails = () => {
     return async (req, res, next) => {
         const SAVEDETAILS = await commerceAPI.updateCustomerDetails(
@@ -176,6 +193,9 @@ exports.getCustomerDetails = () => {
     };
 };
 
+/**
+ * Get all Orders from Customer
+ */
 exports.ordersByCustomers = () => {
     return async (req, res, next) => {
         const ORDERS = await commerceAPI.ordersByCustomers(req.session.customer.email);
@@ -190,6 +210,10 @@ exports.ordersByCustomers = () => {
     };
 };
 
+/**
+ * Get all details from an Order.
+ * @returns {Array} - Array with all the details of an order
+ */
 exports.orderDetailsById = () => {
     return async (req, res, next) => {
         const ORDER = await commerceAPI.orderDetailsById(req.query.order_id, req.query.limit);

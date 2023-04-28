@@ -3,8 +3,8 @@ const productFactory = require('../scripts/factory/product');
 const searchModel = require('../models/search/searchModel');
 
 /**
- * Returns a middleware function to render the product detail page by Id on URL parameter.
- * @returns {Function} - Middleware function.
+ * Renders the product detail page by Id on URL parameter.
+ * @returns {View} -  Product-pdp view with product details.
  */
 exports.ProductDetailPageByParam = () => {
     return async (req, res) => {
@@ -30,8 +30,8 @@ exports.ProductDetailPageByParam = () => {
 };
 
 /**
- * Returns a middleware function to get all products (PDP).
- * @returns {Function} - Middleware function.
+ * Get all products for Caroussel partial (alltile).
+ * @returns {View} - Renders productCaroussel partial.
  */
 exports.getAllProductsCaroussel = () => {
     return async (req, res, next) => {
@@ -43,7 +43,7 @@ exports.getAllProductsCaroussel = () => {
 
 /**
  * Returns a middleware function to get all featured products.
- * @returns {Function} - Middleware function.
+ * @returns {Function} - Renders featuredProductsList partial.
  */
 exports.getFeaturedProductsHome = () => {
     return async (req, res, next) => {
@@ -53,19 +53,21 @@ exports.getFeaturedProductsHome = () => {
 };
 
 /**
- * Returns a middleware function to get a product by ID (PDP).
- * @returns {Function} - The middleware function.
+ * Search for a product with the nav-bar search bar.
+ * @returns {Array} - Renders search-results partial with the search results.
  */
-exports.getPDPProductById = () => {
-    return async (req, res, next) => {
-        const PRODUCT = productModel.Product('pdp', req.body.id);
-        return PRODUCT;
-    };
-};
-
 exports.searchBarProduct = () => {
     return async (req, res, next) => {
         const SEARCH = await searchModel.FindSearch(req.body.searchTerm);
         res.render('partials/navbar/search-results', { SEARCH: SEARCH, csrfToken: req.csrfToken() });
     };
 };
+
+/*
+exports.getPDPProductById = () => {
+    return async (req, res, next) => {
+        const PRODUCT = productModel.Product('pdp', req.body.id);
+        return PRODUCT;
+    };
+};
+*/
