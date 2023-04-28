@@ -4,10 +4,13 @@
 
 <div class="mt-4 featuredProds">
     <div class="container productsList d-flex justify-content-center mt-1">
-        <h1 class="text-white fw-bold fs-2 mr-1">Customers choice.</h1>
+        <h1 class="text-white fw-bold fs-2 mt-md-4 mt-lg-0 mr-lg-1 mr-md-3">Customers choice.</h1>
         <div class="row">
             <% PRODUCTS.forEach(product => {%>
-            <div class="col-lg-4 col-md col-sm-12 mt-md-4" onclick="window.location='/product?pid=<%=product.id%>';">
+            <div
+                class="col-lg-4 col-md col-sm-12 mt-md-4 mt-lg-0"
+                onclick="window.location='/product?pid=<%=product.id%>';"
+            >
                 <div
                     class="card card-body productOnList"
                     style="

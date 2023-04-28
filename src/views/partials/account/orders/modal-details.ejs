@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-6">
                             <div data-cart="true" class="isCart checkout-cart mt-4" style="height: 40vh">
-                                <div data-cart="true" class="shopping-cart-checkout isCart">
+                                <div data-cart="true" class="shopping-cart-checkout isCart" style="padding-top: 0px">
                                     <!--end shopping-cart-checkout-header -->
                                     <div data-cart="true" id="productListOrder" style="overflow-y: auto">
                                         <ul
@@ -119,16 +119,18 @@
                                                                 display: block;
                                                                 text-overflow: ellipsis;
                                                                 font-size: 15px;
+                                                                margin-top: 10px;
                                                             "
                                                         >
                                                             <%- item.name %>
                                                         </p></a
                                                     ></span
                                                 >
-                                                <span data-cart="true" class="item-quantity" style="float: left"
-                                                    >Quantity: Error</span
-                                                >
-                                                <span data-cart="true" class="item-price" style="float: right"
+
+                                                <span
+                                                    data-cart="true"
+                                                    class="item-price fw-bold"
+                                                    style="float: left; margin-top: -10px"
                                                     ><%- item.price.toFixed(2) %>€</span
                                                 >
                                             </li>
