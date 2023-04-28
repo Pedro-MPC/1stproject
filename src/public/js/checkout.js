@@ -53,7 +53,7 @@ $('#checkoutForm').on('submit', function (event) {
                 if (res.response == 'success') {
                     swal.NormalSwal.fire({
                         title: 'Success!',
-                        text: 'Your order as been completed.',
+                        text: 'Your order has been completed.',
                         icon: 'success'
                     }).then((result) => {
                         // Reload the Page

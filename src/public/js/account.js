@@ -204,7 +204,7 @@ $(function () {
     if (window.location.pathname === '/my-account') {
         loadMyAccountPage();
 
-        // Check for hash change and call loadAccountDetails() if the hash is #details or loadAccountOrders() if the had is #orders
+        // Check for hash change and call loadAccountDetails() if the hash is #details or loadAccountOrders() if the hash is #orders
         $(window).on('hashchange', function () {
             if (window.location.hash === '#details') {
                 loadAccountDetails();
@@ -220,11 +220,11 @@ $(function () {
             loadAccountOrders();
         }
 
-        // Attach the event listener only if isDetailsLoaded is true
+        // Run this function only if isDetailsLoaded is true
         $(document).on('submit', '#save-details', function (event) {
             event.preventDefault();
             if (!isDetailsLoaded) {
-                return; // exit if isDetailsLoaded is false
+                return;
             }
             let fname = $('#fname').val();
             let lname = $('#lname').val();

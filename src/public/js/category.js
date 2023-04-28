@@ -1,5 +1,5 @@
 const loadAddToCartButtons = require('./cart');
-const lazyLoad = require('./product');
+const globalScripts = require('./script');
 // Get all categories
 var categoriesLoaded = false;
 function getCategories() {
@@ -9,12 +9,12 @@ function getCategories() {
         success: function (data) {
             $('#sidenav-items').html(data);
             categoriesLoaded = true;
-            lazyLoad.lazyLoad();
+            globalScripts.lazyLoad();
         }
     });
 }
 
-// Get all categories
+// Get all products from a Category
 function ProductListByCategory() {
     $.ajax({
         url: '/getcategoryproducts',
@@ -22,10 +22,11 @@ function ProductListByCategory() {
         success: function (data) {
             $('#productList').html(data);
             loadAddToCartButtons();
-            lazyLoad.lazyLoad();
+            globalScripts.lazyLoad();
         }
     });
 }
+
 $('.toggleSideNav').on('click', function (event) {
     if (!categoriesLoaded) {
         getCategories();

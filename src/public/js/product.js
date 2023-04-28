@@ -1,6 +1,8 @@
 const loadCaroussel = require('./owlcaroussel-settings');
 const loadAddToCartButtons = require('./cart');
+const globalScripts = require('./script');
 
+// Load Caroussel with all Products
 function carousselAllProducts() {
     $.ajax({
         url: '/getallproducts',
@@ -9,18 +11,19 @@ function carousselAllProducts() {
             $('#carousselItems').html(data);
             loadCaroussel();
             loadAddToCartButtons();
-            lazyLoad();
+            globalScripts.lazyLoad();
         }
     });
 }
 
+// Load partial with all Featured Products
 function featuredProducts() {
     $.ajax({
         url: '/getfeaturedproducts',
         type: 'GET',
         success: function (data) {
             $('#featuredProducts').html(data);
-            lazyLoad();
+            globalScripts.lazyLoad();
         }
     });
 }
@@ -39,7 +42,7 @@ function searchBarProduct() {
             },
             success: function (data) {
                 $('#search-results').html(data);
-                lazyLoad();
+                globalScripts.lazyLoad();
             }
         });
     } else {
@@ -49,59 +52,21 @@ function searchBarProduct() {
     }
 }
 
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            timeout = null;
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
-
 window.onload = function () {
     if (window.location.pathname === '/product') {
-        lazyLoad();
+        globalScripts.lazyLoad();
     }
     if (window.location.pathname === '/') {
         carousselAllProducts();
         loadCaroussel();
         featuredProducts();
-        lazyLoad();
+        globalScripts.lazyLoad();
     }
     // Search bar w/ Debounce function working :)
     const searchInput = document.querySelector('#searchbar-input'); // Get the Search bar
-    const debouncedSearch = debounce(searchBarProduct, 300); // Call the Debouce function and send searchBarProduct() function and the timer as arguments
+    const debouncedSearch = globalScripts.debouce(searchBarProduct, 300); // Call the Debouce function and send searchBarProduct() function and the timer as arguments
     searchInput.addEventListener('input', (event) => {
         // Event listener for input on the search bar
         debouncedSearch(event);
     });
 };
-
-function lazyLoad() {
-    const images = document.querySelectorAll('img[data-src]');
-    const imageOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const image = entry.target;
-                const newURL = image.getAttribute('data-src');
-                image.src = newURL;
-                observer.unobserve(image);
-            }
-        });
-    }, imageOptions);
-
-    images.forEach((image) => {
-        observer.observe(image);
-    });
-}
-
-exports.lazyLoad = lazyLoad;

@@ -70,7 +70,7 @@ exports.registerCustomer = () => {
             req.body.lname
         );
         if (registerData == 'customerInserted') {
-            res.json({ msg: 'Registado com sucesso!', regSuccess: true });
+            res.json({ msg: 'Account sucessfully created!', regSuccess: true });
         }
     };
 };

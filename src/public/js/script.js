@@ -1,3 +1,41 @@
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            timeout = null;
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+function lazyLoad() {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const image = entry.target;
+                const newURL = image.getAttribute('data-src');
+                image.src = newURL;
+                observer.unobserve(image);
+            }
+        });
+    }, imageOptions);
+
+    images.forEach((image) => {
+        observer.observe(image);
+    });
+}
+exports.lazyLoad = lazyLoad;
+exports.debouce = debounce;
+
 $(function () {
     const offCanvas = document.querySelector('#searchbar');
     const searchResults = document.querySelector('#search-results');
@@ -31,23 +69,12 @@ $(function () {
         document.body.className = 'visible';
     });
 
-    /**
-     *@function
-     *@description Owl Caroussel animations
-     */
-
-    /**
-     *@function
-     *@description Open login/register modal
-     */
+    // Open Login / Register modal
     $('.btnLoginModal').on('click', function (event) {
         $('#modalLogin').modal('show');
     });
 
-    /**
-     *@function
-     *@description Toggle register/login forms on modal
-     */
+    // Toggle register/login forms on modal
     $('#tglRegister').on('click', function (event) {
         $('#divLogin').css('display', 'none');
         $('#divRegister').css('display', 'block');
@@ -55,43 +82,5 @@ $(function () {
     $('#tglLogin').on('click', function (event) {
         $('#divRegister').css('display', 'none');
         $('#divLogin').css('display', 'block');
-    }); /*
-
-    /*
-    /**
-     *@function
-     *@description Search Product by Id on homepage
-     */
-    /*
-    $('#form-insert').on('submit', function (event) {
-        event.preventDefault();
-        let value = $('#inputText').val();
-
-        if (value != '') {
-            $.ajax({
-                url: '/account',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ msg: value }),
-                success: function (res) {
-                    if (res.response == 'notFound') {
-                        $('#searchProduct').html('Product not found');
-                    } else {
-                        console.log;
-                        $('#searchProduct').html(
-                            'Searched : ' +
-                                value +
-                                '<br>ID: ' +
-                                res.response[0]._id +
-                                '<br>Name: ' +
-                                res.response[0].name
-                        );
-                        console.log(res.response[0]);
-                        //alert("Searched ID: "+value+"\nProduct ID: "+res.response._id+"\nProduct Name: "+res.response.name)
-                    }
-                }
-            });
-        }
     });
-    */
 });
