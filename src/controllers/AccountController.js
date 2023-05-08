@@ -108,7 +108,7 @@ exports.accountPage = () => {
     return async (req, res, next) => {
         res.render('pages/my-account', {
             customer: req.session.customer,
-            pgTitle: 'My Account',
+            pgTitle: 'P_COMMERCE - My Account',
             isLoggedIn: req.session.isLogged,
             csrfToken: req.csrfToken()
         });

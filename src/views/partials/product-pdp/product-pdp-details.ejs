@@ -1,0 +1,59 @@
+<title>P_COMMERCE - <%- PRODUCT.name %></title>
+
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12 prodDetailsImgTitle">
+            <h1 class="text-center"><%- PRODUCT.name %></h1>
+            <div style="display: flex">
+                <% if(Array.isArray(PRODUCT.category)){ PRODUCT.category.forEach(category => {%>
+                <a href="/categories?cid=<%=category.match(/\d+/g)%>" class="caroussel-category m-1" data-abc="true"
+                    ><%- category.match(/[a-zA-Z]+/g) %></a
+                >
+                <% })} else{ %>
+                <a
+                    href="/categories?cid=<%=PRODUCT.category.match(/\d+/g)%>"
+                    class="caroussel-category m-1"
+                    data-abc="true"
+                    ><%- PRODUCT.category.match(/[a-zA-Z]+/g) %></a
+                >
+                <% } %>
+            </div>
+            <img src="img/loading-img.webp" data-src="<%= PRODUCT.img %>" class="img-product mt-3 w-75" alt="" />
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12 prodDetails" style="padding: 2%; height: auto">
+            <div class="row">
+                <div class="col-sm col-md price-stock">
+                    <h3 class="font-weight-semibold mb-2 price"><%- PRODUCT.price.toFixed(2) %>€</h3>
+                    <% if(PRODUCT.online == 1){%>
+                    <p class="font-weight-semibold mb-2" style="font-size: 18px">
+                        <i class="bx bxs-check-circle" style="color: greenyellow"></i> Available
+                    </p>
+                    <% }else{%>
+                    <p class="font-weight-semibold mb-2" style="font-size: 18px">
+                        <i class="bx bxs-check-circle" style="color: rgb(255, 82, 47)"></i> Unavailable
+                    </p>
+                    <% }%>
+                </div>
+                <% if(PRODUCT.online == 1){%>
+
+                <div class="col-sm">
+                    <button
+                        id="addToCart"
+                        class="btn mt-1 text-white btn-block btn-main-style"
+                        data-id="<%- (PRODUCT.id);%>"
+                    >
+                        <span
+                            style="font-size: 25px; vertical-align: middle"
+                            class="bx bx-cart-add mr-2 center-text"
+                        ></span
+                        >Add to cart
+                    </button>
+                </div>
+                <% }%>
+            </div>
+            <br />
+            <p style="text-align: justify"><%- PRODUCT.desc %></p>
+        </div>
+    </div>
+</div>

@@ -249,7 +249,7 @@ $(function () {
                             title: 'Profile updated!'
                         });
                         $('#navabar-fname').html('Welcome, ' + res.customer_fname + '!');
-                        $('#profile_fname').html('Hi, <br />' + res.customer_fname + '! 👋');
+                        $('#profile_fname').html('Hi, <br />' + res.customer_fname);
                     }
                 });
             }

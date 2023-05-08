@@ -61,9 +61,21 @@
                     <% if (locals.isLoggedIn == true) { %>
                     <div class="text-center text-white">
                         <div class="loginFull">
-                            <span style="font-size: 15px" id="navabar-fname" class="btn text-white"
-                                >Welcome, <%= customer.first_name %>!</span
-                            >
+                            <div class="m-2" style="display: flex; align-items: center">
+                                <span
+                                    style="font-size: 15px; max-width: max-content"
+                                    id="navabar-fname"
+                                    class="text-white"
+                                    >Welcome, <%= customer.first_name %></span
+                                >
+                                <% if (customer.isDev == 1) { %>
+                                <span
+                                    title="Developer Account"
+                                    class="bx bxs-badge-check ml-1 fs-4"
+                                    style="color: rgb(10, 132, 255)"
+                                ></span>
+                                <%} %>
+                            </div>
                             <a href="/my-account#details" class="btn btn-light my-2 my-sm-0 btn-block">My Account</a>
                         </div>
                         <div class="loginIcon">

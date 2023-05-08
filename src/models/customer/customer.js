@@ -11,6 +11,7 @@ function defaultCustomer() {
     this.first_name = decorators.setFirstName;
     this.last_name = decorators.setLastName;
     this.add_date = decorators.setAddDate;
+    this.isDev = decorators.setIsDev;
 }
 async function validateLoginCustomer(type, email, password) {
     const CUSTOMEREMAIL = await commerceAPI.getCustomerLogin(email, password);
@@ -28,6 +29,7 @@ async function CustomerDetails(type, email) {
                 customer.email(CUSTOMER.email);
                 customer.first_name(CUSTOMER.fname);
                 customer.last_name(CUSTOMER.lname);
+                customer.isDev(CUSTOMER.isDev);
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 const cAddedDateFormated =
                     CUSTOMER.dtAdd.getDate() +

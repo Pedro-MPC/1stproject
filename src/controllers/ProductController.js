@@ -7,23 +7,26 @@ const searchModel = require('../models/search/searchModel');
  * @returns {View} -  Product-pdp view with product details.
  */
 exports.ProductDetailPageByParam = () => {
-    return async (req, res) => {
-        const FULLURL = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
-        const PARAMS = FULLURL.searchParams;
-        const PID = PARAMS.get('pid');
-        const PRODUCT = await productFactory.getProductFactory('pdp', PID);
+    return (req, res, next) => {
         const customer = req.session.customer;
         const isLoggedIn = req.session.isLogged;
-        console.log(PRODUCT);
+
+        res.render('pages/product-pdp', {
+            isLoggedIn: isLoggedIn,
+            CARTPRODUCTS: res.locals.cardProducts,
+            customer: customer
+        });
+    };
+};
+exports.ProductPDPDetails = () => {
+    return async (req, res, next) => {
+        const PRODUCT = await productFactory.getProductFactory('pdp', req.query.PID);
 
         if (PRODUCT == 'notFound') {
             res.render('pages/404', { title: '404 - Product not Found' });
         } else {
-            res.render('pages/product-pdp', {
-                PRODUCT: PRODUCT,
-                isLoggedIn: isLoggedIn,
-                CARTPRODUCTS: res.locals.cardProducts,
-                customer: customer
+            res.render('partials/product-pdp/product-pdp-details', {
+                PRODUCT: PRODUCT
             });
         }
     };

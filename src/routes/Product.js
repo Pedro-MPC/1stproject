@@ -12,6 +12,7 @@ const productController = require('../controllers/ProductController');
 router.get('/getallproducts', productController.getAllProductsCaroussel());
 router.get('/getfeaturedproducts', productController.getFeaturedProductsHome());
 router.get('/product', productController.ProductDetailPageByParam());
+router.get('/product-details', productController.ProductPDPDetails());
 router.post('/searchproduct', productController.searchBarProduct());
 
 module.exports = router;

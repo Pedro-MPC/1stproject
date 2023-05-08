@@ -13,9 +13,18 @@
             <div class="container">
                 <div class="row mt-2">
                     <div class="col-lg-3 col-md-12 col-sm-12 account-menu" id="account-menu">
-                        <h3 class="fw-bold mb-4 text-md-center text-sm-center text-lg-left" id="profile_fname">
-                            Hi, <br /><%- customer.first_name %>! 👋
-                        </h3>
+                        <div style="display: flex; justify-content: left; align-items: flex-end">
+                            <h3 class="fw-bold mb-4 text-md-center text-sm-center text-lg-left" id="profile_fname">
+                                Hi, <br /><%- customer.first_name %>
+                            </h3>
+                            <% if (customer.isDev == 1) { %>
+                            <span
+                                title="Developer Account"
+                                class="bx bxs-badge-check fs-4 ml-1"
+                                style="color: rgb(10, 132, 255); margin-bottom: 26px"
+                            ></span>
+                            <%}else{%>!<%}%>
+                        </div>
                         <div>
                             <div class="p-1 myaccount-opts">
                                 <a href="#details"

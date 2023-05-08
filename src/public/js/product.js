@@ -3,6 +3,26 @@ const loadAddToCartButtons = require('./cart');
 const globalScripts = require('./script');
 
 // Load Caroussel with all Products
+function productPDP() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const PID = urlParams.get('pid');
+    console.log(PID);
+    $.ajax({
+        url: '/product-details',
+        type: 'GET',
+        contentType: 'application/json',
+        data: {
+            PID: PID
+        },
+        success: function (data) {
+            console.log(data);
+            $('#product-details').html(data);
+            loadAddToCartButtons();
+            globalScripts.lazyLoad();
+        }
+    });
+}
 function carousselAllProducts() {
     $.ajax({
         url: '/getallproducts',
@@ -54,6 +74,7 @@ function searchBarProduct() {
 
 window.onload = function () {
     if (window.location.pathname === '/product') {
+        productPDP();
         globalScripts.lazyLoad();
     }
     if (window.location.pathname === '/') {
