@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const app = express();
-var cookieParser = require('cookie-parser');
+
 var csrf = require('csurf');
 app.use(express.static('src/public'));
 app.set('views', './src/views');
@@ -30,7 +30,7 @@ const cartRoute = require('./routes/Cart');
 const categoryRoute = require('./routes/Category');
 const CheckoutRoute = require('./routes/Checkout');
 
-app.use(cookieParser('fsgdesgsdYYFCCXXX'));
+
 app.use(csrf({ cookie: true }));
 
 app.use(function (req, res, next) {
