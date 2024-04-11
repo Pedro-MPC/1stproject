@@ -31,28 +31,28 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-const homeRoute = require('./routes/homepage');
-const productRoute = require('./routes/Product');
-const errorRoute = require('./routes/404');
-const accountRoute = require('./routes/Account');
-const cartRoute = require('./routes/Cart');
-const categoryRoute = require('./routes/Category');
-const CheckoutRoute = require('./routes/Checkout');
+// const homeRoute = require('./routes/homepage');
+// const productRoute = require('./routes/Product');
+// const errorRoute = require('./routes/404');
+// const accountRoute = require('./routes/Account');
+// const cartRoute = require('./routes/Cart');
+// const categoryRoute = require('./routes/Category');
+// const CheckoutRoute = require('./routes/Checkout');
 
-app.use(cartRoute);
-app.use(productRoute);
-app.use(homeRoute);
-app.use(accountRoute);
-app.use(categoryRoute);
-app.use(CheckoutRoute);
-app.use('*', errorRoute);
+// app.use(cartRoute);
+// app.use(productRoute);
+// app.use(homeRoute);
+// app.use(accountRoute);
+// app.use(categoryRoute);
+// app.use(CheckoutRoute);
+// app.use('*', errorRoute);
 
 
 // Error Handling Middleware
 app.use(function (err, req, res, next) {
     console.error(err);
     // res.status(500).send('Internal Server Errorrrr');
-    res.end('Olá!');
+    res.render('pages/index-commerce');
 });
 
 const port = 3000;
