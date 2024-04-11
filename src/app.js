@@ -46,9 +46,14 @@ app.use(homeRoute);
 app.use(accountRoute);
 app.use(categoryRoute);
 app.use(CheckoutRoute);
-app.use('*', errorRoute);
+app.use('/', errorRoute);
 
 
+// Error Handling Middleware
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
 
 // Create HTTP server
 const server = http.createServer(app);
