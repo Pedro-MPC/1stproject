@@ -4,6 +4,7 @@ const session = require('express-session');
 const app = express();
 var cookieParser = require('cookie-parser');
 var csrf = require('csurf');
+const http = require('http');
 app.use(express.static('src/public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
