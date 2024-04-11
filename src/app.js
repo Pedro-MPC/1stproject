@@ -45,13 +45,14 @@ app.use(homeRoute);
 app.use(accountRoute);
 app.use(categoryRoute);
 app.use(CheckoutRoute);
-// app.use('*', errorRoute);
+app.use('*', errorRoute);
 
 
 // Error Handling Middleware
 app.use(function (err, req, res, next) {
     console.error(err);
-    res.status(500).send('Internal Server Errorrrr');
+    // res.status(500).send('Internal Server Errorrrr');
+    res.render('pages/404', { title: 'Erro 404 - Page not Found' });
 });
 
 const port = 3000;
