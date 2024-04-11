@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const app = express();
 const http = require('http');
+const hostname = '127.0.0.1';
 
 // Middleware
 app.use(express.static('src/public'));
@@ -60,6 +61,6 @@ const server = http.createServer(app);
 
 // Start the server
 const port = 3000;
-server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
-});
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
