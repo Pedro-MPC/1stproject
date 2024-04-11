@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
 // app.use(accountRoute);
 // app.use(categoryRoute);
 // app.use(CheckoutRoute);
-// app.use('*', errorRoute);
+app.use('*', errorRoute);
 
 
 // Error Handling Middleware
