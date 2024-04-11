@@ -46,7 +46,7 @@ app.use(CheckoutRoute);
 app.use('*', errorRoute);
 
 /** Setting up the server on port 3000 */
-const port = 3000;
+const port = 433;
 app.listen(port, function (err) {
     if (err) console.log(err);
     console.log(`Servidor iniciado em: localhost:${port}.`);
