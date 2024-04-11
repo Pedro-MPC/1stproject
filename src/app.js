@@ -4,8 +4,6 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const app = express();
-const http = require('http');
-const hostname = '127.0.0.1';
 
 // Middleware
 app.use(express.static('src/public'));
@@ -56,11 +54,25 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Internal Server Error');
 });
 
-// Create HTTP server
-const server = http.createServer(app);
+// // Create HTTP server
+// const server = http.createServer(app);
 
-// Start the server
+// // Start the server
+// const port = 3000;
+// server.listen(port, hostname, () => {
+//     console.log(`Server running at http://${hostname}:${port}/`);
+//   });
+
+const http = require('http');
+
+const hostname = '127.0.0.1';
 const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+});
+
 server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-  });
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
