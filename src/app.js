@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 // // Routes
 // const homeRoute = require('./routes/homepage');
 // const productRoute = require('./routes/Product');
-// const errorRoute = require('./routes/404');
+const errorRoute = require('./routes/404');
 // const accountRoute = require('./routes/Account');
 // const cartRoute = require('./routes/Cart');
 // const categoryRoute = require('./routes/Category');
