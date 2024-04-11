@@ -1,18 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const app = express();
-var cookieParser = require('cookie-parser');
-var csrf = require('csurf');
-
-const hostname = '127.0.0.1';
 const http = require('http');
 
+// Middleware
 app.use(express.static('src/public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
-
+app.use(cookieParser('fsgdesgsdYYFCCXXX'));
 app.use(
     session({
         secret: ['veryimportantsecret', 'notsoimportantsecret', 'highlyprobablysecret'],
@@ -20,12 +19,19 @@ app.use(
         cookie: {
             httpOnly: true,
             sameSite: true,
-            maxAge: 86400000 // Time is in miliseconds
+            maxAge: 86400000 // Time is in milliseconds
         }
     })
 );
+app.use(csrf({ cookie: true }));
 
-/** Getting and setting routes */
+// Locals Middleware
+app.use(function (req, res, next) {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
+
+// Routes
 const homeRoute = require('./routes/homepage');
 const productRoute = require('./routes/Product');
 const errorRoute = require('./routes/404');
@@ -34,13 +40,6 @@ const cartRoute = require('./routes/Cart');
 const categoryRoute = require('./routes/Category');
 const CheckoutRoute = require('./routes/Checkout');
 
-app.use(cookieParser('fsgdesgsdYYFCCXXX'));
-app.use(csrf({ cookie: true }));
-
-app.use(function (req, res, next) {
-    res.locals.csrfToken = req.csrfToken();
-    next();
-});
 app.use(cartRoute);
 app.use(productRoute);
 app.use(homeRoute);
@@ -49,17 +48,17 @@ app.use(categoryRoute);
 app.use(CheckoutRoute);
 app.use('*', errorRoute);
 
-/** Setting up the server on port 3000 */
+// Error Handling Middleware
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Create HTTP server
+const server = http.createServer(app);
+
+// Start the server
 const port = 3000;
-app.listen(port, function (err) {
-    if (err) console.log(err);
-    console.log(`Servidor iniciado em: localhost:${port}.`);
-});
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-});
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}/`);
 });
