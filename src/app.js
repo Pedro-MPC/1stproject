@@ -45,7 +45,7 @@ app.use(homeRoute);
 app.use(accountRoute);
 app.use(categoryRoute);
 app.use(CheckoutRoute);
-app.use('/', errorRoute);
+// app.use('*', errorRoute);
 
 
 // Error Handling Middleware
