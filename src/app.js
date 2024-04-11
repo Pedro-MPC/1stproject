@@ -4,10 +4,6 @@ const session = require('express-session');
 const app = express();
 var cookieParser = require('cookie-parser');
 var csrf = require('csurf');
-
-const http = require('http');
-const hostname = '127.0.0.1';
-
 app.use(express.static('src/public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -51,13 +47,15 @@ app.use('*', errorRoute);
 
 /** Setting up the server on port 3000 */
 const port = 3000;
+app.listen(port, function (err) {
+    if (err) console.log(err);
+    console.log(`Servidor iniciado em: localhost:${port}.`);
+});
 
 const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World! From OpenLiteSpeed NodeJS\n');
-  });
-  
-  server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-  });
+  res.statusCode = 200;
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
