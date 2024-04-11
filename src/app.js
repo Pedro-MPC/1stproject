@@ -52,7 +52,7 @@ app.use('*', errorRoute);
 app.use(function (err, req, res, next) {
     console.error(err);
     // res.status(500).send('Internal Server Errorrrr');
-    res.end('pages/404', { title: 'Erro 404 - Page not Found' });
+    res.end('Olá!');
 });
 
 const port = 3000;
