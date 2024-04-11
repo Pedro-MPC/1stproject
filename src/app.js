@@ -49,10 +49,10 @@ app.use('/', errorRoute);
 
 
 // Error Handling Middleware
-// app.use(function (err, req, res, next) {
-//     console.error(err);
-//     res.status(500).send('Internal Server Errorrrr');
-// });
+app.use(function (err, req, res, next) {
+    console.error(err);
+    res.status(500).send('Internal Server Errorrrr');
+});
 
 const port = 3000;
 
