@@ -48,11 +48,7 @@ app.use(categoryRoute);
 app.use(CheckoutRoute);
 app.use('*', errorRoute);
 
-// Error Handling Middleware
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+
 
 // Create HTTP server
 const server = http.createServer(app);
