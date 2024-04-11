@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack",
-        "nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node"    },
+        "nvm": "~/.nvm/nvm-exec which node | xargs -J % ln -sf % ./.nvm-node && chmod +x ./.nvm-node",
+        "postinstall": "link-module-alias"
+    },
     "author": "pedro correia",
     "license": "ISC",
     "dependencies": {
