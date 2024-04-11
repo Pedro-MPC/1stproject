@@ -47,7 +47,13 @@ app.use('*', errorRoute);
 
 /** Setting up the server on port 3000 */
 const port = 3000;
-app.listen(port, function (err) {
-    if (err) console.log(err);
-    console.log(`Servidor iniciado em: localhost:${port}.`);
-});
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World! From OpenLiteSpeed NodeJS\n');
+  });
+  
+  server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
